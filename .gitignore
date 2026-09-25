@@ -1,0 +1,16 @@
+# Credentials and local environment configuration
+.env
+.env.*
+!.env.example
+
+# Python and local development artifacts
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Render previews and private uploaded files
+tmp/
+uploads/
+*.log

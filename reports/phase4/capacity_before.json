@@ -1,0 +1,132 @@
+{
+  "time": "2026-09-24T20:14:15.062963+00:00",
+  "python": "3.12.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "fixture": "1000 employees, 100 roles, 1000 documents with source sections and approved requirements, 1000 one-module plans. Synthetic load, not AI evidence.",
+  "requests": {
+    "/health": {
+      "milliseconds": [
+        3.13,
+        2.47,
+        2.53
+      ],
+      "median_ms": 2.53,
+      "max_ms": 3.13,
+      "statuses": [
+        200,
+        200,
+        200
+      ]
+    },
+    "/": {
+      "milliseconds": [
+        25.39,
+        22.96,
+        28.16
+      ],
+      "median_ms": 25.39,
+      "max_ms": 28.16,
+      "statuses": [
+        200,
+        200,
+        200
+      ]
+    },
+    "/employees": {
+      "milliseconds": [
+        65.87,
+        49.0,
+        40.48
+      ],
+      "median_ms": 49.0,
+      "max_ms": 65.87,
+      "statuses": [
+        200,
+        200,
+        200
+      ]
+    },
+    "/documents": {
+      "milliseconds": [
+        21.29,
+        13.75,
+        12.64
+      ],
+      "median_ms": 13.75,
+      "max_ms": 21.29,
+      "statuses": [
+        200,
+        200,
+        200
+      ]
+    },
+    "/plans": {
+      "milliseconds": [
+        28.97,
+        21.06,
+        21.49
+      ],
+      "median_ms": 21.49,
+      "max_ms": 28.97,
+      "statuses": [
+        200,
+        200,
+        200
+      ]
+    },
+    "/reports?role_id=0": {
+      "milliseconds": [
+        312.54,
+        306.93,
+        386.1
+      ],
+      "median_ms": 312.54,
+      "max_ms": 386.1,
+      "statuses": [
+        200,
+        200,
+        200
+      ]
+    },
+    "/reports.csv?role_id=0": {
+      "milliseconds": [
+        258.69,
+        302.42,
+        259.49
+      ],
+      "median_ms": 259.49,
+      "max_ms": 302.42,
+      "statuses": [
+        200,
+        200,
+        200
+      ]
+    },
+    "/reports": {
+      "milliseconds": [
+        20870.84,
+        20933.49,
+        20120.34
+      ],
+      "median_ms": 20870.84,
+      "max_ms": 20933.49,
+      "statuses": [
+        200,
+        200,
+        200
+      ]
+    }
+  },
+  "availability_sample": {
+    "successful": 30,
+    "requests": 30,
+    "duration_seconds": 0.081,
+    "limitation": "Short local request sample, not 99% availability evidence."
+  },
+  "pdf_ingestion": {
+    "parse_ms": 20.33,
+    "sections": 8,
+    "bytes": 4817
+  },
+  "database_bytes": 3815663.0
+}

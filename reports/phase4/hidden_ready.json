@@ -1,0 +1,1388 @@
+{
+  "scope": "Authored unfamiliar role/DOCX rehearsal; automated fixture approval, not human verification. Three four-requirement real generations; other local evaluation work may run concurrently.",
+  "runs": [
+    {
+      "run": 1,
+      "seconds": 15.453,
+      "job": {
+        "_id": "2cc3ab0b58044804ae072d2a63f00a5e",
+        "kind": "generate",
+        "target_id": "learner",
+        "actor_id": "evaluation",
+        "status": "completed",
+        "created_at": "2026-09-24 20:25:51.478000+00:00",
+        "attempts": [
+          {
+            "number": 0,
+            "result": "batch_1",
+            "time": "2026-09-24 20:25:51.486000+00:00"
+          },
+          {
+            "number": 1,
+            "result": "request",
+            "time": "2026-09-24 20:25:51.611000+00:00"
+          }
+        ],
+        "claims": 1,
+        "claim_id": "9acd36d58803480882eebd0db6220579",
+        "lease_until": "2026-09-24 20:30:51.611000+00:00",
+        "started_at": "2026-09-24 20:25:51.479000+00:00",
+        "finished_at": "2026-09-24 20:26:06.929000+00:00",
+        "generation": {
+          "batches": [
+            {
+              "response_id": "resp_0832c412d10392e1016ab58751871c87d2b26190b19333ae2f",
+              "model": "gpt-4.1-mini-2025-04-14",
+              "usage": {
+                "input_tokens": 1673,
+                "input_tokens_details": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0
+                },
+                "output_tokens": 1780,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 3453
+              },
+              "attempts": 1
+            }
+          ],
+          "model": "gpt-4.1-mini",
+          "attempts": 1
+        },
+        "result_id": "2cc3ab0b58044804ae072d2a63f00a5e",
+        "summary": "Plan generated and independently checked. Read the findings before assignment."
+      },
+      "plan": {
+        "_id": "2cc3ab0b58044804ae072d2a63f00a5e",
+        "employee_id": "learner",
+        "role_id": "observatory",
+        "status": "Review required",
+        "content": {
+          "title": "Observatory Calibration Coordinator Onboarding Plan",
+          "summary": "This onboarding plan covers key mandatory calibration procedures for a beginner calibration coordinator at the observatory. It includes module topics on alignment log review, use of fictional sensor data during onboarding, deferred inspection recording, and lens serial number documentation. Each module is scheduled within the first week to ensure compliance and operational readiness.",
+          "role_id": "observatory",
+          "items": [
+            {
+              "requirement_id": "R-29BB6F141E14",
+              "role_id": "observatory",
+              "source_document_id": "069fd5338b974648a2942c29ebc0f494",
+              "source_section_id": "t1-r1-c1-1",
+              "source_quote": "Supervisors must review the alignment log before a coordinator works independently.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Alignment Log Review Before Independent Work",
+              "learning_objective": "Understand the importance and process of supervisor review of alignment logs prior to independent coordinator work.",
+              "practical_activity": "Simulate a scenario where you prepare an alignment log and submit it for supervisor review before performing an independent alignment task.",
+              "estimated_minutes": 25,
+              "lesson": "The supervisor's review of the alignment log is a critical safety and quality control step before coordinators perform independent work. This ensures all alignment activities are verified and any potential issues are caught early, maintaining calibration accuracy and safety. Coordinators must not initiate independent tasks without this confirmation.",
+              "checklist": [
+                "Prepare an alignment log documenting recent alignment activities.",
+                "Submit the alignment log to a supervisor for review.",
+                "Confirm supervisor approval before starting independent work.",
+                "Address any feedback from the supervisor before proceeding."
+              ],
+              "scenario": {
+                "prompt": "You have completed the initial alignment log entries and are ready to begin independent alignment tasks. What should you do before proceeding?",
+                "expected_response": "Submit the alignment log to the supervisor for review and obtain approval before performing independent alignment work."
+              },
+              "quiz": {
+                "question": "Before a coordinator works independently on alignment, what is required?",
+                "options": [
+                  "Supervisor must review the alignment log first",
+                  "Coordinator must review the sensor readings",
+                  "Supervisor approval is not required",
+                  "Coordinator can start immediately after training"
+                ],
+                "correct_index": 0,
+                "explanation": "Supervisors must review the alignment log before a coordinator works independently.",
+                "evidence_quote": "Supervisors must review the alignment log before a coordinator works independently."
+              },
+              "rubric": [
+                {
+                  "criterion": "Accurately described the supervisor review process in the scenario response",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Completed all checklist steps in the practical activity",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Demonstrated understanding of mandatory review before independent work",
+                  "max_points": 5
+                }
+              ],
+              "policy_facts": null
+            },
+            {
+              "requirement_id": "R-52F09FEBA4C6",
+              "role_id": "observatory",
+              "source_document_id": "069fd5338b974648a2942c29ebc0f494",
+              "source_section_id": "para-4-c1",
+              "source_quote": "Coordinators must use fictional sensor readings during onboarding practice.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Use of Fictional Sensor Readings in Onboarding Practice",
+              "learning_objective": "Learn to utilize fictional sensor readings during onboarding to simulate calibration scenarios safely.",
+              "practical_activity": "Practice calibration tasks using a set of provided fictional sensor readings to complete alignment simulations.",
+              "estimated_minutes": 30,
+              "lesson": "During onboarding, coordinators are required to use fictional sensor readings for practice. This approach allows new employees to develop skills and familiarity without affecting real operations or data integrity. Using fictional data ensures safe training environments and reduces the risk of miscalibration in live settings.",
+              "checklist": [
+                "Access the provided fictional sensor reading datasets.",
+                "Perform calibration tasks using these fictional readings.",
+                "Document all simulated alignment results based on fictional data.",
+                "Review simulated outcomes with a mentor or supervisor."
+              ],
+              "scenario": {
+                "prompt": "During your onboarding, you receive sensor data to perform calibration practice. What type of data must you use?",
+                "expected_response": "Fictional sensor readings must be used during onboarding practice."
+              },
+              "quiz": {
+                "question": "What type of sensor readings must coordinators use during onboarding practice?",
+                "options": [
+                  "Fictional sensor readings",
+                  "Real-time operational readings",
+                  "Historical calibration data",
+                  "Random noise data"
+                ],
+                "correct_index": 0,
+                "explanation": "Coordinators must use fictional sensor readings during onboarding practice.",
+                "evidence_quote": "Coordinators must use fictional sensor readings during onboarding practice."
+              },
+              "rubric": [
+                {
+                  "criterion": "Correctly used fictional data in the practical exercise",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Documented and interpreted fictional data accurately",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Explained the importance of using fictional readings during onboarding",
+                  "max_points": 5
+                }
+              ],
+              "policy_facts": null
+            },
+            {
+              "requirement_id": "R-785BE9093026",
+              "role_id": "observatory",
+              "source_document_id": "069fd5338b974648a2942c29ebc0f494",
+              "source_section_id": "para-3-c1",
+              "source_quote": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Deferred Inspection Recording When Lens is Unavailable",
+              "learning_objective": "Understand the procedure to record a deferred inspection if a lens is unavailable during calibration shifts.",
+              "practical_activity": "Simulate a shift closing where the required lens is unavailable and complete the deferred inspection record accordingly.",
+              "estimated_minutes": 30,
+              "lesson": "If a required lens is unavailable during a calibration shift, coordinators are mandated to record a deferred inspection before closing out the shift. This ensures that incomplete inspections are properly documented and flagged for follow-up, maintaining audit trail integrity and operational transparency.",
+              "checklist": [
+                "Check availability status of all lenses at shift end.",
+                "If lens is unavailable, fill out deferred inspection documentation.",
+                "Submit deferred inspection record to supervisor or calibration log.",
+                "Confirm deferred inspection is acknowledged before shift closure."
+              ],
+              "scenario": {
+                "prompt": "You find the lens required for calibration is missing during your shift end checklist. What is your next step before shift closure?",
+                "expected_response": "Record a deferred inspection for the unavailable lens before closing the shift."
+              },
+              "quiz": {
+                "question": "What must a coordinator do if a lens is unavailable at shift end?",
+                "options": [
+                  "Record a deferred inspection before closing the shift",
+                  "Proceed without documenting",
+                  "Wait for the lens to appear",
+                  "Notify supervisors without recording"
+                ],
+                "correct_index": 0,
+                "explanation": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift.",
+                "evidence_quote": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift."
+              },
+              "rubric": [
+                {
+                  "criterion": "Correctly recorded deferred inspection in scenario",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Completed documented checklist for deferred inspection",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Demonstrated understanding of inspection deferral procedures",
+                  "max_points": 5
+                }
+              ],
+              "policy_facts": null
+            },
+            {
+              "requirement_id": "R-928067F6A791",
+              "role_id": "observatory",
+              "source_document_id": "069fd5338b974648a2942c29ebc0f494",
+              "source_section_id": "para-2-c1",
+              "source_quote": "Calibration coordinators must record the lens serial number before each simulated alignment.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Recording Lens Serial Numbers Before Simulated Alignments",
+              "learning_objective": "Learn the importance and method of documenting lens serial numbers prior to each simulated alignment.",
+              "practical_activity": "Perform a simulated alignment procedure where you record the lens serial number before proceeding with alignment steps.",
+              "estimated_minutes": 20,
+              "lesson": "Calibration coordinators are required to record the lens serial number before performing each simulated alignment. This documentation provides traceability and accountability for calibration activities, ensuring that each alignment can be referenced to the specific equipment used, which is crucial for quality control and troubleshooting.",
+              "checklist": [
+                "Identify the lens to be used in the simulated alignment.",
+                "Locate and note the serial number of the lens.",
+                "Record the serial number clearly before starting the alignment.",
+                "Verify that serial number documentation is included in the alignment log."
+              ],
+              "scenario": {
+                "prompt": "Before beginning a simulated alignment, what must you do regarding the lens?",
+                "expected_response": "Record the lens serial number before each simulated alignment."
+              },
+              "quiz": {
+                "question": "What must calibration coordinators do before each simulated alignment?",
+                "options": [
+                  "Record the lens serial number",
+                  "Calibrate sensors first",
+                  "Notify supervisor",
+                  "Clean the lens"
+                ],
+                "correct_index": 0,
+                "explanation": "Calibration coordinators must record the lens serial number before each simulated alignment.",
+                "evidence_quote": "Calibration coordinators must record the lens serial number before each simulated alignment."
+              },
+              "rubric": [
+                {
+                  "criterion": "Accurately recorded lens serial number in scenario",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Followed checklist steps for documentation",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Explained reason for recording serial numbers",
+                  "max_points": 5
+                }
+              ],
+              "policy_facts": null
+            }
+          ]
+        },
+        "validation": {
+          "coverage": 100.0,
+          "traceability": 100.0,
+          "mandatory_total": 4,
+          "mandatory_covered": 4,
+          "missing_count": 0,
+          "core_passed": true,
+          "status": "Review required",
+          "findings": [],
+          "warnings": [
+            {
+              "code": "RULE_ANNOTATION_MISSING",
+              "requirement_id": "R-29BB6F141E14",
+              "message": "No reviewed structured rule is available. Conditions and answer meaning require human review."
+            },
+            {
+              "code": "RULE_ANNOTATION_MISSING",
+              "requirement_id": "R-52F09FEBA4C6",
+              "message": "No reviewed structured rule is available. Conditions and answer meaning require human review."
+            },
+            {
+              "code": "RULE_ANNOTATION_MISSING",
+              "requirement_id": "R-785BE9093026",
+              "message": "No reviewed structured rule is available. Conditions and answer meaning require human review."
+            },
+            {
+              "code": "RULE_ANNOTATION_MISSING",
+              "requirement_id": "R-928067F6A791",
+              "message": "No reviewed structured rule is available. Conditions and answer meaning require human review."
+            }
+          ],
+          "rows": [
+            {
+              "requirement_id": "R-29BB6F141E14",
+              "expected_text": "Supervisors must review the alignment log before a coordinator works independently.",
+              "actual_text": "Supervisors must review the alignment log before a coordinator works independently.",
+              "traceable": true,
+              "result": "Match",
+              "errors": []
+            },
+            {
+              "requirement_id": "R-52F09FEBA4C6",
+              "expected_text": "Coordinators must use fictional sensor readings during onboarding practice.",
+              "actual_text": "Coordinators must use fictional sensor readings during onboarding practice.",
+              "traceable": true,
+              "result": "Match",
+              "errors": []
+            },
+            {
+              "requirement_id": "R-785BE9093026",
+              "expected_text": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift.",
+              "actual_text": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift.",
+              "traceable": true,
+              "result": "Match",
+              "errors": []
+            },
+            {
+              "requirement_id": "R-928067F6A791",
+              "expected_text": "Calibration coordinators must record the lens serial number before each simulated alignment.",
+              "actual_text": "Calibration coordinators must record the lens serial number before each simulated alignment.",
+              "traceable": true,
+              "result": "Match",
+              "errors": []
+            }
+          ],
+          "validator_version": "rules-3.0",
+          "structured_rules_checked": 0,
+          "limitation": "Python checks source identity, coverage, structured rule values, quoted conditions/exceptions, approved quiz answer facts, conflicts and prerequisites. Unannotated rules and free-form meaning still require human review; matching evidence is not a proof of semantic correctness."
+        },
+        "source_document_ids": [
+          "069fd5338b974648a2942c29ebc0f494"
+        ],
+        "learning_checks": {
+          "passed": true,
+          "findings": []
+        },
+        "employee_snapshot": {
+          "role_id": "observatory",
+          "department": "Calibration",
+          "experience": "Beginner",
+          "joining_date": "2026-09-25"
+        },
+        "parent_plan_id": null,
+        "origin": "ai_generation",
+        "carry_parent_plan_id": null,
+        "update_delta": null,
+        "experiment_id": null,
+        "matrix_snapshot": [
+          {
+            "_id": "29bb6f141e1449e5ae962151ab96dc22",
+            "requirement_id": "R-29BB6F141E14",
+            "document_id": "069fd5338b974648a2942c29ebc0f494",
+            "section_id": "t1-r1-c1-1",
+            "title": "Table 1",
+            "text": "Supervisors must review the alignment log before a coordinator works independently.",
+            "mandatory": true,
+            "due_stage": "Week 1",
+            "competency": "Table 1",
+            "role_ids": [
+              "observatory"
+            ],
+            "prerequisites": [],
+            "status": "approved",
+            "origin": "source_clause_extraction",
+            "created_at": "2026-09-24 20:25:51.471000+00:00"
+          },
+          {
+            "_id": "52f09feba4c646bc8b0775ca9bfefb9c",
+            "requirement_id": "R-52F09FEBA4C6",
+            "document_id": "069fd5338b974648a2942c29ebc0f494",
+            "section_id": "para-4-c1",
+            "title": "Paragraph 4",
+            "text": "Coordinators must use fictional sensor readings during onboarding practice.",
+            "mandatory": true,
+            "due_stage": "Week 1",
+            "competency": "Paragraph 4",
+            "role_ids": [
+              "observatory"
+            ],
+            "prerequisites": [],
+            "status": "approved",
+            "origin": "source_clause_extraction",
+            "created_at": "2026-09-24 20:25:51.470000+00:00"
+          },
+          {
+            "_id": "785be90930264ec69c04ba495f7df3de",
+            "requirement_id": "R-785BE9093026",
+            "document_id": "069fd5338b974648a2942c29ebc0f494",
+            "section_id": "para-3-c1",
+            "title": "Paragraph 3",
+            "text": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift.",
+            "mandatory": true,
+            "due_stage": "Week 1",
+            "competency": "Paragraph 3",
+            "role_ids": [
+              "observatory"
+            ],
+            "prerequisites": [],
+            "status": "approved",
+            "origin": "source_clause_extraction",
+            "created_at": "2026-09-24 20:25:51.468000+00:00"
+          },
+          {
+            "_id": "928067f6a7914ceeb3fe4ed971f5bd26",
+            "requirement_id": "R-928067F6A791",
+            "document_id": "069fd5338b974648a2942c29ebc0f494",
+            "section_id": "para-2-c1",
+            "title": "Paragraph 2",
+            "text": "Calibration coordinators must record the lens serial number before each simulated alignment.",
+            "mandatory": true,
+            "due_stage": "Week 1",
+            "competency": "Paragraph 2",
+            "role_ids": [
+              "observatory"
+            ],
+            "prerequisites": [],
+            "status": "approved",
+            "origin": "source_clause_extraction",
+            "created_at": "2026-09-24 20:25:51.467000+00:00"
+          }
+        ],
+        "snapshot_digest": "dae5abeb6a3c87ed5766b848113fff9667e890f6b28143aa05a85eb72efa872c",
+        "created_at": "2026-09-24 20:26:06.926000+00:00",
+        "created_by": "evaluation",
+        "generation": {
+          "batches": [
+            {
+              "response_id": "resp_0832c412d10392e1016ab58751871c87d2b26190b19333ae2f",
+              "model": "gpt-4.1-mini-2025-04-14",
+              "usage": {
+                "input_tokens": 1673,
+                "input_tokens_details": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0
+                },
+                "output_tokens": 1780,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 3453
+              },
+              "attempts": 1
+            }
+          ],
+          "model": "gpt-4.1-mini",
+          "attempts": 1
+        },
+        "prompt_version": "generate_v3",
+        "model": "gpt-4.1-mini",
+        "job_id": "2cc3ab0b58044804ae072d2a63f00a5e"
+      }
+    },
+    {
+      "run": 2,
+      "seconds": 15.027,
+      "job": {
+        "_id": "c5eeabebcb2b41c4a715b3997be2d258",
+        "kind": "generate",
+        "target_id": "learner",
+        "actor_id": "evaluation",
+        "status": "completed",
+        "created_at": "2026-09-24 20:26:06.932000+00:00",
+        "attempts": [
+          {
+            "number": 0,
+            "result": "batch_1",
+            "time": "2026-09-24 20:26:06.939000+00:00"
+          },
+          {
+            "number": 1,
+            "result": "request",
+            "time": "2026-09-24 20:26:06.965000+00:00"
+          }
+        ],
+        "claims": 1,
+        "claim_id": "e700e80d025c41618176fd21f1f5dd68",
+        "lease_until": "2026-09-24 20:31:06.965000+00:00",
+        "started_at": "2026-09-24 20:26:06.934000+00:00",
+        "finished_at": "2026-09-24 20:26:21.954000+00:00",
+        "generation": {
+          "batches": [
+            {
+              "response_id": "resp_05c5b0ed8f03f7e4016ab5875f8f5887d291cd34bb94bad501",
+              "model": "gpt-4.1-mini-2025-04-14",
+              "usage": {
+                "input_tokens": 1673,
+                "input_tokens_details": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0
+                },
+                "output_tokens": 1820,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 3493
+              },
+              "attempts": 1
+            }
+          ],
+          "model": "gpt-4.1-mini",
+          "attempts": 1
+        },
+        "result_id": "c5eeabebcb2b41c4a715b3997be2d258",
+        "summary": "Plan generated and independently checked. Read the findings before assignment."
+      },
+      "plan": {
+        "_id": "c5eeabebcb2b41c4a715b3997be2d258",
+        "employee_id": "learner",
+        "role_id": "observatory",
+        "status": "Review required",
+        "content": {
+          "title": "Observatory Calibration Coordinator Onboarding Plan",
+          "summary": "A structured onboarding plan for a beginner calibration coordinator at the observatory, ensuring mastery of key procedures within the first week of employment.",
+          "role_id": "observatory",
+          "items": [
+            {
+              "requirement_id": "R-29BB6F141E14",
+              "role_id": "observatory",
+              "source_document_id": "069fd5338b974648a2942c29ebc0f494",
+              "source_section_id": "t1-r1-c1-1",
+              "source_quote": "Supervisors must review the alignment log before a coordinator works independently.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Supervisor Alignment Log Review",
+              "learning_objective": "Understand the importance and process of having supervisors review alignment logs before independent work.",
+              "practical_activity": "Simulate submitting an alignment log for supervisor review and receiving feedback prior to independent work.",
+              "estimated_minutes": 25,
+              "lesson": "Before a calibration coordinator is permitted to work independently, a supervisor must carefully review the alignment log. This ensures that all previous alignment activities meet quality standards and that the coordinator is prepared for independent responsibilities. This step is a mandatory safeguard to maintain calibration integrity and prevent errors in the observatory's equipment alignment processes.",
+              "checklist": [
+                "Prepare a complete alignment log after each simulated calibration session.",
+                "Submit the alignment log to the assigned supervisor for review.",
+                "Address any supervisor feedback or required corrections.",
+                "Do not proceed to independent work without documented supervisor approval."
+              ],
+              "scenario": {
+                "prompt": "You have just completed your first alignment session. What must you do before starting independent work?",
+                "expected_response": "I must submit the alignment log to my supervisor and wait for their review and approval before working independently."
+              },
+              "quiz": {
+                "question": "What is the required step before a calibration coordinator works independently?",
+                "options": [
+                  "Supervisor must review the alignment log.",
+                  "Coordinator must sign a safety waiver.",
+                  "Supervisor must observe the coordinator working.",
+                  "Coordinator completes a training quiz."
+                ],
+                "correct_index": 0,
+                "explanation": "Supervisors must review the alignment log before a coordinator works independently to ensure quality and readiness, as stated in the source.",
+                "evidence_quote": "Supervisors must review the alignment log before a coordinator works independently."
+              },
+              "rubric": [
+                {
+                  "criterion": "Accurately explains the need for supervisor review before independent work.",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Properly simulates submitting an alignment log for supervisor review.",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Demonstrates understanding by selecting the correct quiz answer.",
+                  "max_points": 5
+                }
+              ],
+              "policy_facts": null
+            },
+            {
+              "requirement_id": "R-52F09FEBA4C6",
+              "role_id": "observatory",
+              "source_document_id": "069fd5338b974648a2942c29ebc0f494",
+              "source_section_id": "para-4-c1",
+              "source_quote": "Coordinators must use fictional sensor readings during onboarding practice.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Using Fictional Sensor Readings in Onboarding",
+              "learning_objective": "Learn the procedure of using fictional sensor readings during onboarding practices to prepare coordinators for real calibration tasks safely.",
+              "practical_activity": "Perform a calibration exercise using provided fictional sensor readings and document the process.",
+              "estimated_minutes": 30,
+              "lesson": "During onboarding practice, calibration coordinators are required to use fictional sensor readings. This approach allows coordinators to gain hands-on experience in analysis and calibration without risking real equipment or data errors. Using fictional data ensures safety and accuracy skills development before being exposed to live sensor operations.",
+              "checklist": [
+                "Obtain simulated sensor data sets for practice.",
+                "Perform alignment calculations using fictional readings.",
+                "Document results and note any observations or errors.",
+                "Submit results for review without using real sensor data yet."
+              ],
+              "scenario": {
+                "prompt": "While practicing calibration, what type of sensor readings should you use?",
+                "expected_response": "I must use fictional sensor readings during onboarding practice to ensure safe and accurate learning."
+              },
+              "quiz": {
+                "question": "What type of sensor readings must coordinators use during onboarding practice?",
+                "options": [
+                  "Fictional sensor readings",
+                  "Real-time live sensor data",
+                  "Random numeric values",
+                  "Old archived sensor data"
+                ],
+                "correct_index": 0,
+                "explanation": "Coordinators must use fictional sensor readings during onboarding practice to safely learn calibration processes, as stated in the source.",
+                "evidence_quote": "Coordinators must use fictional sensor readings during onboarding practice."
+              },
+              "rubric": [
+                {
+                  "criterion": "Correctly uses fictional data in practice scenarios.",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Documents calibration steps clearly and accurately using fictional data.",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Chooses the correct quiz answer indicating knowledge of data type usage.",
+                  "max_points": 5
+                }
+              ],
+              "policy_facts": null
+            },
+            {
+              "requirement_id": "R-785BE9093026",
+              "role_id": "observatory",
+              "source_document_id": "069fd5338b974648a2942c29ebc0f494",
+              "source_section_id": "para-3-c1",
+              "source_quote": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Recording Deferred Inspections for Unavailable Lenses",
+              "learning_objective": "Understand the procedure for handling unavailable lenses by recording deferred inspections before shift closure.",
+              "practical_activity": "Simulate identifying an unavailable lens during calibration and complete a deferred inspection record before shift end.",
+              "estimated_minutes": 30,
+              "lesson": "If a lens required for calibration is not available, coordinators must document a deferred inspection before ending their shift. This ensures that all equipment inspections are tracked and scheduled for later completion, preventing overlooked calibration tasks. Properly recording deferred inspections maintains calibration schedule integrity and equipment reliability.",
+              "checklist": [
+                "Identify if a lens is unavailable during calibration.",
+                "Create a deferred inspection record with details and reasons.",
+                "Submit the deferred inspection record before closing the shift.",
+                "Notify supervisor as needed about deferred tasks."
+              ],
+              "scenario": {
+                "prompt": "During your shift you find a lens is unavailable. What action should you take before ending your shift?",
+                "expected_response": "I must record a deferred inspection for the unavailable lens before closing the shift."
+              },
+              "quiz": {
+                "question": "What must a coordinator do when a lens is unavailable during calibration?",
+                "options": [
+                  "Record a deferred inspection before closing the shift.",
+                  "Skip the calibration task and continue working.",
+                  "Use a substitute lens without documentation.",
+                  "Report it after the shift ends."
+                ],
+                "correct_index": 0,
+                "explanation": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift to ensure proper tracking, as stated in the source.",
+                "evidence_quote": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift."
+              },
+              "rubric": [
+                {
+                  "criterion": "Accurately records deferred inspections with complete details.",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Demonstrates procedural compliance in simulated shift scenario.",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Correctly answers quiz on deferred inspection protocol.",
+                  "max_points": 5
+                }
+              ],
+              "policy_facts": null
+            },
+            {
+              "requirement_id": "R-928067F6A791",
+              "role_id": "observatory",
+              "source_document_id": "069fd5338b974648a2942c29ebc0f494",
+              "source_section_id": "para-2-c1",
+              "source_quote": "Calibration coordinators must record the lens serial number before each simulated alignment.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Recording Lens Serial Numbers Before Alignments",
+              "learning_objective": "Learn to accurately record lens serial numbers before every simulated alignment to ensure traceability and accurate calibration records.",
+              "practical_activity": "Practice documenting the lens serial number before a series of simulated alignment exercises.",
+              "estimated_minutes": 20,
+              "lesson": "Before conducting each simulated alignment, calibration coordinators are required to record the serial number of the lens being used. This step is critical for traceability, allowing the observatory to track calibration histories and detect issues related to specific lenses. Recording the lens serial number ensures precise documentation and maintains data integrity in calibration processes.",
+              "checklist": [
+                "Verify the lens serial number prior to alignment.",
+                "Enter the serial number accurately in the calibration log.",
+                "Double-check entries for errors before starting alignment.",
+                "Repeat the process for each simulated alignment session."
+              ],
+              "scenario": {
+                "prompt": "What must you do regarding the lens before starting each simulated alignment?",
+                "expected_response": "I must record the lens serial number before each simulated alignment."
+              },
+              "quiz": {
+                "question": "What is required before each simulated alignment by calibration coordinators?",
+                "options": [
+                  "Record the lens serial number",
+                  "Clean the lens surface",
+                  "Check the temperature of the lens",
+                  "Test the lens with a real sensor"
+                ],
+                "correct_index": 0,
+                "explanation": "Calibration coordinators must record the lens serial number before each simulated alignment to ensure traceability, as stated in the source.",
+                "evidence_quote": "Calibration coordinators must record the lens serial number before each simulated alignment."
+              },
+              "rubric": [
+                {
+                  "criterion": "Correctly records lens serial numbers in simulated exercises.",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Maintains accuracy and consistency in documentation.",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Chooses correct answer on lens serial number requirement quiz.",
+                  "max_points": 5
+                }
+              ],
+              "policy_facts": null
+            }
+          ]
+        },
+        "validation": {
+          "coverage": 100.0,
+          "traceability": 100.0,
+          "mandatory_total": 4,
+          "mandatory_covered": 4,
+          "missing_count": 0,
+          "core_passed": true,
+          "status": "Review required",
+          "findings": [],
+          "warnings": [
+            {
+              "code": "RULE_ANNOTATION_MISSING",
+              "requirement_id": "R-29BB6F141E14",
+              "message": "No reviewed structured rule is available. Conditions and answer meaning require human review."
+            },
+            {
+              "code": "RULE_ANNOTATION_MISSING",
+              "requirement_id": "R-52F09FEBA4C6",
+              "message": "No reviewed structured rule is available. Conditions and answer meaning require human review."
+            },
+            {
+              "code": "RULE_ANNOTATION_MISSING",
+              "requirement_id": "R-785BE9093026",
+              "message": "No reviewed structured rule is available. Conditions and answer meaning require human review."
+            },
+            {
+              "code": "RULE_ANNOTATION_MISSING",
+              "requirement_id": "R-928067F6A791",
+              "message": "No reviewed structured rule is available. Conditions and answer meaning require human review."
+            }
+          ],
+          "rows": [
+            {
+              "requirement_id": "R-29BB6F141E14",
+              "expected_text": "Supervisors must review the alignment log before a coordinator works independently.",
+              "actual_text": "Supervisors must review the alignment log before a coordinator works independently.",
+              "traceable": true,
+              "result": "Match",
+              "errors": []
+            },
+            {
+              "requirement_id": "R-52F09FEBA4C6",
+              "expected_text": "Coordinators must use fictional sensor readings during onboarding practice.",
+              "actual_text": "Coordinators must use fictional sensor readings during onboarding practice.",
+              "traceable": true,
+              "result": "Match",
+              "errors": []
+            },
+            {
+              "requirement_id": "R-785BE9093026",
+              "expected_text": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift.",
+              "actual_text": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift.",
+              "traceable": true,
+              "result": "Match",
+              "errors": []
+            },
+            {
+              "requirement_id": "R-928067F6A791",
+              "expected_text": "Calibration coordinators must record the lens serial number before each simulated alignment.",
+              "actual_text": "Calibration coordinators must record the lens serial number before each simulated alignment.",
+              "traceable": true,
+              "result": "Match",
+              "errors": []
+            }
+          ],
+          "validator_version": "rules-3.0",
+          "structured_rules_checked": 0,
+          "limitation": "Python checks source identity, coverage, structured rule values, quoted conditions/exceptions, approved quiz answer facts, conflicts and prerequisites. Unannotated rules and free-form meaning still require human review; matching evidence is not a proof of semantic correctness."
+        },
+        "source_document_ids": [
+          "069fd5338b974648a2942c29ebc0f494"
+        ],
+        "learning_checks": {
+          "passed": true,
+          "findings": []
+        },
+        "employee_snapshot": {
+          "role_id": "observatory",
+          "department": "Calibration",
+          "experience": "Beginner",
+          "joining_date": "2026-09-25"
+        },
+        "parent_plan_id": null,
+        "origin": "ai_generation",
+        "carry_parent_plan_id": null,
+        "update_delta": null,
+        "experiment_id": null,
+        "matrix_snapshot": [
+          {
+            "_id": "29bb6f141e1449e5ae962151ab96dc22",
+            "requirement_id": "R-29BB6F141E14",
+            "document_id": "069fd5338b974648a2942c29ebc0f494",
+            "section_id": "t1-r1-c1-1",
+            "title": "Table 1",
+            "text": "Supervisors must review the alignment log before a coordinator works independently.",
+            "mandatory": true,
+            "due_stage": "Week 1",
+            "competency": "Table 1",
+            "role_ids": [
+              "observatory"
+            ],
+            "prerequisites": [],
+            "status": "approved",
+            "origin": "source_clause_extraction",
+            "created_at": "2026-09-24 20:25:51.471000+00:00"
+          },
+          {
+            "_id": "52f09feba4c646bc8b0775ca9bfefb9c",
+            "requirement_id": "R-52F09FEBA4C6",
+            "document_id": "069fd5338b974648a2942c29ebc0f494",
+            "section_id": "para-4-c1",
+            "title": "Paragraph 4",
+            "text": "Coordinators must use fictional sensor readings during onboarding practice.",
+            "mandatory": true,
+            "due_stage": "Week 1",
+            "competency": "Paragraph 4",
+            "role_ids": [
+              "observatory"
+            ],
+            "prerequisites": [],
+            "status": "approved",
+            "origin": "source_clause_extraction",
+            "created_at": "2026-09-24 20:25:51.470000+00:00"
+          },
+          {
+            "_id": "785be90930264ec69c04ba495f7df3de",
+            "requirement_id": "R-785BE9093026",
+            "document_id": "069fd5338b974648a2942c29ebc0f494",
+            "section_id": "para-3-c1",
+            "title": "Paragraph 3",
+            "text": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift.",
+            "mandatory": true,
+            "due_stage": "Week 1",
+            "competency": "Paragraph 3",
+            "role_ids": [
+              "observatory"
+            ],
+            "prerequisites": [],
+            "status": "approved",
+            "origin": "source_clause_extraction",
+            "created_at": "2026-09-24 20:25:51.468000+00:00"
+          },
+          {
+            "_id": "928067f6a7914ceeb3fe4ed971f5bd26",
+            "requirement_id": "R-928067F6A791",
+            "document_id": "069fd5338b974648a2942c29ebc0f494",
+            "section_id": "para-2-c1",
+            "title": "Paragraph 2",
+            "text": "Calibration coordinators must record the lens serial number before each simulated alignment.",
+            "mandatory": true,
+            "due_stage": "Week 1",
+            "competency": "Paragraph 2",
+            "role_ids": [
+              "observatory"
+            ],
+            "prerequisites": [],
+            "status": "approved",
+            "origin": "source_clause_extraction",
+            "created_at": "2026-09-24 20:25:51.467000+00:00"
+          }
+        ],
+        "snapshot_digest": "dae5abeb6a3c87ed5766b848113fff9667e890f6b28143aa05a85eb72efa872c",
+        "created_at": "2026-09-24 20:26:21.953000+00:00",
+        "created_by": "evaluation",
+        "generation": {
+          "batches": [
+            {
+              "response_id": "resp_05c5b0ed8f03f7e4016ab5875f8f5887d291cd34bb94bad501",
+              "model": "gpt-4.1-mini-2025-04-14",
+              "usage": {
+                "input_tokens": 1673,
+                "input_tokens_details": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0
+                },
+                "output_tokens": 1820,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 3493
+              },
+              "attempts": 1
+            }
+          ],
+          "model": "gpt-4.1-mini",
+          "attempts": 1
+        },
+        "prompt_version": "generate_v3",
+        "model": "gpt-4.1-mini",
+        "job_id": "c5eeabebcb2b41c4a715b3997be2d258"
+      }
+    },
+    {
+      "run": 3,
+      "seconds": 11.599,
+      "job": {
+        "_id": "4fe66eeddf5d4415a62e61adf8d9060c",
+        "kind": "generate",
+        "target_id": "learner",
+        "actor_id": "evaluation",
+        "status": "completed",
+        "created_at": "2026-09-24 20:26:21.961000+00:00",
+        "attempts": [
+          {
+            "number": 0,
+            "result": "batch_1",
+            "time": "2026-09-24 20:26:21.969000+00:00"
+          },
+          {
+            "number": 1,
+            "result": "request",
+            "time": "2026-09-24 20:26:21.994000+00:00"
+          }
+        ],
+        "claims": 1,
+        "claim_id": "d476c42f860a4935836be7de744b342e",
+        "lease_until": "2026-09-24 20:31:21.994000+00:00",
+        "started_at": "2026-09-24 20:26:21.963000+00:00",
+        "finished_at": "2026-09-24 20:26:33.559000+00:00",
+        "generation": {
+          "batches": [
+            {
+              "response_id": "resp_094e92ee2dda9156016ab5876e8e1487d2b458f279c8f93b94",
+              "model": "gpt-4.1-mini-2025-04-14",
+              "usage": {
+                "input_tokens": 1673,
+                "input_tokens_details": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0
+                },
+                "output_tokens": 1827,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 3500
+              },
+              "attempts": 1
+            }
+          ],
+          "model": "gpt-4.1-mini",
+          "attempts": 1
+        },
+        "result_id": "4fe66eeddf5d4415a62e61adf8d9060c",
+        "summary": "Plan generated and independently checked. Read the findings before assignment."
+      },
+      "plan": {
+        "_id": "4fe66eeddf5d4415a62e61adf8d9060c",
+        "employee_id": "learner",
+        "role_id": "observatory",
+        "status": "Review required",
+        "content": {
+          "title": "Observatory Calibration Coordinator Onboarding Plan",
+          "summary": "This onboarding plan for the role of Observatory Calibration Coordinator ensures compliance with calibration protocols, proper record-keeping, and use of simulation data to build competency. Each learning item addresses mandatory requirements to be completed within the first week of employment.",
+          "role_id": "observatory",
+          "items": [
+            {
+              "requirement_id": "R-29BB6F141E14",
+              "role_id": "observatory",
+              "source_document_id": "069fd5338b974648a2942c29ebc0f494",
+              "source_section_id": "t1-r1-c1-1",
+              "source_quote": "Supervisors must review the alignment log before a coordinator works independently.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Supervisor Review of Alignment Log",
+              "learning_objective": "Understand the necessity of supervisor review of alignment logs before independent coordination work.",
+              "practical_activity": "Review a fictional alignment log with a supervisor role-play and discuss corrections before attempting independent work.",
+              "estimated_minutes": 25,
+              "lesson": "In calibration activities, before a coordinator commences independent work, it is mandatory that a supervisor reviews the alignment log carefully. This ensures all procedures are correctly followed and any errors are identified early. Adhering to this protocol maintains accuracy and safety in calibration tasks. You will learn why this review is crucial and how to prepare alignment logs for supervisor evaluation.",
+              "checklist": [
+                "Locate and prepare alignment log for review",
+                "Schedule a supervisor to review and sign off the log",
+                "Discuss any identified corrections or concerns",
+                "Confirm supervisor approval before starting independent work"
+              ],
+              "scenario": {
+                "prompt": "You have completed your initial alignment tasks on a telescope and prepared the alignment log. What should you do before beginning work independently?",
+                "expected_response": "I must have my supervisor review and approve the alignment log before I start working independently to ensure all data and procedures are correct."
+              },
+              "quiz": {
+                "question": "What must happen before a coordinator can work independently according to the alignment log procedure?",
+                "options": [
+                  "A supervisor must review the alignment log",
+                  "The coordinator must submit the log to the quality department",
+                  "The coordinator can work independently immediately",
+                  "Only the lead coordinator needs to see the log"
+                ],
+                "correct_index": 0,
+                "explanation": "Supervisors must review the alignment log before a coordinator works independently to ensure accuracy and compliance.",
+                "evidence_quote": "Supervisors must review the alignment log before a coordinator works independently."
+              },
+              "rubric": [
+                {
+                  "criterion": "Accuracy of supervisor review process in scenario response",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Completeness of checklist items during practical activity",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Clear understanding expressed in quiz answer explanation",
+                  "max_points": 5
+                }
+              ],
+              "policy_facts": null
+            },
+            {
+              "requirement_id": "R-52F09FEBA4C6",
+              "role_id": "observatory",
+              "source_document_id": "069fd5338b974648a2942c29ebc0f494",
+              "source_section_id": "para-4-c1",
+              "source_quote": "Coordinators must use fictional sensor readings during onboarding practice.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Use of Fictional Sensor Readings in Training",
+              "learning_objective": "Apply fictional sensor data correctly during onboarding practice to simulate real calibration scenarios.",
+              "practical_activity": "Complete simulated calibration exercises using provided fictional sensor readings and document results.",
+              "estimated_minutes": 30,
+              "lesson": "During onboarding, coordinators are required to use fictional sensor readings rather than real data. This rule allows safe practice and learning without affecting actual equipment. Practicing with these simulated readings helps develop necessary skills and familiarity with procedures in a controlled environment.",
+              "checklist": [
+                "Obtain official fictional sensor reading dataset",
+                "Use fictional readings in all training calibration tasks",
+                "Document results accurately using the simulated data",
+                "Review outcomes with a trainer to validate understanding"
+              ],
+              "scenario": {
+                "prompt": "During your practice shift, you need to perform sensor calibration. What type of sensor readings should you use?",
+                "expected_response": "I must use fictional sensor readings provided for onboarding practice to safely simulate calibration procedures."
+              },
+              "quiz": {
+                "question": "During onboarding practice, what kind of sensor readings are coordinators required to use?",
+                "options": [
+                  "Fictional sensor readings",
+                  "Real-time sensor data",
+                  "Previous shift\u2019s sensor data",
+                  "Random generated numbers without protocol"
+                ],
+                "correct_index": 0,
+                "explanation": "Coordinators must use fictional sensor readings during onboarding practice to ensure safety and controlled learning.",
+                "evidence_quote": "Coordinators must use fictional sensor readings during onboarding practice."
+              },
+              "rubric": [
+                {
+                  "criterion": "Correct use of fictional sensor data in scenario response",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Accuracy in documenting simulated calibration results",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Clarity and correctness in quiz answers",
+                  "max_points": 5
+                }
+              ],
+              "policy_facts": null
+            },
+            {
+              "requirement_id": "R-785BE9093026",
+              "role_id": "observatory",
+              "source_document_id": "069fd5338b974648a2942c29ebc0f494",
+              "source_section_id": "para-3-c1",
+              "source_quote": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Recording Deferred Inspections for Unavailable Lenses",
+              "learning_objective": "Properly document deferred inspections when lens equipment is unavailable prior to shift end.",
+              "practical_activity": "Simulate an end-of-shift report including a deferred inspection record due to unavailable lens.",
+              "estimated_minutes": 20,
+              "lesson": "If a lens required for calibration is unavailable during your shift, it is mandatory to record a deferred inspection before you close out your work period. This ensures that all intended inspections are tracked and followed up. Proper documentation prevents oversight and maintains equipment integrity across shifts.",
+              "checklist": [
+                "Check lens availability at shift start and during tasks",
+                "If lens unavailable, create a deferred inspection record",
+                "Log details clearly including why inspection was deferred",
+                "Submit deferred inspection report before ending the shift"
+              ],
+              "scenario": {
+                "prompt": "During your shift, you find the lens needed for calibration is missing. What should you do before leaving?",
+                "expected_response": "I must record a deferred inspection noting the lens was unavailable and submit it before closing my shift."
+              },
+              "quiz": {
+                "question": "What action must a coordinator take if a lens is unavailable during a shift?",
+                "options": [
+                  "Record a deferred inspection before closing the shift",
+                  "Ignore the inspection and continue with other tasks",
+                  "Wait until the next shift without documentation",
+                  "Report immediately to the supervisor only"
+                ],
+                "correct_index": 0,
+                "explanation": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift to ensure proper tracking.",
+                "evidence_quote": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift."
+              },
+              "rubric": [
+                {
+                  "criterion": "Inclusion of deferred inspection in scenario response",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Completeness and clarity of deferred inspection record in activity",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Correct quiz choice understanding protocol for lens unavailability",
+                  "max_points": 5
+                }
+              ],
+              "policy_facts": null
+            },
+            {
+              "requirement_id": "R-928067F6A791",
+              "role_id": "observatory",
+              "source_document_id": "069fd5338b974648a2942c29ebc0f494",
+              "source_section_id": "para-2-c1",
+              "source_quote": "Calibration coordinators must record the lens serial number before each simulated alignment.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Recording Lens Serial Numbers Before Simulated Alignments",
+              "learning_objective": "Accurately document the lens serial number prior to each simulated alignment task.",
+              "practical_activity": "Perform a simulated alignment and complete a log entry recording the lens serial number used.",
+              "estimated_minutes": 25,
+              "lesson": "Before performing any simulated alignment, calibration coordinators must record the serial number of the lens in use. This step is essential for traceability and quality assurance, ensuring each alignment can be reviewed and attributed to specific equipment. Maintaining accurate records helps diagnose and prevent equipment issues.",
+              "checklist": [
+                "Identify and locate lens serial number",
+                "Record the serial number before starting the simulated alignment",
+                "Verify that the recorded serial number matches the lens used",
+                "Update the alignment log with lens details"
+              ],
+              "scenario": {
+                "prompt": "You are about to start a simulated alignment. What must you do regarding the lens being used?",
+                "expected_response": "I must record the lens serial number before beginning the simulated alignment to ensure accurate tracking."
+              },
+              "quiz": {
+                "question": "What must calibration coordinators do before each simulated alignment?",
+                "options": [
+                  "Record the lens serial number",
+                  "Check with supervisor for lens approval",
+                  "Calibrate without recording lens info",
+                  "Use any lens without documentation"
+                ],
+                "correct_index": 0,
+                "explanation": "Calibration coordinators must record the lens serial number before each simulated alignment to maintain traceability.",
+                "evidence_quote": "Calibration coordinators must record the lens serial number before each simulated alignment."
+              },
+              "rubric": [
+                {
+                  "criterion": "Scenario response correctly details recording serial number",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Activity log accurately records and verifies serial number",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Quiz answer correctly identifies required action",
+                  "max_points": 5
+                }
+              ],
+              "policy_facts": null
+            }
+          ]
+        },
+        "validation": {
+          "coverage": 100.0,
+          "traceability": 100.0,
+          "mandatory_total": 4,
+          "mandatory_covered": 4,
+          "missing_count": 0,
+          "core_passed": true,
+          "status": "Review required",
+          "findings": [],
+          "warnings": [
+            {
+              "code": "RULE_ANNOTATION_MISSING",
+              "requirement_id": "R-29BB6F141E14",
+              "message": "No reviewed structured rule is available. Conditions and answer meaning require human review."
+            },
+            {
+              "code": "RULE_ANNOTATION_MISSING",
+              "requirement_id": "R-52F09FEBA4C6",
+              "message": "No reviewed structured rule is available. Conditions and answer meaning require human review."
+            },
+            {
+              "code": "RULE_ANNOTATION_MISSING",
+              "requirement_id": "R-785BE9093026",
+              "message": "No reviewed structured rule is available. Conditions and answer meaning require human review."
+            },
+            {
+              "code": "RULE_ANNOTATION_MISSING",
+              "requirement_id": "R-928067F6A791",
+              "message": "No reviewed structured rule is available. Conditions and answer meaning require human review."
+            }
+          ],
+          "rows": [
+            {
+              "requirement_id": "R-29BB6F141E14",
+              "expected_text": "Supervisors must review the alignment log before a coordinator works independently.",
+              "actual_text": "Supervisors must review the alignment log before a coordinator works independently.",
+              "traceable": true,
+              "result": "Match",
+              "errors": []
+            },
+            {
+              "requirement_id": "R-52F09FEBA4C6",
+              "expected_text": "Coordinators must use fictional sensor readings during onboarding practice.",
+              "actual_text": "Coordinators must use fictional sensor readings during onboarding practice.",
+              "traceable": true,
+              "result": "Match",
+              "errors": []
+            },
+            {
+              "requirement_id": "R-785BE9093026",
+              "expected_text": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift.",
+              "actual_text": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift.",
+              "traceable": true,
+              "result": "Match",
+              "errors": []
+            },
+            {
+              "requirement_id": "R-928067F6A791",
+              "expected_text": "Calibration coordinators must record the lens serial number before each simulated alignment.",
+              "actual_text": "Calibration coordinators must record the lens serial number before each simulated alignment.",
+              "traceable": true,
+              "result": "Match",
+              "errors": []
+            }
+          ],
+          "validator_version": "rules-3.0",
+          "structured_rules_checked": 0,
+          "limitation": "Python checks source identity, coverage, structured rule values, quoted conditions/exceptions, approved quiz answer facts, conflicts and prerequisites. Unannotated rules and free-form meaning still require human review; matching evidence is not a proof of semantic correctness."
+        },
+        "source_document_ids": [
+          "069fd5338b974648a2942c29ebc0f494"
+        ],
+        "learning_checks": {
+          "passed": true,
+          "findings": []
+        },
+        "employee_snapshot": {
+          "role_id": "observatory",
+          "department": "Calibration",
+          "experience": "Beginner",
+          "joining_date": "2026-09-25"
+        },
+        "parent_plan_id": null,
+        "origin": "ai_generation",
+        "carry_parent_plan_id": null,
+        "update_delta": null,
+        "experiment_id": null,
+        "matrix_snapshot": [
+          {
+            "_id": "29bb6f141e1449e5ae962151ab96dc22",
+            "requirement_id": "R-29BB6F141E14",
+            "document_id": "069fd5338b974648a2942c29ebc0f494",
+            "section_id": "t1-r1-c1-1",
+            "title": "Table 1",
+            "text": "Supervisors must review the alignment log before a coordinator works independently.",
+            "mandatory": true,
+            "due_stage": "Week 1",
+            "competency": "Table 1",
+            "role_ids": [
+              "observatory"
+            ],
+            "prerequisites": [],
+            "status": "approved",
+            "origin": "source_clause_extraction",
+            "created_at": "2026-09-24 20:25:51.471000+00:00"
+          },
+          {
+            "_id": "52f09feba4c646bc8b0775ca9bfefb9c",
+            "requirement_id": "R-52F09FEBA4C6",
+            "document_id": "069fd5338b974648a2942c29ebc0f494",
+            "section_id": "para-4-c1",
+            "title": "Paragraph 4",
+            "text": "Coordinators must use fictional sensor readings during onboarding practice.",
+            "mandatory": true,
+            "due_stage": "Week 1",
+            "competency": "Paragraph 4",
+            "role_ids": [
+              "observatory"
+            ],
+            "prerequisites": [],
+            "status": "approved",
+            "origin": "source_clause_extraction",
+            "created_at": "2026-09-24 20:25:51.470000+00:00"
+          },
+          {
+            "_id": "785be90930264ec69c04ba495f7df3de",
+            "requirement_id": "R-785BE9093026",
+            "document_id": "069fd5338b974648a2942c29ebc0f494",
+            "section_id": "para-3-c1",
+            "title": "Paragraph 3",
+            "text": "When a lens is unavailable, coordinators must record a deferred inspection before closing the shift.",
+            "mandatory": true,
+            "due_stage": "Week 1",
+            "competency": "Paragraph 3",
+            "role_ids": [
+              "observatory"
+            ],
+            "prerequisites": [],
+            "status": "approved",
+            "origin": "source_clause_extraction",
+            "created_at": "2026-09-24 20:25:51.468000+00:00"
+          },
+          {
+            "_id": "928067f6a7914ceeb3fe4ed971f5bd26",
+            "requirement_id": "R-928067F6A791",
+            "document_id": "069fd5338b974648a2942c29ebc0f494",
+            "section_id": "para-2-c1",
+            "title": "Paragraph 2",
+            "text": "Calibration coordinators must record the lens serial number before each simulated alignment.",
+            "mandatory": true,
+            "due_stage": "Week 1",
+            "competency": "Paragraph 2",
+            "role_ids": [
+              "observatory"
+            ],
+            "prerequisites": [],
+            "status": "approved",
+            "origin": "source_clause_extraction",
+            "created_at": "2026-09-24 20:25:51.467000+00:00"
+          }
+        ],
+        "snapshot_digest": "dae5abeb6a3c87ed5766b848113fff9667e890f6b28143aa05a85eb72efa872c",
+        "created_at": "2026-09-24 20:26:33.557000+00:00",
+        "created_by": "evaluation",
+        "generation": {
+          "batches": [
+            {
+              "response_id": "resp_094e92ee2dda9156016ab5876e8e1487d2b458f279c8f93b94",
+              "model": "gpt-4.1-mini-2025-04-14",
+              "usage": {
+                "input_tokens": 1673,
+                "input_tokens_details": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0
+                },
+                "output_tokens": 1827,
+                "output_tokens_details": {
+                  "reasoning_tokens": 0
+                },
+                "total_tokens": 3500
+              },
+              "attempts": 1
+            }
+          ],
+          "model": "gpt-4.1-mini",
+          "attempts": 1
+        },
+        "prompt_version": "generate_v3",
+        "model": "gpt-4.1-mini",
+        "job_id": "4fe66eeddf5d4415a62e61adf8d9060c"
+      }
+    }
+  ]
+}

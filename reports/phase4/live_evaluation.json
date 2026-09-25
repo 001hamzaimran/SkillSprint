@@ -1,0 +1,82 @@
+{
+  "started_at": "2026-09-24 20:11:28.720094+00:00",
+  "model": "gpt-4.1-mini",
+  "workers": 4,
+  "scope": "10 full role matrices, 88 requirements each",
+  "approval_note": "Explicit automated fixture approval; human review pending",
+  "roles": [
+    {
+      "role_id": "CS",
+      "status": "completed",
+      "elapsed_seconds": 341.969,
+      "items": 88,
+      "core_passed": true
+    },
+    {
+      "role_id": "DC",
+      "status": "completed",
+      "elapsed_seconds": 362.545,
+      "items": 88,
+      "core_passed": true
+    },
+    {
+      "role_id": "WA",
+      "status": "completed",
+      "elapsed_seconds": 345.207,
+      "items": 88,
+      "core_passed": true
+    },
+    {
+      "role_id": "RS",
+      "status": "completed",
+      "elapsed_seconds": 370.01,
+      "items": 88,
+      "core_passed": true
+    },
+    {
+      "role_id": "MS",
+      "status": "completed",
+      "elapsed_seconds": 352.567,
+      "items": 88,
+      "core_passed": true
+    },
+    {
+      "role_id": "FA",
+      "status": "completed",
+      "elapsed_seconds": 483.878,
+      "items": 88,
+      "core_passed": true
+    },
+    {
+      "role_id": "HR",
+      "status": "completed",
+      "elapsed_seconds": 333.112,
+      "items": 88,
+      "core_passed": true
+    },
+    {
+      "role_id": "IT",
+      "status": "completed",
+      "elapsed_seconds": 342.979,
+      "items": 88,
+      "core_passed": true
+    },
+    {
+      "role_id": "DA",
+      "status": "completed",
+      "elapsed_seconds": 366.799,
+      "items": 88,
+      "core_passed": true
+    },
+    {
+      "role_id": "OM",
+      "status": "completed",
+      "elapsed_seconds": 361.819,
+      "items": 88,
+      "core_passed": true
+    }
+  ],
+  "elapsed_seconds": 1062.69,
+  "comparison_rows": 880,
+  "finished_at": "2026-09-24 20:29:11.409555+00:00"
+}

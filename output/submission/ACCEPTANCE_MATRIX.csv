@@ -1,0 +1,64 @@
+Step,SRS requirement,Status,Implementation / evidence,Limit
+1,Company Document Dataset Creation,Implemented; see evidence,app/ingestion.py; app/main.py; app/policy.py; tests/test_phase1.py; tests/test_phase4.py,Human review of generated content remains required.
+2,Multiple Job Roles,Implemented; see evidence,app/ingestion.py; app/main.py; app/policy.py; tests/test_phase1.py; tests/test_phase4.py,Human review of generated content remains required.
+3,Document Variation,Implemented; see evidence,app/ingestion.py; app/main.py; app/policy.py; tests/test_phase1.py; tests/test_phase4.py,Human review of generated content remains required.
+4,Document Upload,Implemented; see evidence,app/ingestion.py; app/main.py; app/policy.py; tests/test_phase1.py; tests/test_phase4.py,Human review of generated content remains required.
+5,Document Validation,Implemented; see evidence,app/ingestion.py; app/main.py; app/policy.py; tests/test_phase1.py; tests/test_phase4.py,Human review of generated content remains required.
+6,Document Parsing,Implemented; see evidence,app/ingestion.py; app/main.py; app/policy.py; tests/test_phase1.py; tests/test_phase4.py,Human review of generated content remains required.
+7,Content Chunking,Partial / reviewed limitation,app/ingestion.py; app/main.py; app/policy.py; tests/test_phase1.py; tests/test_phase4.py,Location-based bounded chunks; no semantic chunk optimization.
+8,Document Version Control,Implemented; see evidence,app/ingestion.py; app/main.py; app/policy.py; tests/test_phase1.py; tests/test_phase4.py,Human review of generated content remains required.
+9,Employee Profile Creation,Implemented; see evidence,app/ingestion.py; app/main.py; app/policy.py; tests/test_phase1.py; tests/test_phase4.py,Human review of generated content remains required.
+10,Role Requirement Matrix,Partial / reviewed limitation,app/ingestion.py; app/main.py; app/policy.py; tests/test_phase1.py; tests/test_phase4.py,Reviewer-approved matrix; no fully automatic semantic authority.
+11,Requirement Extraction,Partial / reviewed limitation,app/ingestion.py; app/main.py; app/policy.py; tests/test_phase1.py; tests/test_phase4.py,Draft clause/obligation extraction plus optional AI; human review required.
+12,Personalized Onboarding Plan Generation,Implemented; see evidence,app/schemas.py; app/worker.py; prompt_templates/generate_v3.txt; reports/phase4/role_*.json,Human review of generated content remains required.
+13,Multi-Stage Onboarding Plan,Partial / reviewed limitation,app/schemas.py; app/worker.py; prompt_templates/generate_v3.txt; reports/phase4/role_*.json,Stages supported; early deadlines can concentrate items in Week 1.
+14,Learning Module Generation,Implemented; see evidence,app/schemas.py; app/worker.py; prompt_templates/generate_v3.txt; reports/phase4/role_*.json,Human review of generated content remains required.
+15,Source-Grounded Generation,Implemented; see evidence,app/schemas.py; app/worker.py; prompt_templates/generate_v3.txt; reports/phase4/role_*.json,Human review of generated content remains required.
+16,Role-Specific Learning,Partial / reviewed limitation,app/schemas.py; app/worker.py; prompt_templates/generate_v3.txt; reports/phase4/role_*.json,Role scope enforced; explanation relevance remains reviewed.
+17,Checklist Generation,Implemented; see evidence,app/schemas.py; app/worker.py; prompt_templates/generate_v3.txt; reports/phase4/role_*.json,Human review of generated content remains required.
+18,Role-Specific Task Generation,Implemented; see evidence,app/schemas.py; app/worker.py; prompt_templates/generate_v3.txt; reports/phase4/role_*.json,Human review of generated content remains required.
+19,Scenario-Based Task Generation,Partial / reviewed limitation,app/schemas.py; app/worker.py; prompt_templates/generate_v3.txt; reports/phase4/role_*.json,Scenario content generated; free-form quality needs review.
+20,Quiz Generation,Implemented; see evidence,app/schemas.py; app/worker.py; prompt_templates/generate_v3.txt; reports/phase4/role_*.json,Human review of generated content remains required.
+21,Quiz Traceability,Implemented; see evidence,app/schemas.py; app/worker.py; prompt_templates/generate_v3.txt; reports/phase4/role_*.json,Human review of generated content remains required.
+22,Distractor Validation,Partial / reviewed limitation,app/schemas.py; app/worker.py; prompt_templates/generate_v3.txt; reports/phase4/role_*.json,Distinct options and approved answer facts checked; distractor meaning needs human review.
+23,Assessment Generation,Implemented; see evidence,app/schemas.py; app/worker.py; prompt_templates/generate_v3.txt; reports/phase4/role_*.json,Human review of generated content remains required.
+24,Assessment Rubric,Implemented; see evidence,app/schemas.py; app/worker.py; prompt_templates/generate_v3.txt; reports/phase4/role_*.json,Human review of generated content remains required.
+25,Difficulty Levels,Partial / reviewed limitation,app/schemas.py; app/worker.py; prompt_templates/generate_v3.txt; reports/phase4/role_*.json,Experience influences prompt; no explicit difficulty-level field or calibrated assessment difficulty.
+26,Prerequisite Management,Implemented; see evidence,app/validation.py; app/policy.py; tests/test_phase1.py; tests/test_phase3.py,Human review of generated content remains required.
+27,Learning Sequence Validation,Partial / reviewed limitation,app/validation.py; app/policy.py; tests/test_phase1.py; tests/test_phase3.py,Stage ordering and dependency cycles checked; no fine-grained same-stage schedule proof.
+28,Python Requirement Validation Engine,Implemented; see evidence,app/validation.py; app/policy.py; tests/test_phase1.py; tests/test_phase3.py,Human review of generated content remains required.
+29,Coverage Score,Implemented; see evidence,app/validation.py; app/policy.py; tests/test_phase1.py; tests/test_phase3.py,Human review of generated content remains required.
+30,Traceability Score,Implemented; see evidence,app/validation.py; app/policy.py; tests/test_phase1.py; tests/test_phase3.py,Human review of generated content remains required.
+31,Hallucination Detection,Partial / reviewed limitation,app/validation.py; app/policy.py; tests/test_phase1.py; tests/test_phase3.py,Unsupported identities/structured facts detected; free-form hallucinations are not exhaustively detected.
+32,Unsupported Content Detection,Partial / reviewed limitation,app/validation.py; app/policy.py; tests/test_phase1.py; tests/test_phase3.py,Source and matrix membership checked; semantic support remains bounded.
+33,Contradiction Detection,Partial / reviewed limitation,app/validation.py; app/policy.py; tests/test_phase1.py; tests/test_phase3.py,Reviewed key/context/value conflicts; differently worded conditions not inferred.
+34,Policy Precedence Rules,Partial / reviewed limitation,app/validation.py; app/policy.py; tests/test_phase1.py; tests/test_phase3.py,Explicit reviewer precedence; no general automated authority ontology.
+35,Duplicate Learning Detection,Partial / reviewed limitation,app/validation.py; app/policy.py; tests/test_phase1.py; tests/test_phase3.py,Duplicate IDs and exact quiz questions; no semantic near-duplicate detection.
+36,Role Relevance Validation,Partial / reviewed limitation,app/validation.py; app/policy.py; tests/test_phase1.py; tests/test_phase3.py,Role IDs and approved scope checked; prose relevance remains reviewed.
+37,GenAI Structured Output,Implemented; see evidence,app/validation.py; app/policy.py; tests/test_phase1.py; tests/test_phase3.py,Human review of generated content remains required.
+38,Schema Validation,Implemented; see evidence,app/validation.py; app/policy.py; tests/test_phase1.py; tests/test_phase3.py,Human review of generated content remains required.
+39,GenAI Retry and Recovery,Implemented; see evidence,app/generation.py; app/worker.py; tests/test_phase4.py,Human review of generated content remains required.
+40,Prompt Template Management,Implemented; see evidence,app/generation.py; app/worker.py; tests/test_phase4.py,Human review of generated content remains required.
+41,Prompt Version Tracking,Implemented; see evidence,app/generation.py; app/worker.py; tests/test_phase4.py,Human review of generated content remains required.
+42,Prompt Injection Defense,Partial / reviewed limitation,app/generation.py; app/worker.py; tests/test_phase4.py,Pattern quarantine plus architecture boundaries; not a guarantee against all attacks.
+43,Adversarial Document Testing,Partial / reviewed limitation,app/generation.py; app/worker.py; tests/test_phase4.py,All ten authored PDFs tested; not an independent penetration test.
+44,GenAI Consistency Check,Implemented; see evidence,app/comparison.py; reports/phase3_live_smoke.json; reports/phase4/requirement_comparison.csv,Human review of generated content remains required.
+45,Generation Consistency Score,Implemented; see evidence,app/comparison.py; reports/phase3_live_smoke.json; reports/phase4/requirement_comparison.csv,Human review of generated content remains required.
+46,Python and GenAI Result Comparison,Implemented; see evidence,app/comparison.py; reports/phase3_live_smoke.json; reports/phase4/requirement_comparison.csv,Human review of generated content remains required.
+47,Final Verification Status,Partial / reviewed limitation,app/training.py; app/learning.py; tests/test_phase2.py,Uses Review required / Needs correction / Stale sources / Published rather than every SRS status label.
+48,Human Review Workflow,Implemented; see evidence,app/training.py; app/learning.py; tests/test_phase2.py,Human review of generated content remains required.
+49,Reviewer Override,Partial / reviewed limitation,app/training.py; app/learning.py; tests/test_phase2.py,Original results and reviewer comments preserved; blocking validation cannot be overridden.
+50,Employee Learning Dashboard,Implemented; see evidence,app/training.py; app/learning.py; tests/test_phase2.py,Human review of generated content remains required.
+51,Administrator Dashboard,Implemented; see evidence,app/training.py; app/learning.py; tests/test_phase2.py,Human review of generated content remains required.
+52,Role Dashboard,Partial / reviewed limitation,app/training.py; app/learning.py; tests/test_phase2.py,Role matrix and report filters; no dedicated aggregated role dashboard.
+53,Progress Tracking,Implemented; see evidence,app/training.py; app/learning.py; tests/test_phase2.py,Human review of generated content remains required.
+54,Progress Assessment,Implemented; see evidence,app/training.py; app/learning.py; tests/test_phase2.py,Human review of generated content remains required.
+55,Adaptive Recommendation,Partial / reviewed limitation,app/training.py; app/learning.py; tests/test_phase2.py,Rule-based weak-area suggestions; no adaptive model or spaced repetition.
+56,Weak-Area Identification,Implemented; see evidence,app/training.py; app/learning.py; tests/test_phase2.py,Human review of generated content remains required.
+57,Policy Update Detection,Implemented; see evidence,app/phase3.py; app/updates.py; tests/test_phase3.py,Human review of generated content remains required.
+58,Impact Analysis,Partial / reviewed limitation,app/phase3.py; app/updates.py; tests/test_phase3.py,Affected components preview before activation; no complete historical impact dashboard.
+59,Selective Regeneration,Partial / reviewed limitation,app/phase3.py; app/updates.py; tests/test_phase3.py,Conservative identity-based invalidation; unchanged content must match exactly.
+60,Training Plan Comparison,Implemented; see evidence,app/phase3.py; app/updates.py; tests/test_phase3.py,Human review of generated content remains required.
+61,Search and Filtering,Implemented; see evidence,app/phase3.py; app/updates.py; tests/test_phase3.py,Human review of generated content remains required.
+62,Reports,Implemented; see evidence,app/phase3.py; app/updates.py; tests/test_phase3.py,Human review of generated content remains required.
+63,Export,Partial / reviewed limitation,app/phase3.py; app/updates.py; tests/test_phase3.py,CSV export implemented; application PDF export not implemented.

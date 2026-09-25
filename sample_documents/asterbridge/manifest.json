@@ -1,0 +1,23 @@
+{
+  "company": "AsterBridge Delivery Services",
+  "snapshot_date": "2026-09-24",
+  "fictional": true,
+  "human_review_status": "pending",
+  "current_documents": 20,
+  "archived_versions": 10,
+  "job_roles": 10,
+  "requirements": 160,
+  "mandatory_requirements": 140,
+  "role_specific_requirements": 80,
+  "conflict_cases": 10,
+  "policy_version_changes": 10,
+  "adversarial_cases": 10,
+  "generated_plans": 0,
+  "application_tests_run": false,
+  "formats": [
+    "PDF",
+    "Markdown source",
+    "JSON reference"
+  ],
+  "docx_ingestion_test_status": "pending"
+}

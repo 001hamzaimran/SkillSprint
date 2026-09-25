@@ -1,0 +1,544 @@
+{
+  "test": "Real OpenAI Phase 2 integration",
+  "timestamp": "2026-09-24T12:21:50.701167+00:00",
+  "provider": "openai",
+  "model": "gpt-4.1-mini",
+  "database": "isolated local MongoDB",
+  "upload_format": "PDF",
+  "source": "AsterBridge SOP-11 v1.0",
+  "requirements_approved": 8,
+  "status": "completed",
+  "elapsed_seconds": 115.13,
+  "generation": {
+    "batches": [
+      {
+        "response_id": "resp_09824c00583be23f016ab5156fb4a887d28623f16c3032c900",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "usage": {
+          "input_tokens": 1357,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 2296,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 3653
+        },
+        "attempts": 1
+      },
+      {
+        "response_id": "resp_0007b81c45c8b501016ab515c80a6487d280fdf44caf07d666",
+        "model": "gpt-4.1-mini-2025-04-14",
+        "usage": {
+          "input_tokens": 1344,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 2164,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 3508
+        },
+        "attempts": 2
+      }
+    ],
+    "model": "gpt-4.1-mini",
+    "attempts": 3
+  },
+  "validation": {
+    "coverage": 100.0,
+    "traceability": 100.0,
+    "mandatory_total": 7,
+    "mandatory_covered": 7,
+    "missing_count": 0,
+    "core_passed": true,
+    "status": "Review required",
+    "findings": [],
+    "rows": [
+      {
+        "requirement_id": "R-164869B52C24",
+        "expected_text": "The Customer Support Executive must complete approved requester verification before disclosing protected shipment details, following POL-06. A failed verification permits only general public guidance.",
+        "actual_text": "The Customer Support Executive must complete approved requester verification before disclosing protected shipment details, following POL-06. A failed verification permits only general public guidance.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      },
+      {
+        "requirement_id": "R-302C0C8FD2A9",
+        "expected_text": "The Customer Support Executive must acknowledge a complaint within 2 working hours of receipt and provide the case reference and next update time. Critical incidents follow POL-09 instead of this routine target.",
+        "actual_text": "The Customer Support Executive must acknowledge a complaint within 2 working hours of receipt and provide the case reference and next update time. Critical incidents follow POL-09 instead of this routine target.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      },
+      {
+        "requirement_id": "R-502D1496EB52",
+        "expected_text": "The Customer Support Executive must send refund requests to the Returns Specialist and must not promise eligibility, amount or payment date before approval under SOP-14 and SOP-16.",
+        "actual_text": "The Customer Support Executive must send refund requests to the Returns Specialist and must not promise eligibility, amount or payment date before approval under SOP-14 and SOP-16.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      },
+      {
+        "requirement_id": "R-AFBF998AF770",
+        "expected_text": "The Customer Support Executive must check the latest recorded shipment event and applicable SOP before promising a next step. Missing tracking information must be described as unconfirmed.",
+        "actual_text": "The Customer Support Executive must check the latest recorded shipment event and applicable SOP before promising a next step. Missing tracking information must be described as unconfirmed.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      },
+      {
+        "requirement_id": "R-BB345744D6F2",
+        "expected_text": "The Customer Support Executive may propose an FAQ clarification after identifying repeated confusion, subject to owner review before publication.",
+        "actual_text": "The Customer Support Executive may propose an FAQ clarification after identifying repeated confusion, subject to owner review before publication.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      },
+      {
+        "requirement_id": "R-C6ECB5D9FC59",
+        "expected_text": "The Customer Support Executive must escalate a routine case still unresolved after 1 working day to the Operations Manager with actions taken and the outstanding decision.",
+        "actual_text": "The Customer Support Executive must escalate a routine case still unresolved after 1 working day to the Operations Manager with actions taken and the outstanding decision.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      },
+      {
+        "requirement_id": "R-F676841CA26B",
+        "expected_text": "The Customer Support Executive must open a case for each new enquiry, record the shipment ID and classify the issue before advising the customer. Related follow-ups must link to the existing case.",
+        "actual_text": "The Customer Support Executive must open a case for each new enquiry, record the shipment ID and classify the issue before advising the customer. Related follow-ups must link to the existing case.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      },
+      {
+        "requirement_id": "R-F7D7C0FA60B6",
+        "expected_text": "The Customer Support Executive must record the resolution, supporting evidence and customer notification before closure. Lack of customer response alone must not be recorded as successful delivery.",
+        "actual_text": "The Customer Support Executive must record the resolution, supporting evidence and customer notification before closure. Lack of customer response alone must not be recorded as successful delivery.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      }
+    ],
+    "validator_version": "core-1.0",
+    "limitation": "Core checks verify approved requirements, quoted policy text, role, stage, prerequisites and source identity. Generated objectives and activities still require human review. Assessment structure is checked separately; lessons, answer correctness and practical rubrics require explicit human review. Advanced conflict and consistency checks are Phase 3."
+  },
+  "plan": {
+    "title": "Customer Support Executive Onboarding Plan",
+    "summary": "This onboarding plan ensures that the new Customer Support Executive understands and complies with critical operational policies concerning requester verification, complaint acknowledgment, refund authority, and shipment event accuracy. Each learning item is aligned with mandatory company policies and to be completed within the first week.",
+    "role_id": "514847fd6a574737b604830bade671fe",
+    "items": [
+      {
+        "requirement_id": "R-164869B52C24",
+        "role_id": "514847fd6a574737b604830bade671fe",
+        "source_document_id": "144c60c023264acf8e044468272ddc2e",
+        "source_section_id": "p1-4.2",
+        "source_quote": "The Customer Support Executive must complete approved requester verification before disclosing protected shipment details, following POL-06. A failed verification permits only general public guidance.",
+        "mandatory": true,
+        "stage": "Week 1",
+        "module_title": "Requester Verification for Shipment Detail Disclosure",
+        "learning_objective": "Understand and apply the requester verification process before disclosing protected shipment details in compliance with POL-06.",
+        "practical_activity": "Simulate a customer request for shipment details. Perform requester verification according to POL-06 and decide whether to disclose protected details or provide general information if verification fails.",
+        "estimated_minutes": 25,
+        "lesson": "As a Customer Support Executive, it's essential to verify the identity of the requester before sharing any protected shipment information. This verification must follow the approved procedure outlined in POL-06. If the verification does not confirm the requester's identity, only general public information should be given. This protects customer privacy and maintains company compliance with privacy policies.",
+        "checklist": [
+          "Review POL-06 verification steps thoroughly.",
+          "Perform verification for every shipment detail request.",
+          "If verification passes, provide authorized shipment details.",
+          "If verification fails, offer only general public guidance without revealing protected information."
+        ],
+        "scenario": {
+          "prompt": "A caller requests detailed shipment information but exhibits incomplete identification. How do you proceed?",
+          "expected_response": "Conduct the POL-06 verification procedure. Since identification is incomplete, do not disclose protected details; instead, provide only general public shipment information as per policy."
+        },
+        "quiz": {
+          "question": "What should a Customer Support Executive do if requester verification fails when asked for protected shipment details?",
+          "options": [
+            "Disclose only general public guidance without protected details",
+            "Disclose shipment details because the caller seems trustworthy",
+            "Refuse to provide any information at all",
+            "Escalate the request to a supervisor before responding"
+          ],
+          "correct_index": 0,
+          "explanation": "The policy mandates the Customer Support Executive to complete approved requester verification before disclosing protected shipment details. If verification fails, only general public guidance can be given.",
+          "evidence_quote": "The Customer Support Executive must complete approved requester verification before disclosing protected shipment details, following POL-06. A failed verification permits only general public guidance."
+        },
+        "rubric": [
+          {
+            "criterion": "Accuracy in applying POL-06 verification steps during the scenario",
+            "max_points": 5
+          },
+          {
+            "criterion": "Correct handling of information disclosure post-verification",
+            "max_points": 5
+          },
+          {
+            "criterion": "Completeness and correctness in the practical simulation activity",
+            "max_points": 5
+          }
+        ]
+      },
+      {
+        "requirement_id": "R-302C0C8FD2A9",
+        "role_id": "514847fd6a574737b604830bade671fe",
+        "source_document_id": "144c60c023264acf8e044468272ddc2e",
+        "source_section_id": "p1-4.4",
+        "source_quote": "The Customer Support Executive must acknowledge a complaint within 2 working hours of receipt and provide the case reference and next update time. Critical incidents follow POL-09 instead of this routine target.",
+        "mandatory": true,
+        "stage": "Week 1",
+        "module_title": "Timely Complaint Acknowledgment and Communication",
+        "learning_objective": "Learn to acknowledge customer complaints within 2 working hours and communicate case references and next update times clearly, respecting escalation policies for critical incidents.",
+        "practical_activity": "Respond to a mock complaint email within 2 working hours, providing a case reference and expected next update time. Role-play escalation for a critical incident following POL-09 guidelines.",
+        "estimated_minutes": 30,
+        "lesson": "Acknowledging customer complaints promptly is vital for customer trust. You must acknowledge all complaints within two working hours of receipt, providing the customer with a case reference number and an expected time for the next update. For critical incidents, different escalation procedures are followed as defined in POL-09. This helps prioritize issues effectively and manage customer expectations.",
+        "checklist": [
+          "Check complaint inbox regularly to meet the 2-hour acknowledgment target.",
+          "Always include the case reference number in the acknowledgment.",
+          "Communicate the expected time for the next update clearly.",
+          "Identify critical incidents and escalate following POL-09 instead of routine acknowledgment."
+        ],
+        "scenario": {
+          "prompt": "You receive a customer complaint at 10:00 AM regarding a delayed delivery. What steps do you take according to policy?",
+          "expected_response": "Acknowledge the complaint by 12:00 PM with a case reference and inform the customer when they can expect the next update. If the complaint qualifies as critical, initiate escalation per POL-09."
+        },
+        "quiz": {
+          "question": "Within what timeframe must a Customer Support Executive acknowledge a routine complaint?",
+          "options": [
+            "Within 2 working hours",
+            "Within 24 hours",
+            "Within 30 minutes",
+            "Immediately upon receipt"
+          ],
+          "correct_index": 0,
+          "explanation": "The policy requires acknowledgment within 2 working hours of receipt for routine complaints.",
+          "evidence_quote": "The Customer Support Executive must acknowledge a complaint within 2 working hours of receipt and provide the case reference and next update time. Critical incidents follow POL-09 instead of this routine target."
+        },
+        "rubric": [
+          {
+            "criterion": "Timeliness of complaint acknowledgment response",
+            "max_points": 5
+          },
+          {
+            "criterion": "Inclusion of case reference and next update time in communication",
+            "max_points": 5
+          },
+          {
+            "criterion": "Correct identification and escalation of critical incidents",
+            "max_points": 5
+          }
+        ]
+      },
+      {
+        "requirement_id": "R-502D1496EB52",
+        "role_id": "514847fd6a574737b604830bade671fe",
+        "source_document_id": "144c60c023264acf8e044468272ddc2e",
+        "source_section_id": "p2-4.5",
+        "source_quote": "The Customer Support Executive must send refund requests to the Returns Specialist and must not promise eligibility, amount or payment date before approval under SOP-14 and SOP-16.",
+        "mandatory": true,
+        "stage": "Week 1",
+        "module_title": "Adhering to Refund Request Protocol and Authority",
+        "learning_objective": "Understand the procedure for handling refund requests by forwarding them appropriately and avoid making promises before official approvals under SOP-14 and SOP-16.",
+        "practical_activity": "Receive a simulated refund request and practice forwarding it to the Returns Specialist. Role-play responding to customers without promising refund eligibility, amounts, or payment dates prior to approvals.",
+        "estimated_minutes": 20,
+        "lesson": "Refunds are sensitive financial transactions handled under strict controls. As a Customer Support Executive, you are required to forward refund requests to the Returns Specialist and avoid promising customers anything about eligibility, refund amount, or payment timing until these are officially approved under SOP-14 and SOP-16. This process ensures accuracy and prevents misinformation.",
+        "checklist": [
+          "Identify refund-related requests promptly.",
+          "Forward refund requests to the Returns Specialist immediately.",
+          "Do not promise any refund details before approval.",
+          "Refer customers to official policies or specialists for refund queries."
+        ],
+        "scenario": {
+          "prompt": "A customer demands to know the refund amount and payment date immediately. How do you respond?",
+          "expected_response": "Politely inform the customer that refund requests are sent to the Returns Specialist, and refund eligibility, amounts, or payment dates cannot be promised until official approval per SOP-14 and SOP-16."
+        },
+        "quiz": {
+          "question": "What actions should a Customer Support Executive take regarding refund requests?",
+          "options": [
+            "Send requests to the Returns Specialist and avoid promising refund details before approval",
+            "Promise refund amounts if the customer insists",
+            "Approve refunds immediately to expedite service",
+            "Ignore refund requests and refer customers to the website"
+          ],
+          "correct_index": 0,
+          "explanation": "The policy requires sending refund requests to the Returns Specialist and forbids promises about refund eligibility, amounts, or payment dates before official approvals under SOP-14 and SOP-16.",
+          "evidence_quote": "The Customer Support Executive must send refund requests to the Returns Specialist and must not promise eligibility, amount or payment date before approval under SOP-14 and SOP-16."
+        },
+        "rubric": [
+          {
+            "criterion": "Proper routing of refund requests to the Returns Specialist",
+            "max_points": 5
+          },
+          {
+            "criterion": "Accuracy in communication avoiding premature refund promises",
+            "max_points": 5
+          },
+          {
+            "criterion": "Demonstrated understanding of SOP-14 and SOP-16 requirements",
+            "max_points": 5
+          }
+        ]
+      },
+      {
+        "requirement_id": "R-AFBF998AF770",
+        "role_id": "514847fd6a574737b604830bade671fe",
+        "source_document_id": "144c60c023264acf8e044468272ddc2e",
+        "source_section_id": "p1-4.3",
+        "source_quote": "The Customer Support Executive must check the latest recorded shipment event and applicable SOP before promising a next step. Missing tracking information must be described as unconfirmed.",
+        "mandatory": true,
+        "stage": "Week 1",
+        "module_title": "Using Current Shipment Evidence for Customer Communication",
+        "learning_objective": "Learn to verify the latest shipment event and consult SOP before communicating next steps, and correctly classify any missing tracking data as unconfirmed.",
+        "practical_activity": "Review a simulated shipment tracking system to find the latest event and decide next steps to communicate to customers. Practice phrasing responses clearly when tracking information is missing.",
+        "estimated_minutes": 25,
+        "lesson": "When assisting customers with shipment inquiries, always verify the most recent recorded event and consult the relevant SOP before promising any next steps. If shipment tracking details are missing or incomplete, you must clearly state that the information is unconfirmed rather than making assumptions. This approach ensures accuracy and maintains customer trust.",
+        "checklist": [
+          "Always check the latest shipment event in the system.",
+          "Consult applicable SOPs before advising on next steps.",
+          "If tracking info is missing, explicitly describe it as unconfirmed.",
+          "Communicate next steps clearly and accurately."
+        ],
+        "scenario": {
+          "prompt": "A customer asks about the next step in their shipment, but the tracking system shows no recent update. How do you proceed?",
+          "expected_response": "Check the latest shipment event and consult SOP. Inform the customer that tracking information is currently unconfirmed and provide guidance based on SOP without making unwarranted promises."
+        },
+        "quiz": {
+          "question": "What must a Customer Support Executive do before promising the next step in shipment handling?",
+          "options": [
+            "Check the latest recorded shipment event and applicable SOP",
+            "Guess the next step based on experience",
+            "Promise next day delivery regardless of tracking",
+            "Ignore missing tracking information"
+          ],
+          "correct_index": 0,
+          "explanation": "The Customer Support Executive must check the latest recorded shipment event and applicable SOP before promising a next step. Missing tracking information must be described as unconfirmed.",
+          "evidence_quote": "The Customer Support Executive must check the latest recorded shipment event and applicable SOP before promising a next step. Missing tracking information must be described as unconfirmed."
+        },
+        "rubric": [
+          {
+            "criterion": "Verification of latest shipment event in simulated scenario",
+            "max_points": 5
+          },
+          {
+            "criterion": "Correct identification and communication of unconfirmed tracking information",
+            "max_points": 5
+          },
+          {
+            "criterion": "Use of SOP guidelines in advising next steps",
+            "max_points": 5
+          }
+        ]
+      },
+      {
+        "requirement_id": "R-BB345744D6F2",
+        "role_id": "514847fd6a574737b604830bade671fe",
+        "source_document_id": "144c60c023264acf8e044468272ddc2e",
+        "source_section_id": "p2-4.8",
+        "source_quote": "The Customer Support Executive may propose an FAQ clarification after identifying repeated confusion, subject to owner review before publication.",
+        "mandatory": false,
+        "stage": "Week 1",
+        "module_title": "Proposing FAQ Clarifications",
+        "learning_objective": "Learn how to identify common customer confusion and propose FAQ clarifications for review and potential publication.",
+        "practical_activity": "Review three sample customer inquiries and draft a proposed FAQ clarification note based on repeated themes. Submit the proposal for simulated owner review.",
+        "estimated_minutes": 25,
+        "lesson": "Sometimes customers repeatedly express confusion about certain topics, signaling a need for clearer communication. As a Customer Support Executive, you can propose FAQ clarifications after detecting these patterns. Your proposal must be clear and factual and will be subject to review and approval by the FAQ owner before being published. This process helps improve customer understanding and reduces repeated enquiries on the same issue.",
+        "checklist": [
+          "Review customer inquiries to identify common confusions.",
+          "Draft clear, concise FAQ clarification proposals.",
+          "Submit proposals for owner review before publication.",
+          "Track status of proposals and follow up as needed."
+        ],
+        "scenario": {
+          "prompt": "You have noticed multiple customers asking the same question about the delay policy in shipments. What is your next step regarding the FAQ?",
+          "expected_response": "I will draft a clear FAQ clarification addressing the shipment delay policy and submit it to the FAQ owner for review before any publication to ensure accuracy and appropriateness."
+        },
+        "quiz": {
+          "question": "When can a Customer Support Executive propose an FAQ clarification?",
+          "options": [
+            "After noticing repeated customer confusion, subject to owner review before publication.",
+            "After each individual customer enquiry, without review.",
+            "Only after receiving direct approval from the Operations Manager.",
+            "Only if mandated by the company annually."
+          ],
+          "correct_index": 0,
+          "explanation": "The Customer Support Executive may propose an FAQ clarification after identifying repeated confusion, subject to owner review before publication.",
+          "evidence_quote": "The Customer Support Executive may propose an FAQ clarification after identifying repeated confusion, subject to owner review before publication."
+        },
+        "rubric": [
+          {
+            "criterion": "Identifies customer confusion correctly in scenario response",
+            "max_points": 5
+          },
+          {
+            "criterion": "Drafts relevant and clear FAQ proposal",
+            "max_points": 5
+          },
+          {
+            "criterion": "Follows submission and tracking process in activity",
+            "max_points": 5
+          }
+        ]
+      },
+      {
+        "requirement_id": "R-C6ECB5D9FC59",
+        "role_id": "514847fd6a574737b604830bade671fe",
+        "source_document_id": "144c60c023264acf8e044468272ddc2e",
+        "source_section_id": "p2-4.6",
+        "source_quote": "The Customer Support Executive must escalate a routine case still unresolved after 1 working day to the Operations Manager with actions taken and the outstanding decision.",
+        "mandatory": true,
+        "stage": "Week 1",
+        "module_title": "Escalating Unresolved Cases",
+        "learning_objective": "Understand the procedure and timing to escalate unresolved cases to the Operations Manager.",
+        "practical_activity": "Simulate logging a case unresolved for over one working day and prepare an escalation report detailing actions taken and needed decisions. Submit the report in a role-play review.",
+        "estimated_minutes": 30,
+        "lesson": "It is mandatory to escalate any routine case unresolved after one working day to the Operations Manager promptly. Your escalation must include the actions you have taken so far and clearly specify the decisions or information still needed. This ensures the issue is addressed efficiently without undue delay and maintains quality standards for customer support.",
+        "checklist": [
+          "Identify cases unresolved after 1 working day.",
+          "Prepare a detailed report of actions taken so far.",
+          "Specify the outstanding decisions required.",
+          "Submit escalation promptly to the Operations Manager."
+        ],
+        "scenario": {
+          "prompt": "A customer's shipment issue case has been open for 1.5 working days with no resolution. What should you do?",
+          "expected_response": "I must escalate the case to the Operations Manager immediately, including a summary of actions taken and the decision outstanding to facilitate resolution."
+        },
+        "quiz": {
+          "question": "When must a Customer Support Executive escalate a routine unresolved case?",
+          "options": [
+            "After 1 working day with actions taken and outstanding decision included.",
+            "After 3 working days with customer approval.",
+            "Only if the customer requests escalation.",
+            "Only for cases involving shipment delays."
+          ],
+          "correct_index": 0,
+          "explanation": "The Customer Support Executive must escalate a routine case still unresolved after 1 working day to the Operations Manager with actions taken and the outstanding decision.",
+          "evidence_quote": "The Customer Support Executive must escalate a routine case still unresolved after 1 working day to the Operations Manager with actions taken and the outstanding decision."
+        },
+        "rubric": [
+          {
+            "criterion": "Timely identification and escalation of unresolved case",
+            "max_points": 5
+          },
+          {
+            "criterion": "Completeness and clarity of escalation report",
+            "max_points": 5
+          },
+          {
+            "criterion": "Prompt submission to Operations Manager",
+            "max_points": 5
+          }
+        ]
+      },
+      {
+        "requirement_id": "R-F676841CA26B",
+        "role_id": "514847fd6a574737b604830bade671fe",
+        "source_document_id": "144c60c023264acf8e044468272ddc2e",
+        "source_section_id": "p1-4.1",
+        "source_quote": "The Customer Support Executive must open a case for each new enquiry, record the shipment ID and classify the issue before advising the customer. Related follow-ups must link to the existing case.",
+        "mandatory": true,
+        "stage": "Week 1",
+        "module_title": "Opening and Classifying Customer Cases",
+        "learning_objective": "Learn to correctly open a new case for each enquiry, record shipment ID, classify the issue, and link follow-ups properly.",
+        "practical_activity": "Practice opening five simulated new enquiries by entering shipment IDs, selecting the correct classification, and linking any follow-ups appropriately in the case system.",
+        "estimated_minutes": 30,
+        "lesson": "Each new customer enquiry requires you to open a new case in the system to ensure proper tracking. For every case, you must record the shipment ID and accurately classify the issue before providing advice to the customer. When related follow-ups occur, they must be linked to the original case to maintain continuity and context. This practice helps maintain clear records and efficient response management.",
+        "checklist": [
+          "Open a new case for every new enquiry.",
+          "Record the associated shipment ID in the case.",
+          "Classify the issue following company categories.",
+          "Link all related follow-ups to the initial case."
+        ],
+        "scenario": {
+          "prompt": "A new enquiry comes in regarding a missing shipment with ID 12345. What steps should you take?",
+          "expected_response": "I will open a new case, record shipment ID 12345, classify the issue as 'missing shipment,' and link any related follow-ups to this case before advising the customer."
+        },
+        "quiz": {
+          "question": "What must a Customer Support Executive do when receiving a new enquiry?",
+          "options": [
+            "Open a new case, record shipment ID, classify the issue, and link follow-ups.",
+            "Only advise the customer immediately without case opening.",
+            "Open a case only if the shipment is delayed.",
+            "Escalate immediately to Operations Manager."
+          ],
+          "correct_index": 0,
+          "explanation": "The Customer Support Executive must open a case for each new enquiry, record the shipment ID and classify the issue before advising the customer. Related follow-ups must link to the existing case.",
+          "evidence_quote": "The Customer Support Executive must open a case for each new enquiry, record the shipment ID and classify the issue before advising the customer. Related follow-ups must link to the existing case."
+        },
+        "rubric": [
+          {
+            "criterion": "Accurate case creation with shipment ID",
+            "max_points": 5
+          },
+          {
+            "criterion": "Correct classification of issue",
+            "max_points": 5
+          },
+          {
+            "criterion": "Proper linkage of follow-ups to case",
+            "max_points": 5
+          }
+        ]
+      },
+      {
+        "requirement_id": "R-F7D7C0FA60B6",
+        "role_id": "514847fd6a574737b604830bade671fe",
+        "source_document_id": "144c60c023264acf8e044468272ddc2e",
+        "source_section_id": "p2-4.7",
+        "source_quote": "The Customer Support Executive must record the resolution, supporting evidence and customer notification before closure. Lack of customer response alone must not be recorded as successful delivery.",
+        "mandatory": true,
+        "stage": "Week 1",
+        "module_title": "Proper Case Closure with Documentation",
+        "learning_objective": "Understand how to document resolution, evidence and notification properly before closing a customer case.",
+        "practical_activity": "Simulate resolving three cases by documenting the resolution steps, attaching supporting evidence, confirming customer notification, and appropriately closing the cases.",
+        "estimated_minutes": 30,
+        "lesson": "Before closing any customer case, it is mandatory to record the resolution details, attach supporting evidence, and confirm that the customer has been notified. Simply closing a case due to lack of customer response is not acceptable. Proper documentation ensures accountability, traceability, and transparency for all cases handled, promoting customer trust and operational integrity.",
+        "checklist": [
+          "Document detailed resolution for the case.",
+          "Attach all relevant supporting evidence.",
+          "Confirm and record customer notification.",
+          "Do not close case solely due to no customer response."
+        ],
+        "scenario": {
+          "prompt": "You have resolved a customer's query but have not yet received their confirmation. Can you close the case?",
+          "expected_response": "No, I must record the resolution, gather supporting evidence, notify the customer, and only close the case once these steps are properly documented. Lack of customer response alone does not justify closure."
+        },
+        "quiz": {
+          "question": "What must be recorded before closing a customer case?",
+          "options": [
+            "Resolution, supporting evidence, and customer notification.",
+            "Only the resolution is needed.",
+            "Customer response alone without documentation.",
+            "No documentation if the customer is unresponsive."
+          ],
+          "correct_index": 0,
+          "explanation": "The Customer Support Executive must record the resolution, supporting evidence and customer notification before closure. Lack of customer response alone must not be recorded as successful delivery.",
+          "evidence_quote": "The Customer Support Executive must record the resolution, supporting evidence and customer notification before closure. Lack of customer response alone must not be recorded as successful delivery."
+        },
+        "rubric": [
+          {
+            "criterion": "Complete and accurate recording of resolution and evidence",
+            "max_points": 5
+          },
+          {
+            "criterion": "Proper documentation of customer notification",
+            "max_points": 5
+          },
+          {
+            "criterion": "Understanding that lack of customer response does not permit closure",
+            "max_points": 5
+          }
+        ]
+      }
+    ]
+  },
+  "workflow": {
+    "published": true,
+    "modules_completed_in_test": 8,
+    "quiz_attempts": 8,
+    "graded_submissions": 8,
+    "note": "Automated workflow test only. Human verification of generated teaching content remains pending."
+  }
+}

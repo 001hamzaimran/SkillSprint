@@ -1,0 +1,32 @@
+{
+  "tests": 70,
+  "test_failures": 0,
+  "roles": 10,
+  "generated_items": 880,
+  "all_roles_core_passed": true,
+  "human_review": "pending",
+  "unannotated_item_warnings": 880,
+  "full_plan_seconds": [
+    341.969,
+    362.545,
+    345.207,
+    370.01,
+    352.567,
+    483.878,
+    333.112,
+    342.979,
+    366.799,
+    361.819
+  ],
+  "small_plan_seconds": [
+    15.453,
+    15.027,
+    11.599
+  ],
+  "reports_before_median_ms": 20870.84,
+  "reports_after_median_ms": 3118.42,
+  "deployment": "excluded by user",
+  "video": "screen-based replay; full live-action recording not supplied",
+  "public_repository": "not published",
+  "blog": "2590-word local draft; not published"
+}

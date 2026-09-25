@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{% block title %}SkillSprint AI{% endblock %}</title><link rel="stylesheet" href="/static/app.css?v=3"><script src="/static/app.js" defer></script></head>
+<body>{% if user %}<aside class="sidebar"><a class="brand" href="/"><span class="brandmark">s</span><span>SkillSprint<span class="brand-ai">AI</span></span></a><div class="workspace-label">ASTERBRIDGE WORKSPACE</div>
+<nav aria-label="Main navigation">
+<a class="{{ 'selected' if path=='/' }}" href="/">◫ <span>Overview</span></a>
+{% if user.role in editors or user.role in reviewers %}
+<a class="{{ 'selected' if path.startswith('/documents') }}" href="/documents">▤ <span>Knowledge library</span></a>
+<a class="{{ 'selected' if path=='/matrix' }}" href="/matrix">▦ <span>Role requirements</span></a>
+<a class="{{ 'selected' if path=='/verification' }}" href="/verification">✓ <span>Verification</span></a>
+<a class="{{ 'selected' if path=='/roles' }}" href="/roles">◇ <span>Job roles</span></a>{% endif %}
+<a class="{{ 'selected' if path=='/employees' }}" href="/employees">♧ <span>People</span></a>
+<a class="{{ 'selected' if path.startswith('/plans') or path.startswith('/jobs') }}" href="/plans">↗ <span>Onboarding plans</span></a>
+<a class="{{ 'selected' if path.startswith('/learning') }}" href="/learning">✓ <span>{{ 'My Sprint' if user.role=='employee' else 'Learning progress' }}</span></a>
+{% if user.role in reviewers or user.role=='manager' %}<a class="{{ 'selected' if path=='/assessments' }}" href="/assessments">▣ <span>Assessments</span></a>{% endif %}
+{% if user.role in reviewers %}<a class="{{ 'selected' if path=='/audit' }}" href="/audit">◷ <span>Activity trail</span></a>{% endif %}
+{% if user.role=='admin' %}<a class="{{ 'selected' if path=='/users' }}" href="/users">⚙ <span>Access management</span></a>{% endif %}
+<a class="{{ 'selected' if path=='/reports' }}" href="/reports">▥ <span>Reports</span></a></nav><div class="sidebar-note"><span class="tiny-label">BUILT ON EVIDENCE</span><p>Every learning journey starts with a trusted source.</p><span class="small muted">Source → requirement → learning</span></div><div class="account"><div class="avatar">{{ user.name[:1]|upper }}</div><div><strong>{{ user.name }}</strong><small>{{ user.role.replace('_',' ')|title }}</small></div></div><form action="/logout" method="post" class="signout"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="text-button">Sign out</button></form></aside>{% endif %}
+<main class="{{ 'main' if user else 'public-main' }}">{% if user %}<header class="topbar"><span>Learning & development <span class="muted">/ Workspace</span></span><span class="workspace-chip"><i></i> AsterBridge Delivery Services</span></header>{% endif %}<div class="content">{% if message %}<div class="notice" role="status">{{ message }}</div>{% endif %}{% block content %}{% endblock %}</div></main></body></html>

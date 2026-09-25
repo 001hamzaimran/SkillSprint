@@ -1,0 +1,218 @@
+{
+  "test": "Real OpenAI Phase 1 integration",
+  "timestamp": "2026-09-23T19:55:48.643340+00:00",
+  "provider": "openai",
+  "model": "gpt-4.1-mini",
+  "database": "isolated local MongoDB",
+  "upload_format": "PDF",
+  "source": "AsterBridge SOP-11 v1.0",
+  "requirements_approved": 8,
+  "status": "completed",
+  "elapsed_seconds": 19.66,
+  "generation": {
+    "response_id": "resp_068497686a67be10016ab42eb642a887d29d19976b4ca49f5a",
+    "model": "gpt-4.1-mini-2025-04-14",
+    "usage": {
+      "input_tokens": 1448,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 0
+      },
+      "output_tokens": 1379,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 2827
+    },
+    "attempts": 1
+  },
+  "validation": {
+    "coverage": 100.0,
+    "traceability": 100.0,
+    "mandatory_total": 7,
+    "mandatory_covered": 7,
+    "missing_count": 0,
+    "core_passed": true,
+    "status": "Review required",
+    "findings": [],
+    "rows": [
+      {
+        "requirement_id": "R-CB3BBEF511D0",
+        "expected_text": "The Customer Support Executive must open a case for each new enquiry, record the shipment ID and classify the issue before advising the customer. Related follow-ups must link to the existing case.",
+        "actual_text": "The Customer Support Executive must open a case for each new enquiry, record the shipment ID and classify the issue before advising the customer. Related follow-ups must link to the existing case.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      },
+      {
+        "requirement_id": "R-226D5264C613",
+        "expected_text": "The Customer Support Executive must complete approved requester verification before disclosing protected shipment details, following POL-06. A failed verification permits only general public guidance.",
+        "actual_text": "The Customer Support Executive must complete approved requester verification before disclosing protected shipment details, following POL-06. A failed verification permits only general public guidance.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      },
+      {
+        "requirement_id": "R-6C02D4328BEE",
+        "expected_text": "The Customer Support Executive must check the latest recorded shipment event and applicable SOP before promising a next step. Missing tracking information must be described as unconfirmed.",
+        "actual_text": "The Customer Support Executive must check the latest recorded shipment event and applicable SOP before promising a next step. Missing tracking information must be described as unconfirmed.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      },
+      {
+        "requirement_id": "R-92B6209FCFE5",
+        "expected_text": "The Customer Support Executive must acknowledge a complaint within 2 working hours of receipt and provide the case reference and next update time. Critical incidents follow POL-09 instead of this routine target.",
+        "actual_text": "The Customer Support Executive must acknowledge a complaint within 2 working hours of receipt and provide the case reference and next update time. Critical incidents follow POL-09 instead of this routine target.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      },
+      {
+        "requirement_id": "R-B3F4CA58D2C7",
+        "expected_text": "The Customer Support Executive must record the resolution, supporting evidence and customer notification before closure. Lack of customer response alone must not be recorded as successful delivery.",
+        "actual_text": "The Customer Support Executive must record the resolution, supporting evidence and customer notification before closure. Lack of customer response alone must not be recorded as successful delivery.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      },
+      {
+        "requirement_id": "R-D0A029584873",
+        "expected_text": "The Customer Support Executive must send refund requests to the Returns Specialist and must not promise eligibility, amount or payment date before approval under SOP-14 and SOP-16.",
+        "actual_text": "The Customer Support Executive must send refund requests to the Returns Specialist and must not promise eligibility, amount or payment date before approval under SOP-14 and SOP-16.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      },
+      {
+        "requirement_id": "R-EB4D634CD0B9",
+        "expected_text": "The Customer Support Executive must escalate a routine case still unresolved after 1 working day to the Operations Manager with actions taken and the outstanding decision.",
+        "actual_text": "The Customer Support Executive must escalate a routine case still unresolved after 1 working day to the Operations Manager with actions taken and the outstanding decision.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      },
+      {
+        "requirement_id": "R-518626FAFD01",
+        "expected_text": "The Customer Support Executive may propose an FAQ clarification after identifying repeated confusion, subject to owner review before publication.",
+        "actual_text": "The Customer Support Executive may propose an FAQ clarification after identifying repeated confusion, subject to owner review before publication.",
+        "traceable": true,
+        "result": "Match",
+        "errors": []
+      }
+    ],
+    "validator_version": "core-1.0",
+    "limitation": "Core checks verify approved requirements, quoted policy text, role, stage, prerequisites and source identity. Generated objectives and activities still require human review. Full semantic and assessment validation is Phase 2."
+  },
+  "plan": {
+    "title": "Customer Support Executive Onboarding Plan",
+    "summary": "Structured onboarding plan for a beginner Customer Support Executive focusing on essential responsibilities including verification, case handling, complaint management, evidence recording, refund protocol, and escalation procedures.",
+    "role_id": "346458eaae704c39bc9ed7e4d373ad4b",
+    "items": [
+      {
+        "requirement_id": "R-CB3BBEF511D0",
+        "role_id": "346458eaae704c39bc9ed7e4d373ad4b",
+        "source_document_id": "033dbb8af0c74912918d866285451399",
+        "source_section_id": "p1-4.1",
+        "source_quote": "The Customer Support Executive must open a case for each new enquiry, record the shipment ID and classify the issue before advising the customer. Related follow-ups must link to the existing case.",
+        "mandatory": true,
+        "stage": "Day 1",
+        "module_title": "Effective Case Opening and Classification",
+        "learning_objective": "Learn to open and classify customer cases accurately to ensure proper tracking and handling of enquiries.",
+        "practical_activity": "Practice opening sample customer cases with various enquiry types, recording shipment IDs, and linking follow-ups.",
+        "estimated_minutes": 60
+      },
+      {
+        "requirement_id": "R-226D5264C613",
+        "role_id": "346458eaae704c39bc9ed7e4d373ad4b",
+        "source_document_id": "033dbb8af0c74912918d866285451399",
+        "source_section_id": "p1-4.2",
+        "source_quote": "The Customer Support Executive must complete approved requester verification before disclosing protected shipment details, following POL-06. A failed verification permits only general public guidance.",
+        "mandatory": true,
+        "stage": "Day 1",
+        "module_title": "Requester Verification Procedures",
+        "learning_objective": "Understand and apply the requester verification process to protect shipment details according to POL-06.",
+        "practical_activity": "Role-play verification scenarios to practice distinguishing verified requesters from non-verified.",
+        "estimated_minutes": 45
+      },
+      {
+        "requirement_id": "R-6C02D4328BEE",
+        "role_id": "346458eaae704c39bc9ed7e4d373ad4b",
+        "source_document_id": "033dbb8af0c74912918d866285451399",
+        "source_section_id": "p1-4.3",
+        "source_quote": "The Customer Support Executive must check the latest recorded shipment event and applicable SOP before promising a next step. Missing tracking information must be described as unconfirmed.",
+        "mandatory": true,
+        "stage": "Day 1",
+        "module_title": "Utilizing Current Shipment Evidence",
+        "learning_objective": "Learn to verify latest shipment status and applicable SOP to provide accurate information and avoid unconfirmed promises.",
+        "practical_activity": "Analyze shipment records and SOPs to determine appropriate responses for different tracking statuses.",
+        "estimated_minutes": 50
+      },
+      {
+        "requirement_id": "R-92B6209FCFE5",
+        "role_id": "346458eaae704c39bc9ed7e4d373ad4b",
+        "source_document_id": "033dbb8af0c74912918d866285451399",
+        "source_section_id": "p1-4.4",
+        "source_quote": "The Customer Support Executive must acknowledge a complaint within 2 working hours of receipt and provide the case reference and next update time. Critical incidents follow POL-09 instead of this routine target.",
+        "mandatory": true,
+        "stage": "Day 1",
+        "module_title": "Timely Complaint Acknowledgment",
+        "learning_objective": "Ensure prompt acknowledgement of complaints with clear communication of case references and update timelines.",
+        "practical_activity": "Simulate receiving complaints and crafting timely acknowledgment messages including necessary details.",
+        "estimated_minutes": 40
+      },
+      {
+        "requirement_id": "R-B3F4CA58D2C7",
+        "role_id": "346458eaae704c39bc9ed7e4d373ad4b",
+        "source_document_id": "033dbb8af0c74912918d866285451399",
+        "source_section_id": "p2-4.7",
+        "source_quote": "The Customer Support Executive must record the resolution, supporting evidence and customer notification before closure. Lack of customer response alone must not be recorded as successful delivery.",
+        "mandatory": true,
+        "stage": "Week 1",
+        "module_title": "Closing Cases with Proper Evidence",
+        "learning_objective": "Master the procedure to document resolutions thoroughly including evidence and customer notifications before closing cases.",
+        "practical_activity": "Review case studies to identify proper closure documentation and practice completing closure reports.",
+        "estimated_minutes": 50
+      },
+      {
+        "requirement_id": "R-D0A029584873",
+        "role_id": "346458eaae704c39bc9ed7e4d373ad4b",
+        "source_document_id": "033dbb8af0c74912918d866285451399",
+        "source_section_id": "p2-4.5",
+        "source_quote": "The Customer Support Executive must send refund requests to the Returns Specialist and must not promise eligibility, amount or payment date before approval under SOP-14 and SOP-16.",
+        "mandatory": true,
+        "stage": "Week 1",
+        "module_title": "Refund Request Protocol",
+        "learning_objective": "Understand the refund process and limits of authority for promising refunds, ensuring compliance with SOP-14 and SOP-16.",
+        "practical_activity": "Practice preparing refund requests and role-playing communication avoiding unauthorized promises.",
+        "estimated_minutes": 45
+      },
+      {
+        "requirement_id": "R-EB4D634CD0B9",
+        "role_id": "346458eaae704c39bc9ed7e4d373ad4b",
+        "source_document_id": "033dbb8af0c74912918d866285451399",
+        "source_section_id": "p2-4.6",
+        "source_quote": "The Customer Support Executive must escalate a routine case still unresolved after 1 working day to the Operations Manager with actions taken and the outstanding decision.",
+        "mandatory": true,
+        "stage": "Week 1",
+        "module_title": "Escalation of Unresolved Cases",
+        "learning_objective": "Learn to identify cases requiring escalation and prepare clear summaries for the Operations Manager.",
+        "practical_activity": "Simulate unresolved case scenarios and draft escalation communications.",
+        "estimated_minutes": 40
+      },
+      {
+        "requirement_id": "R-518626FAFD01",
+        "role_id": "346458eaae704c39bc9ed7e4d373ad4b",
+        "source_document_id": "033dbb8af0c74912918d866285451399",
+        "source_section_id": "p2-4.8",
+        "source_quote": "The Customer Support Executive may propose an FAQ clarification after identifying repeated confusion, subject to owner review before publication.",
+        "mandatory": false,
+        "stage": "Week 1",
+        "module_title": "Improving Customer Communication",
+        "learning_objective": "Develop skills to identify frequent customer confusion and suggest FAQ improvements effectively.",
+        "practical_activity": "Review past cases to find patterns of confusion and draft potential FAQ clarifications for review.",
+        "estimated_minutes": 30
+      }
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "$defs": {
+    "ExtractedRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "section_id": {
+          "title": "Section Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "source_quote": {
+          "title": "Source Quote",
+          "type": "string"
+        },
+        "mandatory": {
+          "title": "Mandatory",
+          "type": "boolean"
+        },
+        "due_stage": {
+          "enum": [
+            "Day 1",
+            "Week 1",
+            "Week 2",
+            "First 30 Days",
+            "First 60 Days",
+            "First 90 Days"
+          ],
+          "title": "Due Stage",
+          "type": "string"
+        },
+        "competency": {
+          "title": "Competency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "section_id",
+        "title",
+        "source_quote",
+        "mandatory",
+        "due_stage",
+        "competency"
+      ],
+      "title": "ExtractedRequirement",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "requirements": {
+      "items": {
+        "$ref": "#/$defs/ExtractedRequirement"
+      },
+      "title": "Requirements",
+      "type": "array"
+    }
+  },
+  "required": [
+    "requirements"
+  ],
+  "title": "Extraction",
+  "type": "object"
+}

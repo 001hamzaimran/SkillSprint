@@ -1,0 +1,22 @@
+{
+  "artifact_checks": "passed",
+  "checks": [
+    "20 current documents",
+    "10 historical versions",
+    "160 unique requirements",
+    "140 mandatory requirements",
+    "80 role-specific requirements",
+    "10 roles with 88 applicable requirements each",
+    "10 actual version changes",
+    "10 conflict cases",
+    "10 adversarial cases",
+    "all PDF source quotes and pages match",
+    "all document hashes match",
+    "all prerequisite IDs resolve"
+  ],
+  "rendered_pages": 80,
+  "visual_review": "All 80 source PDF pages reviewed in rendered sheets; no clipping or overlap observed.",
+  "application_tests": "not_run",
+  "human_content_review": "pending",
+  "compiled_manual_check": "40 pages render identically to reviewed current source PDFs."
+}

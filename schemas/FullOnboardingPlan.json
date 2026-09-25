@@ -1,0 +1,308 @@
+{
+  "$defs": {
+    "FullLearningItem": {
+      "additionalProperties": false,
+      "properties": {
+        "requirement_id": {
+          "title": "Requirement Id",
+          "type": "string"
+        },
+        "role_id": {
+          "title": "Role Id",
+          "type": "string"
+        },
+        "source_document_id": {
+          "title": "Source Document Id",
+          "type": "string"
+        },
+        "source_section_id": {
+          "title": "Source Section Id",
+          "type": "string"
+        },
+        "source_quote": {
+          "title": "Source Quote",
+          "type": "string"
+        },
+        "mandatory": {
+          "title": "Mandatory",
+          "type": "boolean"
+        },
+        "stage": {
+          "enum": [
+            "Day 1",
+            "Week 1",
+            "Week 2",
+            "First 30 Days",
+            "First 60 Days",
+            "First 90 Days"
+          ],
+          "title": "Stage",
+          "type": "string"
+        },
+        "module_title": {
+          "title": "Module Title",
+          "type": "string"
+        },
+        "learning_objective": {
+          "title": "Learning Objective",
+          "type": "string"
+        },
+        "practical_activity": {
+          "title": "Practical Activity",
+          "type": "string"
+        },
+        "estimated_minutes": {
+          "maximum": 180,
+          "minimum": 1,
+          "title": "Estimated Minutes",
+          "type": "integer"
+        },
+        "lesson": {
+          "maxLength": 5000,
+          "minLength": 30,
+          "title": "Lesson",
+          "type": "string"
+        },
+        "checklist": {
+          "items": {
+            "maxLength": 1200,
+            "minLength": 3,
+            "type": "string"
+          },
+          "maxItems": 6,
+          "minItems": 2,
+          "title": "Checklist",
+          "type": "array"
+        },
+        "scenario": {
+          "$ref": "#/$defs/Scenario"
+        },
+        "quiz": {
+          "$ref": "#/$defs/QuizQuestion"
+        },
+        "rubric": {
+          "items": {
+            "$ref": "#/$defs/RubricCriterion"
+          },
+          "maxItems": 5,
+          "minItems": 2,
+          "title": "Rubric",
+          "type": "array"
+        },
+        "policy_facts": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PolicyRule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "requirement_id",
+        "role_id",
+        "source_document_id",
+        "source_section_id",
+        "source_quote",
+        "mandatory",
+        "stage",
+        "module_title",
+        "learning_objective",
+        "practical_activity",
+        "estimated_minutes",
+        "lesson",
+        "checklist",
+        "scenario",
+        "quiz",
+        "rubric"
+      ],
+      "title": "FullLearningItem",
+      "type": "object"
+    },
+    "PolicyRule": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "maxLength": 80,
+          "minLength": 2,
+          "title": "Key",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 600,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        },
+        "condition": {
+          "maxLength": 1200,
+          "title": "Condition",
+          "type": "string"
+        },
+        "exception": {
+          "maxLength": 1200,
+          "title": "Exception",
+          "type": "string"
+        },
+        "answer_fact": {
+          "maxLength": 1200,
+          "title": "Answer Fact",
+          "type": "string"
+        },
+        "module_category": {
+          "maxLength": 120,
+          "minLength": 2,
+          "title": "Module Category",
+          "type": "string"
+        },
+        "assessment_topic": {
+          "maxLength": 120,
+          "minLength": 2,
+          "title": "Assessment Topic",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "value",
+        "condition",
+        "exception",
+        "answer_fact",
+        "module_category",
+        "assessment_topic"
+      ],
+      "title": "PolicyRule",
+      "type": "object"
+    },
+    "QuizQuestion": {
+      "additionalProperties": false,
+      "properties": {
+        "question": {
+          "maxLength": 1200,
+          "minLength": 3,
+          "title": "Question",
+          "type": "string"
+        },
+        "options": {
+          "items": {
+            "maxLength": 1200,
+            "minLength": 3,
+            "type": "string"
+          },
+          "maxItems": 5,
+          "minItems": 3,
+          "title": "Options",
+          "type": "array"
+        },
+        "correct_index": {
+          "maximum": 4,
+          "minimum": 0,
+          "title": "Correct Index",
+          "type": "integer"
+        },
+        "explanation": {
+          "maxLength": 1200,
+          "minLength": 3,
+          "title": "Explanation",
+          "type": "string"
+        },
+        "evidence_quote": {
+          "maxLength": 6000,
+          "minLength": 3,
+          "title": "Evidence Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "question",
+        "options",
+        "correct_index",
+        "explanation",
+        "evidence_quote"
+      ],
+      "title": "QuizQuestion",
+      "type": "object"
+    },
+    "RubricCriterion": {
+      "additionalProperties": false,
+      "properties": {
+        "criterion": {
+          "maxLength": 1200,
+          "minLength": 3,
+          "title": "Criterion",
+          "type": "string"
+        },
+        "max_points": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Max Points",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "criterion",
+        "max_points"
+      ],
+      "title": "RubricCriterion",
+      "type": "object"
+    },
+    "Scenario": {
+      "additionalProperties": false,
+      "properties": {
+        "prompt": {
+          "maxLength": 1200,
+          "minLength": 3,
+          "title": "Prompt",
+          "type": "string"
+        },
+        "expected_response": {
+          "maxLength": 1200,
+          "minLength": 3,
+          "title": "Expected Response",
+          "type": "string"
+        }
+      },
+      "required": [
+        "prompt",
+        "expected_response"
+      ],
+      "title": "Scenario",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "summary": {
+      "title": "Summary",
+      "type": "string"
+    },
+    "role_id": {
+      "title": "Role Id",
+      "type": "string"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/FullLearningItem"
+      },
+      "maxItems": 120,
+      "minItems": 1,
+      "title": "Items",
+      "type": "array"
+    }
+  },
+  "required": [
+    "title",
+    "summary",
+    "role_id",
+    "items"
+  ],
+  "title": "FullOnboardingPlan",
+  "type": "object"
+}

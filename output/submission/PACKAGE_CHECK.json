@@ -1,0 +1,15 @@
+{
+  "files": 250,
+  "archive_bytes": 3459134,
+  "sha256": "abc7e076acb84e0b21640087f5d00a67693976b4341b03e1521c656989592963",
+  "zip_integrity": "passed",
+  "configured_secret_scan": "passed",
+  "excluded": [
+    ".env",
+    "uploads",
+    ".venv",
+    ".git",
+    "SRS"
+  ],
+  "scope": "Local delivery only; publication and human verification not claimed."
+}

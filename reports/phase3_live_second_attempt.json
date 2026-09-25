@@ -1,0 +1,765 @@
+{
+  "phase": 3,
+  "timestamp": "2026-09-24T15:24:02.865334+00:00",
+  "provider": "openai",
+  "model": "gpt-4.1-mini",
+  "note": "Real API output; automated test approvals and seeded learning history are synthetic, not human verification.",
+  "initial": {
+    "generation": {
+      "batches": [
+        {
+          "response_id": "resp_04d9690990e3f97f016ab540961db087d1a47e941b648a83ab",
+          "model": "gpt-4.1-mini-2025-04-14",
+          "usage": {
+            "input_tokens": 1506,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 1183,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 2689
+          },
+          "attempts": 1
+        },
+        {
+          "response_id": "resp_0fa2f1f6e02126a4016ab540a2473487d19e171578898d1885",
+          "model": "gpt-4.1-mini-2025-04-14",
+          "usage": {
+            "input_tokens": 2992,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 1280
+            },
+            "output_tokens": 1151,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 4143
+          },
+          "attempts": 1,
+          "repair": true
+        }
+      ],
+      "model": "gpt-4.1-mini",
+      "attempts": 2,
+      "pre_repair_content": {
+        "title": "Support Role Onboarding Plan",
+        "summary": "This onboarding plan is designed for a beginner support employee to meet critical operational requirements during the first week. It covers timely case acknowledgment and workstation security procedures to ensure compliance and effective incident handling.",
+        "role_id": "support",
+        "items": [
+          {
+            "requirement_id": "R-7A0CB2CD406B",
+            "role_id": "support",
+            "source_document_id": "7cf2228ef1314650b3c84005c0eabdf1",
+            "source_section_id": "para-1-c1",
+            "source_quote": "During a shift, employees must acknowledge a case within 2 working hours. Urgent incidents require immediate escalation.",
+            "mandatory": true,
+            "stage": "Week 1",
+            "module_title": "Timely Case Acknowledgment and Urgent Incident Escalation",
+            "learning_objective": "Understand and apply the requirement to acknowledge support cases within 2 working hours during a shift and immediately escalate urgent incidents.",
+            "practical_activity": "Simulate receiving multiple support cases during a shift. Prioritize and acknowledge each case within the 2 working hour window. Identify and escalate one urgent incident immediately.",
+            "estimated_minutes": 25,
+            "lesson": "During your shift, you must acknowledge every support case within 2 working hours. This means you need to respond to new cases promptly to ensure no delays in support. Additionally, urgent incidents demand your immediate escalation without delay. Remember, 'During a shift' sets the time condition, and 'Urgent incidents require immediate escalation.' is an exception you must follow exactly. Prompt acknowledgment and escalation help maintain high service standards and customer satisfaction.",
+            "checklist": [
+              "Review case queue regularly during shift",
+              "Acknowledge each case within 2 working hours",
+              "Identify urgent incidents promptly",
+              "Immediately escalate urgent incidents"
+            ],
+            "scenario": {
+              "prompt": "You receive three new support cases during your shift: two are standard issues, and one is marked urgent. How do you handle these cases to comply with company policy?",
+              "expected_response": "I will acknowledge the two standard cases within 2 working hours of receipt. For the urgent incident, I will escalate it immediately as required by the policy exception."
+            },
+            "quiz": {
+              "question": "According to company policy, how soon must you acknowledge a support case during your shift, and what must you do with urgent incidents?",
+              "options": [
+                "Acknowledge within 2 working hours; escalate urgent incidents immediately",
+                "Acknowledge within 4 working hours; escalate urgent incidents after 2 hours",
+                "Acknowledge within 1 working hour; handle urgent incidents in the next shift",
+                "Acknowledge at the end of shift; escalate urgent incidents only if they affect multiple customers"
+              ],
+              "correct_index": 0,
+              "explanation": "The policy requires acknowledging cases within 2 working hours during a shift, and urgent incidents require immediate escalation. This ensures timely response and prioritization of critical issues.",
+              "evidence_quote": "During a shift, employees must acknowledge a case within 2 working hours. Urgent incidents require immediate escalation."
+            },
+            "rubric": [
+              {
+                "criterion": "Timeliness in acknowledging standard cases within 2 working hours",
+                "max_points": 5
+              },
+              {
+                "criterion": "Prompt identification and immediate escalation of urgent incidents",
+                "max_points": 5
+              },
+              {
+                "criterion": "Completion and accuracy of the practical simulation activity",
+                "max_points": 5
+              }
+            ],
+            "policy_facts": {
+              "key": "ack-01",
+              "value": "2 working hours",
+              "condition": "During a shift",
+              "exception": "Urgent incidents require immediate escalation.",
+              "answer_fact": "2 working hours",
+              "module_category": "ACK-01",
+              "assessment_topic": "ACK-01 action"
+            }
+          },
+          {
+            "requirement_id": "R-CC1B7656F4A6",
+            "role_id": "support",
+            "source_document_id": "11d90435335f4e06bb292ef6e264888e",
+            "source_section_id": "para-1-c1",
+            "source_quote": "Employees must lock their workstation before leaving it unattended.",
+            "mandatory": true,
+            "stage": "Week 1",
+            "module_title": "Workstation Security: Locking Procedures",
+            "learning_objective": "Ensure employees consistently lock their workstation before leaving it unattended to maintain workplace security and data protection.",
+            "practical_activity": "Practice locking your workstation manually and setting up automatic locking settings. Simulate leaving your desk for 5 minutes while the workstation is locked.",
+            "estimated_minutes": 20,
+            "lesson": "To protect company data and equipment, you must lock your workstation any time you leave it unattended. This simple action prevents unauthorized access to your system and helps maintain security compliance. Always remember to lock your screen before stepping away, no matter how brief the absence.",
+            "checklist": [
+              "Press the Windows key + L or use the lock screen shortcut",
+              "Confirm your screen is locked before leaving",
+              "Configure automatic lock settings as a backup",
+              "Ensure no sensitive information is visible when away"
+            ],
+            "scenario": {
+              "prompt": "You need to step away from your desk for a short break. What should you do to comply with workstation security policy?",
+              "expected_response": "I will lock my workstation before leaving it unattended to prevent unauthorized access."
+            },
+            "quiz": {
+              "question": "What is the required action regarding your workstation when you leave it unattended?",
+              "options": [
+                "Lock your workstation",
+                "Leave it as is if stepping away briefly",
+                "Log out of your user account",
+                "Shut down the computer"
+              ],
+              "correct_index": 0,
+              "explanation": "The policy mandates that employees must lock their workstation before leaving it unattended to ensure security. Other options do not fulfill this requirement effectively.",
+              "evidence_quote": "Employees must lock their workstation before leaving it unattended."
+            },
+            "rubric": [
+              {
+                "criterion": "Consistently locking workstation before unattended periods",
+                "max_points": 5
+              },
+              {
+                "criterion": "Effectiveness of setting up automatic locking features",
+                "max_points": 3
+              },
+              {
+                "criterion": "Correct application of locking procedure in practical activity",
+                "max_points": 5
+              }
+            ],
+            "policy_facts": {
+              "key": "lock-01",
+              "value": "lock their workstation",
+              "condition": "",
+              "exception": "",
+              "answer_fact": "lock their workstation",
+              "module_category": "LOCK-01",
+              "assessment_topic": "LOCK-01 action"
+            }
+          }
+        ]
+      },
+      "initial_findings": [
+        {
+          "code": "QUIZ_ANSWER_FACT_MISMATCH",
+          "requirement_id": "R-7A0CB2CD406B",
+          "message": "Quiz answer fact mismatch"
+        },
+        {
+          "code": "QUIZ_ANSWER_FACT_MISMATCH",
+          "requirement_id": "R-CC1B7656F4A6",
+          "message": "Quiz answer fact mismatch"
+        },
+        {
+          "code": "REQUIREMENT_MISSING",
+          "requirement_id": "R-7A0CB2CD406B",
+          "message": "Mandatory requirement has no valid learning item."
+        },
+        {
+          "code": "REQUIREMENT_MISSING",
+          "requirement_id": "R-CC1B7656F4A6",
+          "message": "Mandatory requirement has no valid learning item."
+        }
+      ]
+    },
+    "validation": {
+      "coverage": 100.0,
+      "traceability": 100.0,
+      "mandatory_total": 2,
+      "mandatory_covered": 2,
+      "missing_count": 0,
+      "core_passed": true,
+      "status": "Review required",
+      "findings": [],
+      "warnings": [],
+      "rows": [
+        {
+          "requirement_id": "R-7A0CB2CD406B",
+          "expected_text": "During a shift, employees must acknowledge a case within 2 working hours. Urgent incidents require immediate escalation.",
+          "actual_text": "During a shift, employees must acknowledge a case within 2 working hours. Urgent incidents require immediate escalation.",
+          "traceable": true,
+          "result": "Match",
+          "errors": []
+        },
+        {
+          "requirement_id": "R-CC1B7656F4A6",
+          "expected_text": "Employees must lock their workstation before leaving it unattended.",
+          "actual_text": "Employees must lock their workstation before leaving it unattended.",
+          "traceable": true,
+          "result": "Match",
+          "errors": []
+        }
+      ],
+      "validator_version": "rules-3.0",
+      "structured_rules_checked": 2,
+      "limitation": "Python checks source identity, coverage, structured rule values, quoted conditions/exceptions, approved quiz answer facts, conflicts and prerequisites. Unannotated rules and free-form meaning still require human review; matching evidence is not a proof of semantic correctness."
+    },
+    "content": {
+      "title": "Support Role Onboarding Plan",
+      "summary": "This onboarding plan is designed for a beginner support employee to meet critical operational requirements during the first week. It covers timely case acknowledgment and workstation security procedures to ensure compliance and effective incident handling.",
+      "role_id": "support",
+      "items": [
+        {
+          "requirement_id": "R-7A0CB2CD406B",
+          "role_id": "support",
+          "source_document_id": "7cf2228ef1314650b3c84005c0eabdf1",
+          "source_section_id": "para-1-c1",
+          "source_quote": "During a shift, employees must acknowledge a case within 2 working hours. Urgent incidents require immediate escalation.",
+          "mandatory": true,
+          "stage": "Week 1",
+          "module_title": "Timely Case Acknowledgment and Urgent Incident Escalation",
+          "learning_objective": "Understand and apply the requirement to acknowledge support cases within 2 working hours during a shift and immediately escalate urgent incidents.",
+          "practical_activity": "Simulate receiving multiple support cases during a shift. Prioritize and acknowledge each case within the 2 working hour window. Identify and escalate one urgent incident immediately.",
+          "estimated_minutes": 25,
+          "lesson": "During a shift, employees are required to acknowledge a support case within 2 working hours. This ensures that support requests are responded to promptly, maintaining service quality. Additionally, \"During a shift\" sets the condition for when this timing applies. Importantly, \"Urgent incidents require immediate escalation.\" This exception means such cases must be escalated without delay, prioritizing critical issues. Following this rule helps maintain customer satisfaction and operational efficiency.",
+          "checklist": [
+            "Monitor case queue regularly during your shift",
+            "Acknowledge each new case within 2 working hours",
+            "Identify any urgent incidents immediately",
+            "Escalate urgent incidents without delay"
+          ],
+          "scenario": {
+            "prompt": "You receive three new support cases during your shift: two are standard issues, and one is marked urgent. How do you handle these cases to comply with company policy?",
+            "expected_response": "I will acknowledge the two standard cases within 2 working hours of receipt. For the urgent incident, I will escalate it immediately as required by the policy exception."
+          },
+          "quiz": {
+            "question": "According to company policy, how soon must you acknowledge a support case during your shift, and what must you do with urgent incidents?",
+            "options": [
+              "2 working hours",
+              "4 working hours",
+              "1 working hour",
+              "Immediate escalation only"
+            ],
+            "correct_index": 0,
+            "explanation": "The policy requires acknowledging cases within 2 working hours during a shift, and urgent incidents require immediate escalation. This ensures timely response and prioritization of critical issues.",
+            "evidence_quote": "During a shift, employees must acknowledge a case within 2 working hours. Urgent incidents require immediate escalation."
+          },
+          "rubric": [
+            {
+              "criterion": "Timeliness in acknowledging standard cases within 2 working hours",
+              "max_points": 5
+            },
+            {
+              "criterion": "Prompt identification and immediate escalation of urgent incidents",
+              "max_points": 5
+            },
+            {
+              "criterion": "Completion and accuracy of the practical simulation activity",
+              "max_points": 5
+            }
+          ],
+          "policy_facts": {
+            "key": "ack-01",
+            "value": "2 working hours",
+            "condition": "During a shift",
+            "exception": "Urgent incidents require immediate escalation.",
+            "answer_fact": "2 working hours",
+            "module_category": "ACK-01",
+            "assessment_topic": "ACK-01 action"
+          }
+        },
+        {
+          "requirement_id": "R-CC1B7656F4A6",
+          "role_id": "support",
+          "source_document_id": "11d90435335f4e06bb292ef6e264888e",
+          "source_section_id": "para-1-c1",
+          "source_quote": "Employees must lock their workstation before leaving it unattended.",
+          "mandatory": true,
+          "stage": "Week 1",
+          "module_title": "Workstation Security: Locking Procedures",
+          "learning_objective": "Ensure employees consistently lock their workstation before leaving it unattended to maintain workplace security and data protection.",
+          "practical_activity": "Practice locking your workstation manually and setting up automatic locking settings. Simulate leaving your desk for 5 minutes while the workstation is locked.",
+          "estimated_minutes": 20,
+          "lesson": "Employees must lock their workstation any time they leave it unattended to protect company data and equipment. This simple security measure prevents unauthorized access and helps maintain compliance with workplace policies. Always ensure your screen is locked before stepping away, even for short periods. There are no stated conditions or exceptions for this requirement, emphasizing its essential nature.",
+          "checklist": [
+            "Use keyboard shortcut (e.g., Windows key + L) to lock",
+            "Verify workstation is locked before leaving",
+            "Set up automatic locking settings as backup",
+            "Ensure no sensitive information is visible while away"
+          ],
+          "scenario": {
+            "prompt": "You need to step away from your desk for a short break. What should you do to comply with workstation security policy?",
+            "expected_response": "I will lock my workstation before leaving it unattended to prevent unauthorized access."
+          },
+          "quiz": {
+            "question": "What is the required action regarding your workstation when you leave it unattended?",
+            "options": [
+              "lock their workstation",
+              "leave it as is if stepping away briefly",
+              "log out of your user account",
+              "shut down the computer"
+            ],
+            "correct_index": 0,
+            "explanation": "The policy mandates that employees must lock their workstation before leaving it unattended to ensure security. Other options do not fulfill this requirement effectively.",
+            "evidence_quote": "Employees must lock their workstation before leaving it unattended."
+          },
+          "rubric": [
+            {
+              "criterion": "Consistently locking workstation before unattended periods",
+              "max_points": 5
+            },
+            {
+              "criterion": "Effectiveness of setting up automatic locking features",
+              "max_points": 3
+            },
+            {
+              "criterion": "Correct application of locking procedure in practical activity",
+              "max_points": 5
+            }
+          ],
+          "policy_facts": {
+            "key": "lock-01",
+            "value": "lock their workstation",
+            "condition": "",
+            "exception": "",
+            "answer_fact": "lock their workstation",
+            "module_category": "LOCK-01",
+            "assessment_topic": "LOCK-01 action"
+          }
+        }
+      ]
+    }
+  },
+  "consistency": {
+    "experiment_id": "3b0e97b3c743459fae2a2821b5b4aec2",
+    "plan_ids": [
+      "a5d75280ba45446799c28324f8aba48b",
+      "baf4995e9521421281fff6323f6b8758"
+    ],
+    "snapshot_digest": "8303689b5d6debc75cc18d50fd758ab5abb290cdeb4a80f5bb9e871de9cf162b",
+    "comparison": {
+      "comparable": true,
+      "categories": [
+        {
+          "category": "requirements",
+          "intersection": 2,
+          "union": 2,
+          "score": 100.0
+        },
+        {
+          "category": "sources",
+          "intersection": 2,
+          "union": 2,
+          "score": 100.0
+        },
+        {
+          "category": "module_categories",
+          "intersection": 2,
+          "union": 2,
+          "score": 100.0
+        },
+        {
+          "category": "assessment_topics",
+          "intersection": 2,
+          "union": 2,
+          "score": 100.0
+        }
+      ],
+      "consistency_score": 100.0,
+      "method": "Jaccard overlap: intersection / union for requirement IDs, versioned sources, module categories and assessment topics; aggregate is the mean of non-empty categories.",
+      "limitation": "A consistency score measures repeatability, not factual correctness. Unannotated category/topic labels use competency/title/question text and are sensitive to wording."
+    },
+    "generation": [
+      {
+        "batches": [
+          {
+            "response_id": "resp_0e619b5c6dc6ba6e016ab540ad60ac87d18ca47173160058d1",
+            "model": "gpt-4.1-mini-2025-04-14",
+            "usage": {
+              "input_tokens": 1506,
+              "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0
+              },
+              "output_tokens": 1118,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 2624
+            },
+            "attempts": 1
+          },
+          {
+            "response_id": "resp_0e2416cab1b911aa016ab540baf97487d1b0d111ca95051cba",
+            "model": "gpt-4.1-mini-2025-04-14",
+            "usage": {
+              "input_tokens": 2010,
+              "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0
+              },
+              "output_tokens": 567,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 2577
+            },
+            "attempts": 1,
+            "repair": true
+          }
+        ],
+        "model": "gpt-4.1-mini",
+        "attempts": 2,
+        "pre_repair_content": {
+          "title": "Support Role Onboarding Plan",
+          "summary": "This onboarding plan covers mandatory security and operational requirements for support employees, focusing on case acknowledgment timeframes and workstation security.",
+          "role_id": "support",
+          "items": [
+            {
+              "requirement_id": "R-7A0CB2CD406B",
+              "role_id": "support",
+              "source_document_id": "7cf2228ef1314650b3c84005c0eabdf1",
+              "source_section_id": "para-1-c1",
+              "source_quote": "During a shift, employees must acknowledge a case within 2 working hours. Urgent incidents require immediate escalation.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Case Acknowledgment and Urgent Incident Escalation",
+              "learning_objective": "Understand the requirement to acknowledge cases within 2 working hours during shifts and to immediately escalate urgent incidents.",
+              "practical_activity": "Simulate managing incoming cases and practice acknowledging them within 2 working hours. Identify urgent incidents and perform the escalation process as per policy.",
+              "estimated_minutes": 25,
+              "lesson": "During your shift, you are required to acknowledge any support case within 2 working hours. This means that from the moment a case is assigned or appears in your queue, you must respond or indicate acknowledgment to ensure prompt handling. However, if a case qualifies as an urgent incident, it requires immediate escalation without delay. This ensures critical issues receive priority attention. The condition 'During a shift' applies to this timing, and the exception 'Urgent incidents require immediate escalation.' must always be followed.",
+              "checklist": [
+                "Monitor your queue regularly during shifts for new cases.",
+                "Acknowledge each case within 2 working hours of assignment.",
+                "Recognize criteria for urgent incidents promptly.",
+                "Immediately escalate any urgent incidents following company procedures."
+              ],
+              "scenario": {
+                "prompt": "You receive a new case at 10:00 AM during your shift. Two hours later, you realize you haven't acknowledged it. What should you do? Also, if an urgent incident comes in, how do you proceed?",
+                "expected_response": "You should acknowledge the case immediately as you missed the 2 working hours deadline, and for an urgent incident, escalate it immediately without delay."
+              },
+              "quiz": {
+                "question": "What is the maximum time to acknowledge a case during your shift per company policy?",
+                "options": [
+                  "2 working hours",
+                  "4 working hours",
+                  "End of the shift",
+                  "Immediately after the shift"
+                ],
+                "correct_index": 0,
+                "explanation": "Company policy requires employees to acknowledge a case within 2 working hours during their shift. Urgent incidents require immediate escalation.",
+                "evidence_quote": "During a shift, employees must acknowledge a case within 2 working hours. Urgent incidents require immediate escalation."
+              },
+              "rubric": [
+                {
+                  "criterion": "Correctly identify the acknowledgment time and exception in scenario response",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Perform timely acknowledgment in practical activity simulation",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Demonstrate proper escalation of urgent incidents in both scenario and activity",
+                  "max_points": 5
+                }
+              ],
+              "policy_facts": {
+                "key": "ack-01",
+                "value": "2 working hours",
+                "condition": "During a shift",
+                "exception": "Urgent incidents require immediate escalation.",
+                "answer_fact": "2 working hours",
+                "module_category": "ACK-01",
+                "assessment_topic": "ACK-01 action"
+              }
+            },
+            {
+              "requirement_id": "R-CC1B7656F4A6",
+              "role_id": "support",
+              "source_document_id": "11d90435335f4e06bb292ef6e264888e",
+              "source_section_id": "para-1-c1",
+              "source_quote": "Employees must lock their workstation before leaving it unattended.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Workstation Security: Locking Your Workstation",
+              "learning_objective": "Learn the importance and procedure of locking your workstation whenever leaving it unattended to protect company data and security.",
+              "practical_activity": "Practice locking and unlocking a workstation using your login credentials in a simulated environment before leaving it unattended.",
+              "estimated_minutes": 20,
+              "lesson": "To maintain security and protect sensitive information, you must lock your workstation anytime you step away from it and leave it unattended. This simple action prevents unauthorized access and reduces the risk of data breaches or misuse of company resources. There are no exceptions stated, so this applies whenever you leave your workstation for any reason.",
+              "checklist": [
+                "Memorize or bookmark the workstation locking shortcut or process.",
+                "Before stepping away, ensure all sensitive work is saved.",
+                "Lock your workstation every time you leave it unattended, even briefly.",
+                "Unlock securely using your credentials when you return."
+              ],
+              "scenario": {
+                "prompt": "You need to step away from your desk to get a document. What should you do before leaving your workstation unattended?",
+                "expected_response": "You must lock your workstation before leaving to prevent unauthorized access."
+              },
+              "quiz": {
+                "question": "What should you do before leaving your workstation unattended according to company policy?",
+                "options": [
+                  "Lock your workstation",
+                  "Leave it as is",
+                  "Log off permanently",
+                  "Shut down the computer"
+                ],
+                "correct_index": 0,
+                "explanation": "Employees must lock their workstation before leaving it unattended to ensure security.",
+                "evidence_quote": "Employees must lock their workstation before leaving it unattended."
+              },
+              "rubric": [
+                {
+                  "criterion": "Clearly state workstation locking requirement in scenario response",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Perform locking procedure correctly during practical activity",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Understand security importance in lesson and checklist",
+                  "max_points": 4
+                }
+              ],
+              "policy_facts": {
+                "key": "lock-01",
+                "value": "lock their workstation",
+                "condition": "",
+                "exception": "",
+                "answer_fact": "lock their workstation",
+                "module_category": "LOCK-01",
+                "assessment_topic": "LOCK-01 action"
+              }
+            }
+          ]
+        },
+        "initial_findings": [
+          {
+            "code": "QUIZ_ANSWER_FACT_MISMATCH",
+            "requirement_id": "R-CC1B7656F4A6",
+            "message": "Quiz answer fact mismatch"
+          },
+          {
+            "code": "REQUIREMENT_MISSING",
+            "requirement_id": "R-CC1B7656F4A6",
+            "message": "Mandatory requirement has no valid learning item."
+          }
+        ]
+      },
+      {
+        "batches": [
+          {
+            "response_id": "resp_03ea8914e467cc8f016ab540c2ca9887d1b946103b2fd417cf",
+            "model": "gpt-4.1-mini-2025-04-14",
+            "usage": {
+              "input_tokens": 1506,
+              "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0
+              },
+              "output_tokens": 1162,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 2668
+            },
+            "attempts": 1
+          },
+          {
+            "response_id": "resp_0e33cb6fe5439349016ab540d081d087d18fd6bc54c9ded24e",
+            "model": "gpt-4.1-mini-2025-04-14",
+            "usage": {
+              "input_tokens": 2974,
+              "input_tokens_details": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0
+              },
+              "output_tokens": 1168,
+              "output_tokens_details": {
+                "reasoning_tokens": 0
+              },
+              "total_tokens": 4142
+            },
+            "attempts": 1,
+            "repair": true
+          }
+        ],
+        "model": "gpt-4.1-mini",
+        "attempts": 2,
+        "pre_repair_content": {
+          "title": "Support Role Onboarding Plan",
+          "summary": "This onboarding plan covers critical early requirements for support employees, focusing on case acknowledgment timelines and workstation security to ensure compliance and operational security during the first week of employment.",
+          "role_id": "support",
+          "items": [
+            {
+              "requirement_id": "R-7A0CB2CD406B",
+              "role_id": "support",
+              "source_document_id": "7cf2228ef1314650b3c84005c0eabdf1",
+              "source_section_id": "para-1-c1",
+              "source_quote": "During a shift, employees must acknowledge a case within 2 working hours. Urgent incidents require immediate escalation.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Timely Case Acknowledgment and Urgent Escalation",
+              "learning_objective": "Understand and apply the rule to acknowledge cases within required timelines and escalate urgent incidents immediately during shifts.",
+              "practical_activity": "Simulate receiving multiple case tickets during a shift, identify urgent incidents, and demonstrate timely acknowledgment and escalation actions within the 2 working hour limit.",
+              "estimated_minutes": 25,
+              "lesson": "During a shift, it is mandatory to acknowledge any case within 2 working hours. This ensures prompt attention to customer issues and maintains service standards. Special attention must be given to urgent incidents, which require immediate escalation to higher support or management. The condition applies strictly during your working shift, and failure to comply can impact customer satisfaction and operational efficiency. Remember, urgent incidents require immediate escalation.",
+              "checklist": [
+                "Monitor incoming cases continuously during your shift.",
+                "Acknowledge each case within 2 working hours of assignment.",
+                "Identify urgent incidents promptly.",
+                "Escalate urgent incidents immediately as per protocol."
+              ],
+              "scenario": {
+                "prompt": "You start your shift and receive five new cases. One case customer indicates an outage affecting their core business application. How do you handle these cases within your shift?",
+                "expected_response": "I will acknowledge each of the five cases as they come in, ensuring none are unacknowledged for more than 2 working hours. Recognizing the customer's report of a core business application outage as an urgent incident, I will escalate it immediately without delay, following escalation procedures."
+              },
+              "quiz": {
+                "question": "According to the case acknowledgment policy, within what time must you acknowledge a case during your shift?",
+                "options": [
+                  "2 working hours",
+                  "4 working hours",
+                  "End of shift",
+                  "Within one business day"
+                ],
+                "correct_index": 0,
+                "explanation": "The policy states, 'During a shift, employees must acknowledge a case within 2 working hours.' This means acknowledgment within 2 working hours is mandatory, with immediate escalation for urgent incidents.",
+                "evidence_quote": "During a shift, employees must acknowledge a case within 2 working hours. Urgent incidents require immediate escalation."
+              },
+              "rubric": [
+                {
+                  "criterion": "Scenario response demonstrates acknowledgment within 2 working hours and immediate escalation of urgent incidents.",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Practical activity shows accurate timing and correct escalation steps.",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Checklist steps completed accurately in simulated environment.",
+                  "max_points": 5
+                }
+              ],
+              "policy_facts": {
+                "key": "ack-01",
+                "value": "2 working hours",
+                "condition": "During a shift",
+                "exception": "Urgent incidents require immediate escalation.",
+                "answer_fact": "2 working hours",
+                "module_category": "ACK-01",
+                "assessment_topic": "ACK-01 action"
+              }
+            },
+            {
+              "requirement_id": "R-CC1B7656F4A6",
+              "role_id": "support",
+              "source_document_id": "11d90435335f4e06bb292ef6e264888e",
+              "source_section_id": "para-1-c1",
+              "source_quote": "Employees must lock their workstation before leaving it unattended.",
+              "mandatory": true,
+              "stage": "Week 1",
+              "module_title": "Workstation Security: Locking Procedures",
+              "learning_objective": "Learn and apply the security requirement of locking your workstation before leaving it unattended to protect sensitive information.",
+              "practical_activity": "Perform a simulated scenario where you step away from your workstation multiple times during a shift, demonstrating proper locking each time before leaving the workstation.",
+              "estimated_minutes": 20,
+              "lesson": "To protect company data and maintain security, employees must lock their workstation before leaving it unattended. This prevents unauthorized access to confidential information. There are no exceptions to this rule. Locking the workstation is a simple yet critical action to uphold IT security policies and ensure compliance with company standards.",
+              "checklist": [
+                "Always lock your workstation before stepping away, even briefly.",
+                "Use the established keyboard shortcut or menu option to lock immediately.",
+                "Verify the workstation is locked before leaving.",
+                "Educate colleagues on the importance of locking workstations."
+              ],
+              "scenario": {
+                "prompt": "You need to take a 5-minute break during your shift. What steps do you take to secure your workstation?",
+                "expected_response": "Before leaving my workstation, I will lock it using the keyboard shortcut or lock screen option to ensure no one else can access it while I am away."
+              },
+              "quiz": {
+                "question": "What must an employee do before leaving their workstation unattended?",
+                "options": [
+                  "Lock their workstation",
+                  "Log off completely",
+                  "Notify a manager",
+                  "Shut down the computer"
+                ],
+                "correct_index": 0,
+                "explanation": "The policy states 'Employees must lock their workstation before leaving it unattended,' ensuring security while away from the workstation.",
+                "evidence_quote": "Employees must lock their workstation before leaving it unattended."
+              },
+              "rubric": [
+                {
+                  "criterion": "Scenario response correctly describes locking procedure every time before absence from workstation.",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Practical activity demonstrates locking the workstation consistently before each break.",
+                  "max_points": 5
+                },
+                {
+                  "criterion": "Checklist steps followed accurately during practical activity.",
+                  "max_points": 5
+                }
+              ],
+              "policy_facts": {
+                "key": "lock-01",
+                "value": "lock their workstation",
+                "condition": "",
+                "exception": "",
+                "answer_fact": "lock their workstation",
+                "module_category": "LOCK-01",
+                "assessment_topic": "LOCK-01 action"
+              }
+            }
+          ]
+        },
+        "initial_findings": [
+          {
+            "code": "EXCEPTION_OMITTED",
+            "requirement_id": "R-7A0CB2CD406B",
+            "message": "Exception omitted"
+          },
+          {
+            "code": "QUIZ_ANSWER_FACT_MISMATCH",
+            "requirement_id": "R-CC1B7656F4A6",
+            "message": "Quiz answer fact mismatch"
+          },
+          {
+            "code": "REQUIREMENT_MISSING",
+            "requirement_id": "R-7A0CB2CD406B",
+            "message": "Mandatory requirement has no valid learning item."
+          },
+          {
+            "code": "REQUIREMENT_MISSING",
+            "requirement_id": "R-CC1B7656F4A6",
+            "message": "Mandatory requirement has no valid learning item."
+          }
+        ]
+      }
+    ]
+  },
+  "status": "failed",
+  "error_type": "AssertionError",
+  "failed_jobs": []
+}
