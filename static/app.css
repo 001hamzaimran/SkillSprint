@@ -6,3 +6,37 @@
 .rule-editor{margin:20px 0;padding-top:15px;border-top:1px solid var(--border)}.report-filters{display:flex;gap:16px;align-items:end;flex-wrap:wrap;margin:20px 0}.report-filters label{flex:1;min-width:170px;margin-bottom:0}.report-filters .button{margin-bottom:0}
 
 .table-panel td > strong, .table-panel td > a { display: block; }
+
+/* Accessibility, account recovery, and compact mobile navigation */
+html{scroll-behavior:smooth}
+a:focus-visible,button:focus-visible{outline:3px solid #9bc780;outline-offset:3px;border-radius:4px}
+.skip-link{position:fixed;top:-100px;left:8px;background:var(--ink);color:#fff;padding:10px 14px;z-index:100;border-radius:6px}
+.skip-link:focus{top:8px}
+.sidebar-heading{display:flex;align-items:center;justify-content:space-between}
+.nav-toggle{display:none;border:1px solid var(--border);background:#fff;color:var(--ink);border-radius:6px;padding:8px 11px}
+.mobile-signout{display:none}
+.label-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+.label-row label{margin:0}
+.label-row a{font-size:11px}
+.password-field{position:relative;margin-bottom:21px}
+.password-field input{padding-right:62px;margin-top:0}
+.password-toggle{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--green);font-size:11px;font-weight:700;padding:7px}
+.auth-shell{min-height:100vh;display:grid;place-items:center;padding:32px;background:linear-gradient(135deg,#edf3e4,#f8faf6)}
+.auth-card{width:min(460px,100%);background:#fff;border:1px solid var(--border);border-radius:14px;padding:38px;box-shadow:0 16px 45px #19382e12}
+.auth-brand{margin-bottom:46px}
+.auth-card h1{font-size:32px}
+.auth-card form{margin-top:28px}
+.auth-back{display:block;text-align:center;margin-top:24px;font-size:12px}
+.success-mark{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:#e4f1d8;color:var(--green);font-size:23px;margin-bottom:24px}
+.auth-card .notice p{margin:8px 0 14px}
+@media(max-width:760px){
+  .nav-toggle{display:block}
+  .sidebar nav{display:none}
+  .sidebar nav.open{display:flex}
+  .sidebar .signout{display:none}
+  .sidebar nav.open .mobile-signout{display:block;flex:0 0 auto;padding:0}
+  .sidebar nav.open .mobile-signout button{padding:8px 11px;white-space:nowrap}
+  .auth-shell{padding:18px}
+  .auth-card{padding:28px 22px}
+  .auth-brand{margin-bottom:34px}
+}

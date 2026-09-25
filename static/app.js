@@ -4,6 +4,25 @@ document.querySelectorAll('form').forEach(form => {
     if (button) { button.disabled = true; button.setAttribute('aria-busy', 'true'); }
   });
 });
+document.querySelectorAll('[data-password-toggle]').forEach(button => {
+  button.addEventListener('click', () => {
+    const input = document.getElementById(button.dataset.passwordToggle);
+    if (!input) return;
+    const show = input.type === 'password';
+    input.type = show ? 'text' : 'password';
+    button.textContent = show ? 'Hide' : 'Show';
+    button.setAttribute('aria-label', `${show ? 'Hide' : 'Show'} password`);
+  });
+});
+const navToggle = document.querySelector('.nav-toggle');
+const navigation = document.getElementById('main-navigation');
+if (navToggle && navigation) {
+  navToggle.addEventListener('click', () => {
+    const open = navToggle.getAttribute('aria-expanded') !== 'true';
+    navToggle.setAttribute('aria-expanded', String(open));
+    navigation.classList.toggle('open', open);
+  });
+}
 const job = document.querySelector('[data-job-id]');
 if (job && ['queued','running'].includes(job.dataset.jobStatus)) {
   const timer = setInterval(async () => {

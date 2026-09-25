@@ -1,0 +1,96 @@
+{
+  "database": "skillsprint",
+  "created_at": "20260925T204130Z",
+  "collections": {
+    "audit_events": {
+      "records": 79,
+      "sha256": "973cd171880f3b44e8f731293881004064a252c6618521caa8c93743262c41b0",
+      "file": "audit_events.json.gz"
+    },
+    "conflict_resolutions": {
+      "records": 0,
+      "sha256": "0f8e379ca6d85e7851a55a715c047ed1003835d7caa9b828029d71aa34cd3c19",
+      "file": "conflict_resolutions.json.gz"
+    },
+    "consistency_experiments": {
+      "records": 0,
+      "sha256": "4a062ae5dac229ac4916d803532262323e8787da9b31981e32da0896748915f5",
+      "file": "consistency_experiments.json.gz"
+    },
+    "documents": {
+      "records": 21,
+      "sha256": "4b3ac796e58dbcd69932b61c648a06ca9f5be9d041976898ab85971711cc01a7",
+      "file": "documents.json.gz"
+    },
+    "employees": {
+      "records": 1,
+      "sha256": "d57d1311a95edc8819a1686f506fa8f557692df8f0e181b5b4b7a229c5caa155",
+      "file": "employees.json.gz"
+    },
+    "job_roles": {
+      "records": 10,
+      "sha256": "fdd8b9a07208a4a42b2921da839be6cb98930267571a8188571b4265843f86fe",
+      "file": "job_roles.json.gz"
+    },
+    "jobs": {
+      "records": 6,
+      "sha256": "4402a41afb13f5a090e9676e95186edb94fbdab24b6e422a540fed7866b0fc15",
+      "file": "jobs.json.gz"
+    },
+    "learning_progress": {
+      "records": 1,
+      "sha256": "d278a55b38f2fb583d892c43cc3255d6ec7591636f05eb90e5f4256cbf054f1c",
+      "file": "learning_progress.json.gz"
+    },
+    "login_limits": {
+      "records": 0,
+      "sha256": "d4b887714acdc5f2db9cac447a81b828957e14f0641bf3999636882be5eb8a72",
+      "file": "login_limits.json.gz"
+    },
+    "password_resets": {
+      "records": 0,
+      "sha256": "63cf3afeb29ed3057a1f9319cae5d0793ecd14949473b616381065a6175db161",
+      "file": "password_resets.json.gz"
+    },
+    "plan_reviews": {
+      "records": 1,
+      "sha256": "ae54ac22492fb1ab9a585f977de2d489b286775d65e490edcc3f0730a85c0ec4",
+      "file": "plan_reviews.json.gz"
+    },
+    "plans": {
+      "records": 1,
+      "sha256": "d533b21fd8faf1c7edac0d4a29801d330f5a454582ba0eddfb4bdf8cd75b6585",
+      "file": "plans.json.gz"
+    },
+    "practical_submissions": {
+      "records": 0,
+      "sha256": "b197ab01d12e34d2a013134d013d4412552733fb3769de2b8ec4be83ca974107",
+      "file": "practical_submissions.json.gz"
+    },
+    "quiz_attempts": {
+      "records": 2,
+      "sha256": "d167c19c7055ed055a4ea6560c50c8098b48298e1246a9fbcb14913980b25223",
+      "file": "quiz_attempts.json.gz"
+    },
+    "requirements": {
+      "records": 161,
+      "sha256": "5211743c5c86e788f71e07976336478e1d8a252bb88a0a506d7389514efec64f",
+      "file": "requirements.json.gz"
+    },
+    "sessions": {
+      "records": 0,
+      "sha256": "301dad41e495311e151293901aa7b2d207ddd52fd2271dd2f9050a4bc4fe90a3",
+      "file": "sessions.json.gz"
+    },
+    "source_sections": {
+      "records": 161,
+      "sha256": "287a434ff7bde0d8c6caf833c5641934b88d63e25ec7f8e8faa0ec751dc23d5b",
+      "file": "source_sections.json.gz"
+    },
+    "users": {
+      "records": 4,
+      "sha256": "4282b4e690abd2954b76ca295a837cec25a944721431b920c1683db726efb7ea",
+      "file": "users.json.gz"
+    }
+  }
+}

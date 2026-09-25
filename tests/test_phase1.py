@@ -6,7 +6,7 @@ from docx import Document
 from app.db import now, uid
 from app.ingestion import parse
 from app.schemas import OnboardingPlan
-from app.security import token_hash
+from app.security import token_hash, verify_password
 from app.validation import validate_plan
 from app.worker import enqueue, process_one
 from .conftest import login, csrf, upload_docx
@@ -29,6 +29,37 @@ def approve(client, db, token, doc):
             },
         )
         assert response.status_code == 200
+
+
+def test_password_recovery_is_generic_one_time_and_revokes_sessions(workspace):
+    client, db, _ = workspace
+    unknown = client.get("/forgot-password")
+    response = client.post("/forgot-password", data={
+        "email": "missing@test.local", "csrf_token": csrf(unknown.text)
+    })
+    assert response.status_code == 200 and "Check your email" in response.text
+    assert "reset-password?token=" not in response.text
+
+    known = client.get("/forgot-password")
+    response = client.post("/forgot-password", data={
+        "email": "employee@test.local", "csrf_token": csrf(known.text)
+    })
+    assert response.status_code == 200 and "Local development only" in response.text
+    match = __import__("re").search(r'href="[^"]*/reset-password\?token=([^"&]+)', response.text)
+    assert match
+    raw = match.group(1)
+    reset = client.get("/reset-password?token=" + raw)
+    new_password = "A-new-password-456!"
+    response = client.post("/reset-password", data={
+        "token": raw, "password": new_password, "confirm_password": new_password,
+        "csrf_token": csrf(reset.text),
+    })
+    assert response.status_code == 200 and "Password updated" in response.text
+    user = db.users.find_one({"_id": "employee"})
+    assert verify_password(new_password, user["password_hash"])
+    assert db.password_resets.count_documents({"user_id": "employee"}) == 0
+    assert client.get("/reset-password?token=" + raw).status_code == 200
+    assert "invalid or has expired" in client.get("/reset-password?token=" + raw).text
 
 
 def test_login_permissions_csrf_and_session_expiry(workspace):

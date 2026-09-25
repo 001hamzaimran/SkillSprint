@@ -1,5 +1,7 @@
 # MongoDB implementation design
 
+> Archived design: the application was migrated to PostgreSQL. See `POSTGRESQL_DESIGN.md` for the active persistence architecture. This file is retained only as historical project context.
+
 Status: the table below is the target architecture. The local Phase 1/2 implementation is connected to MongoDB and creates its collections/indexes in app/db.py. Current collections are users, sessions, login_limits, employees, job_roles, documents (one immutable version per record), source_sections, requirements, jobs, plans, audit_events, plan_reviews, learning_progress, quiz_attempts and practical_submissions. Plan content and matrix snapshots are embedded in each immutable plan version. Employee active_plan_id is the authoritative assignment pointer; progress and attempts refer to a specific plan ID. Unique indexes prevent multiple profiles per linked login, duplicate progress rows and simultaneous pending submissions for the same module.
 
 Use FastAPI, PyMongo, Pydantic and a server-rendered Jinja2 interface. MongoDB is the sole application database. Use explicit UTC timestamps for storage and Asia/Karachi for the company display/calendar. Store stable business identifiers separately from MongoDB `_id` values so citations remain readable.

@@ -8,9 +8,8 @@ from fastapi import FastAPI, Request, Form, File, UploadFile, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from pymongo.errors import DuplicateKeyError
 from .config import Settings, ROOT
-from .db import connect, initialize, now, uid, audit
+from .db import connect, initialize, now, uid, audit, DuplicateKeyError
 from .security import (
     require,
     identity,
@@ -32,6 +31,10 @@ from .worker import start_worker, enqueue, matrix
 from .training import install_training, current
 from .learning import public_content, learning_checks
 from .phase3 import install_phase3
+from .api import router as api_router
+from .training_api import router as training_api_router
+from .phase3_api import router as phase3_api_router
+from .mail import send_password_reset
 
 templates = Jinja2Templates(directory=str(ROOT / "templates"))
 
@@ -72,6 +75,30 @@ def create_app(settings=None):
 
     def page(request, name, **context):
         user, session = identity(request)
+        titles = {
+            "dashboard.html": "Overview",
+            "roles.html": "Job roles",
+            "employees.html": "People",
+            "documents.html": "Knowledge library",
+            "document.html": "Document",
+            "matrix.html": "Role requirements",
+            "job.html": "Background job",
+            "plans.html": "Onboarding plans",
+            "plan.html": "Plan",
+            "users.html": "Access management",
+            "audit.html": "Activity trail",
+            "learning_home.html": "Learning progress",
+            "learn.html": "Learning plan",
+            "assessments.html": "Assessments",
+            "verification.html": "Verification",
+            "reports.html": "Reports",
+            "compare.html": "Compare plans",
+            "edit_item.html": "Edit learning item",
+            "update_plan.html": "Selective update",
+            "impact.html": "Policy impact",
+            "experiment.html": "Consistency experiment",
+            "error.html": "Error",
+        }
         return templates.TemplateResponse(
             request=request,
             name=name,
@@ -80,6 +107,7 @@ def create_app(settings=None):
                 "csrf_token": session["csrf"] if session else "",
                 "message": request.query_params.get("message", ""),
                 "path": request.url.path,
+                "page_title": titles.get(name, "Workspace"),
                 "stages": STAGES,
                 "editors": EDITORS,
                 "reviewers": REVIEWERS,
@@ -94,14 +122,17 @@ def create_app(settings=None):
         response.headers["X-Frame-Options"] = "DENY"
         response.headers["Referrer-Policy"] = "same-origin"
         response.headers["Content-Security-Policy"] = (
-            "default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; form-action 'self'; frame-ancestors 'none'; base-uri 'self'"
+            "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; form-action 'self'; frame-ancestors 'none'; base-uri 'self'"
         )
-        if not request.url.path.startswith("/static"):
+        if not request.url.path.startswith(("/static", "/assets")):
             response.headers["Cache-Control"] = "no-store"
         return response
 
     @app.exception_handler(HTTPException)
     async def http_error(request, exc):
+        # JSON error response for API endpoints
+        if request.url.path.startswith("/api/"):
+            return JSONResponse({"detail": exc.detail}, status_code=exc.status_code)
         if exc.status_code == 401:
             return redirect("/login", "Please sign in to continue.")
         response = page(request, "error.html", error=exc.detail, code=exc.status_code)
@@ -110,6 +141,11 @@ def create_app(settings=None):
 
     @app.exception_handler(DuplicateKeyError)
     async def duplicate_error(request, exc):
+        if request.url.path.startswith("/api/"):
+            return JSONResponse(
+                {"detail": "This record already exists. Choose a unique value."},
+                status_code=409,
+            )
         response = page(
             request,
             "error.html",
@@ -181,6 +217,139 @@ def create_app(settings=None):
         )
         response.delete_cookie("login_csrf")
         audit(db, user["_id"], "auth.login", user["_id"])
+        return response
+
+    @app.get("/forgot-password")
+    def forgot_password_page(request: Request):
+        if identity(request)[0]:
+            return redirect("/")
+        reset_csrf = anonymous_csrf(settings.app_secret_key)
+        response = page(request, "forgot_password.html", reset_csrf=reset_csrf)
+        response.set_cookie(
+            "reset_csrf",
+            reset_csrf,
+            httponly=True,
+            secure=settings.session_cookie_secure,
+            samesite="strict",
+            max_age=1800,
+        )
+        return response
+
+    @app.post("/forgot-password")
+    def forgot_password(request: Request, email: str = Form(...), csrf_token: str = Form(...)):
+        if not valid_anonymous(
+            csrf_token, request.cookies.get("reset_csrf"), settings.app_secret_key
+        ):
+            raise HTTPException(403, "Refresh the password recovery page before trying again.")
+        db = request.app.state.db
+        email = email.strip().lower()[:254]
+        ip = request.client.host if request.client else "unknown"
+        limit_key = token_hash("password-reset|" + ip + "|" + email)
+        window = db.login_limits.find_one({"_id": limit_key, "expires_at": {"$gt": now()}})
+        allowed = not window or window["count"] < 5
+        if not window:
+            db.login_limits.replace_one(
+                {"_id": limit_key},
+                {"_id": limit_key, "count": 0, "expires_at": now() + timedelta(minutes=15)},
+                upsert=True,
+            )
+        db.login_limits.update_one({"_id": limit_key}, {"$inc": {"count": 1}})
+        user = db.users.find_one({"email": email, "active": True}) if allowed else None
+        reset_url = ""
+        if user:
+            raw = secrets.token_urlsafe(48)
+            db.password_resets.delete_many({"user_id": user["_id"]})
+            db.password_resets.insert_one(
+                {
+                    "_id": uid(),
+                    "token_hash": token_hash(raw),
+                    "user_id": user["_id"],
+                    "expires_at": now() + timedelta(minutes=30),
+                    "created_at": now(),
+                }
+            )
+            reset_url = settings.app_base_url.rstrip("/") + "/reset-password?token=" + quote(raw)
+            try:
+                delivered = send_password_reset(settings, email, reset_url)
+            except Exception:
+                delivered = False
+            audit(
+                db,
+                user["_id"],
+                "password.reset_requested",
+                user["_id"],
+                {"email_delivered": delivered},
+            )
+        response = page(
+            request,
+            "forgot_password_sent.html",
+            development_reset_url=reset_url if settings.app_env == "development" else "",
+        )
+        response.delete_cookie("reset_csrf")
+        return response
+
+    @app.get("/reset-password")
+    def reset_password_page(request: Request):
+        raw = request.query_params.get("token", "")
+        record = (
+            request.app.state.db.password_resets.find_one(
+                {"token_hash": token_hash(raw), "expires_at": {"$gt": now()}}
+            )
+            if raw
+            else None
+        )
+        if not record:
+            return page(request, "reset_password.html", invalid=True, reset_token="", reset_csrf="")
+        reset_csrf = anonymous_csrf(settings.app_secret_key)
+        response = page(
+            request,
+            "reset_password.html",
+            invalid=False,
+            reset_token=raw,
+            reset_csrf=reset_csrf,
+        )
+        response.set_cookie(
+            "reset_csrf",
+            reset_csrf,
+            httponly=True,
+            secure=settings.session_cookie_secure,
+            samesite="strict",
+            max_age=1800,
+        )
+        return response
+
+    @app.post("/reset-password")
+    def reset_password(
+        request: Request,
+        token: str = Form(...),
+        password: str = Form(...),
+        confirm_password: str = Form(...),
+        csrf_token: str = Form(...),
+    ):
+        if not valid_anonymous(
+            csrf_token, request.cookies.get("reset_csrf"), settings.app_secret_key
+        ):
+            raise HTTPException(403, "Refresh the reset page before trying again.")
+        if password != confirm_password:
+            raise HTTPException(422, "The passwords do not match.")
+        try:
+            encoded = hash_password(password)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from None
+        db = request.app.state.db
+        record = db.password_resets.find_one_and_delete(
+            {"token_hash": token_hash(token), "expires_at": {"$gt": now()}}
+        )
+        if not record:
+            raise HTTPException(422, "This reset link is invalid or expired. Request a new one.")
+        db.users.update_one(
+            {"_id": record["user_id"], "active": True}, {"$set": {"password_hash": encoded}}
+        )
+        db.sessions.delete_many({"user_id": record["user_id"]})
+        db.password_resets.delete_many({"user_id": record["user_id"]})
+        audit(db, record["user_id"], "password.reset_completed", record["user_id"])
+        response = redirect("/login", "Password updated. Sign in with your new password.")
+        response.delete_cookie("reset_csrf")
         return response
 
     @app.post("/logout")
@@ -722,4 +891,30 @@ def create_app(settings=None):
 
     install_training(app, page, employees_for, employee_access, plan_access)
     install_phase3(app, page, employees_for, employee_access, plan_access)
+
+    # ── JSON API for React SPA ──────────────────────────────────────────────
+    app.include_router(api_router)
+    app.include_router(training_api_router)
+    app.include_router(phase3_api_router)
+
+    # ── Serve React SPA build ──────────────────────────────────────────────
+    frontend_dist = ROOT / "frontend" / "dist"
+    app.mount(
+        "/assets",
+        StaticFiles(directory=frontend_dist / "assets", check_dir=False),
+        name="spa-assets",
+    )
+
+    @app.get("/app/{rest:path}")
+    @app.get("/app")
+    def spa_catchall(request: Request, rest: str = ""):
+        index = frontend_dist / "index.html"
+        if not index.is_file():
+            raise HTTPException(503, "Build the React frontend first: cd frontend && npm run build")
+        return FileResponse(index)
+
     return app
+
+
+# Support both `uvicorn app.main:app` and the existing factory entry point.
+app = create_app()

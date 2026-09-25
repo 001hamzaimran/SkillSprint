@@ -4,7 +4,7 @@ Historical Phase 1 checkpoint. Phase 2 has since been completed; see [Phase 2 st
 
 Implemented and verified locally:
 
-- MongoDB configuration, collection validators and indexes; bootstrap administrator and idempotent sample import.
+- PostgreSQL configuration and JSONB-backed application tables; bootstrap administrator and idempotent sample import.
 - Password hashing, expiring server-side sessions, CSRF protection, login throttling, five application roles and employee-record authorization.
 - Job roles, employee profiles, account creation and scoped dashboards.
 - PDF and DOCX ingestion, file checks, duplicate detection, traceable page/paragraph/table sources, draft requirements and suspicious-content quarantine.

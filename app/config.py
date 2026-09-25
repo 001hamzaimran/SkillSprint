@@ -12,11 +12,13 @@ class Settings(BaseSettings):
     app_secret_key: str = Field(
         min_length=32, validation_alias=AliasChoices("APP_SECRET_KEY", "SECRET_KEY")
     )
-    mongodb_uri: str = Field(
-        default="mongodb://localhost:27017",
-        validation_alias=AliasChoices("MONGODB_URI", "MONGO_URI"),
+    database_url: str = Field(
+        default="postgresql://postgres:postgres@localhost:5432/skillsprint",
+        validation_alias=AliasChoices("DATABASE_URL", "POSTGRES_URL"),
     )
-    mongodb_db_name: str = "skillsprint"
+    postgres_schema: str = "skillsprint"
+    # Direct-constructor compatibility for older scripts; no MongoDB is used.
+    mongodb_db_name: str = ""
     genai_provider: str = "openai"
     openai_api_key: str = Field(
         default="", validation_alias=AliasChoices("OPENAI_API_KEY", "GENAI_API_KEY")
@@ -29,6 +31,12 @@ class Settings(BaseSettings):
     run_worker: bool = True
     bootstrap_admin_email: str = "admin@skillsprint.local"
     bootstrap_admin_password: str = ""
+    smtp_host: str = ""
+    smtp_port: int = 587
+    smtp_username: str = ""
+    smtp_password: str = ""
+    smtp_from_email: str = ""
+    smtp_starttls: bool = True
 
     @model_validator(mode="after")
     def production_security(self):
@@ -38,5 +46,9 @@ class Settings(BaseSettings):
             raise ValueError("Production requires HTTPS and secure session cookies.")
         if self.genai_provider != "openai":
             raise ValueError("This workspace supports the OpenAI provider only.")
+        if self.mongodb_db_name:
+            self.postgres_schema = self.mongodb_db_name
+        if not self.database_url.startswith(("postgresql://", "postgres://")):
+            raise ValueError("DATABASE_URL must be a PostgreSQL connection URL.")
         self.upload_dir = self.upload_dir.resolve()
         return self

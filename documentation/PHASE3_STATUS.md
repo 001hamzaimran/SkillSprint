@@ -1,6 +1,6 @@
 # Phase 3: verification, policy updates and reports
 
-Implemented locally on 2026-09-25. MongoDB remains the application database. Phase 4 remains for broader evaluation, performance, deployment and competition submission.
+Implemented locally on 2026-09-25. The application persistence layer has since been migrated to PostgreSQL. Phase 4 remains for broader evaluation, performance, deployment and competition submission.
 
 ## Delivered
 

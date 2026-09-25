@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #19382e;
+  --color-muted: #738079;
+  --color-brand: #246b50;
+  --color-green: #246b50;
+  --color-primary: #246b50;
+  --color-background: #f6f8f4;
+  --color-input: #e0e7df;
+  --color-ring: #a5c78b;
+  --color-muted-foreground: #738079;
+  --color-destructive: #dc2626;
+  --color-brand-hover: #1d5a42;
+  --color-lime: #d6eeaf;
+  --color-paper: #f6f8f4;
+  --color-border: #e0e7df;
+  --color-surface: #ffffff;
+  --color-amber: #976419;
+  --color-amber-light: #fff1d8;
+  --color-success: #eaf5e5;
+  --color-success-border: #d5e5cb;
+  --color-danger: #dc2626;
+  --color-badge-bg: #eef3e9;
+  --color-badge-text: #5e7556;
+  --color-warning-bg: #fff5e3;
+  --color-warning-border: #eddfc0;
+  --color-warning-text: #8a692e;
+  --color-hero-bg: #e9f0df;
+  --color-quote-bg: #f7f9f3;
+  --color-quote-border: #cadcb6;
+  --color-table-header-bg: #fbfcf8;
+  --color-table-header-text: #93a086;
+  --color-table-row-border: #edf0e8;
+  --color-nav-active: #edf4e8;
+  --color-focus: #a5c78b;
+
+  --font-sans: 'Segoe UI', Arial, sans-serif;
+  --font-serif: Georgia, serif;
+}
+
+:root {
+  --green: var(--color-brand);
+  --ink: var(--color-ink);
+  --muted: var(--color-muted);
+  --paper: var(--color-paper);
+  --white: var(--color-surface);
+  --border: var(--color-border);
+  --lime: var(--color-lime);
+  --amber: var(--color-amber);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
+::selection {
+  background-color: var(--color-lime);
+  color: var(--color-ink);
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 12px;
+}
+
+code {
+  font-size: 10px;
+  font-family: monospace;
+}
+
+.preserve-lines {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

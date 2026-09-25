@@ -1,7 +1,7 @@
 from copy import deepcopy
 import threading
 from datetime import timedelta
-from pymongo import ReturnDocument
+from .db import ReturnDocument
 from .db import now, uid, audit
 from .generation import structured, GenerationFailure
 from .schemas import Extraction, OnboardingPlan, FullOnboardingPlan

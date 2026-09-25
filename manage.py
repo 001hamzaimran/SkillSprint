@@ -21,12 +21,16 @@ def main():
     settings = Settings()
     client, db = connect(settings)
     try:
+        # Both `check` and `init` are valid first-run commands. Ensure the
+        # PostgreSQL schema exists before either command reads its tables.
+        initialize(db)
         if args.command == "check":
             print(
                 json.dumps(
                     {
-                        "mongodb": "connected",
-                        "database": settings.mongodb_db_name,
+                        "postgresql": "connected",
+                        "database": settings.database_url.rsplit("/", 1)[-1].split("?", 1)[0],
+                        "schema": settings.postgres_schema,
                         "ai_key_configured": bool(settings.openai_api_key),
                         "model": settings.genai_model,
                         "users": db.users.count_documents({}),
@@ -35,7 +39,6 @@ def main():
                 )
             )
             return
-        initialize(db)
         email = settings.bootstrap_admin_email.strip().lower()
         admin = db.users.find_one({"email": email})
         if not admin:
