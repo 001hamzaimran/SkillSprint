@@ -63,6 +63,11 @@ It uses and removes an isolated test database and writes `reports/phase2_live_sm
 
 Application modules live in `app/`; prompts in `prompt_templates/`; UI in `templates/` and `static/`. MongoDB stores users, expiring sessions, roles, employees, source metadata, reviewed requirements, leased jobs, plans and audit events. Original files remain in private `uploads/` storage. Back up MongoDB and uploads together.
 
+Python code uses Black with a 100-character line length. Run
+`.\.venv\Scripts\python.exe -m black app scripts tests manage.py run.py` before
+submitting code changes. Recoverable caches and temporary build artifacts are
+kept in `archive_unused/`; see its README for the inventory.
+
 The local server binds to loopback and runs one embedded worker. Keep `RUN_WORKER=true` for this setup. Phase 3 adds reviewed structured rules, conflict precedence, prerequisite checks, controlled consistency runs, comparison views, selective updates and filtered CSV reports. Unchanged progress is carried forward only for eligible selective updates; old work remains in history. Phase 4 local evaluation and packaging are delivered; deployment was removed by user request. See output/submission/START_HERE.md for evidence and remaining owner actions. Practical work requires a human assessor. Existing Phase 1 plans need regeneration before publication. Scanned PDFs require OCR before upload. Source filtering is a defense, not a guarantee against all prompt injection. Free-text factual accuracy needs human review.
 
 Keep `.env` private and out of source control. The generated company pack is fictional competition material, not real company policy. See `PROJECT_PLAN.md`, `AI_USAGE.md` and `documentation/MONGODB_DESIGN.md` for project context.

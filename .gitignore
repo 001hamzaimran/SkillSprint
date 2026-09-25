@@ -14,3 +14,8 @@ __pycache__/
 tmp/
 uploads/
 *.log
+
+# Recoverable generated artifacts moved out of the working tree
+archive_unused/python_cache/
+archive_unused/pytest_cache/
+archive_unused/temporary_output/
