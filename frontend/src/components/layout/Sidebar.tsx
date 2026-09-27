@@ -37,6 +37,14 @@ export function Sidebar() {
       </div>
 
       <nav className="flex-1 px-4 space-y-1">
+        {[
+          { path: '/search', label: 'Search', show: true },
+          { path: '/insights', label: 'Progress insights', show: true },
+          { path: '/manage', label: 'Manage people & roles', show: EDITORS.has(user.role) },
+          { path: '/review-queue', label: 'Review queue', show: isReviewer },
+          { path: '/compare', label: 'Compare profiles', show: isEditorOrReviewer },
+          { path: '/settings', label: 'Onboarding schedule', show: isAdmin },
+        ].filter(item => item.show).map(item => <NavLink key={item.path} to={item.path} className={({ isActive }) => cn('block px-3 py-2 rounded-md text-sm font-medium', isActive ? 'bg-green/10 text-green' : 'text-muted hover:bg-paper')}>{item.label}</NavLink>)}
         <NavLink to="/" className={({ isActive }) => cn("flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium", isActive ? "bg-green/10 text-green" : "text-muted hover:bg-paper hover:text-ink")}>
           <LayoutDashboard className="w-4 h-4" />
           Overview

@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=ROOT / ".env", extra="ignore", populate_by_name=True)
     app_env: str = "development"
     app_base_url: str = "http://localhost:8000"
+    frontend_url: str = "http://localhost:5173"
+    allowed_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
     app_secret_key: str = Field(
         min_length=32, validation_alias=AliasChoices("APP_SECRET_KEY", "SECRET_KEY")
     )
@@ -52,3 +54,11 @@ class Settings(BaseSettings):
             raise ValueError("DATABASE_URL must be a PostgreSQL connection URL.")
         self.upload_dir = self.upload_dir.resolve()
         return self
+
+    @property
+    def origins(self):
+        return [
+            origin.strip().rstrip("/")
+            for origin in self.allowed_origins.split(",")
+            if origin.strip()
+        ]

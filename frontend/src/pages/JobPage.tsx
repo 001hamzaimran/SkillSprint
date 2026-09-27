@@ -7,6 +7,7 @@ import { PageHeader } from '@/components/shared/PageHeader';
 import { Spinner } from '@/components/shared/Spinner';
 import { Button } from '@/components/ui/button';
 import { StatusBadge } from '@/components/shared/StatusBadge';
+import api from '@/lib/api';
 
 export function JobPage() {
   const { id } = useParams<{ id: string }>();
@@ -94,6 +95,7 @@ export function JobPage() {
           <div className="space-y-4 py-6">
             <AlertCircle className="w-16 h-16 text-red-500 mx-auto" />
             <h3 className="text-xl font-semibold text-ink">Job Failed</h3>
+            <Button onClick={async () => { try { const result = await api.post(`jobs/${id}/retry`).json<{ job_id: string }>(); navigate(`/jobs/${result.job_id}`); } catch { toast.error('Could not retry this job. Start a new request from its source.'); } }}>Retry as a new job</Button>
             <p className="text-red-600 bg-red-50 p-4 rounded-lg border border-red-200 max-w-lg mx-auto font-mono text-sm">
               {job.error || 'An unexpected error occurred during execution.'}
             </p>

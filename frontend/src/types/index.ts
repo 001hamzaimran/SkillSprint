@@ -104,6 +104,9 @@ export interface Job {
 }
 
 export interface QuizQuestion {
+  question_type?: 'multiple_choice' | 'multiple_response' | 'true_false' | 'scenario'
+  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced'
+  correct_indices?: number[]
   question: string
   options: string[]
   correct_index: number
@@ -295,6 +298,8 @@ export interface ComparisonRow {
   status: 'Added' | 'Removed' | 'Changed' | 'Unchanged'
   left?: LearningItem
   right?: LearningItem
+  before?: LearningItem
+  after?: LearningItem
 }
 
 export interface Comparison {

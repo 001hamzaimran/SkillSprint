@@ -93,7 +93,10 @@ export const usePlanStore = create<PlanState>((set) => ({
     set({
       currentPlan: res.left,
       alternatives: res.alternatives,
-      comparison: res.comparison,
+      comparison: res.comparison ? {
+        ...res.comparison,
+        rows: res.comparison.rows.map(row => ({ ...row, left: row.before, right: row.after })),
+      } : null,
       isLoading: false,
     })
   },

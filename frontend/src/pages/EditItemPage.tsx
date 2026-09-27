@@ -34,8 +34,10 @@ export function EditItemPage() {
       question: '',
       options: '',
       correct_index: 0,
+      question_type: 'multiple_choice',
+      correct_indices: '',
       explanation: '',
-      rubric: [{ criterion: '', max_points: 10 }],
+      rubric: [{ criterion: '', expected_performance: '', max_points: 5 }, { criterion: '', expected_performance: '', max_points: 5 }],
       reason: ''
     }
   });
@@ -64,8 +66,10 @@ export function EditItemPage() {
             question: item.quiz?.question || item.question || '',
             options: (item.quiz?.options || item.options || []).join('\n'),
             correct_index: item.quiz?.correct_index ?? item.correct_index ?? 0,
+            question_type: item.quiz?.question_type || 'multiple_choice',
+            correct_indices: (item.quiz?.correct_indices || []).join(','),
             explanation: item.quiz?.explanation || item.explanation || '',
-            rubric: item.rubric && item.rubric.length > 0 ? item.rubric : [{ criterion: '', max_points: 10 }],
+            rubric: item.rubric && item.rubric.length > 0 ? item.rubric : [{ criterion: '', expected_performance: '', max_points: 5 }, { criterion: '', expected_performance: '', max_points: 5 }],
             reason: ''
           });
         }
@@ -88,8 +92,10 @@ export function EditItemPage() {
         question: formData.question,
         options: formData.options.split('\n').map((l: string) => l.trim()).filter(Boolean),
         correct_index: Number(formData.correct_index),
+        question_type: formData.question_type,
+        correct_indices: formData.question_type === 'multiple_response' ? formData.correct_indices.split(',').map((v: string) => Number(v.trim())) : [],
         explanation: formData.explanation,
-        rubric: formData.rubric.map((r: any) => ({ criterion: r.criterion, max_points: Number(r.max_points) })),
+        rubric: formData.rubric.map((r: any) => ({ criterion: r.criterion, expected_performance: r.expected_performance || '', max_points: Number(r.max_points) })),
         reason: formData.reason,
       };
 
@@ -198,6 +204,12 @@ export function EditItemPage() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label>Quiz Question</Label>
+              <Select {...register('question_type')}>
+                <option value="multiple_choice">Multiple choice</option>
+                <option value="multiple_response">Multiple response</option>
+                <option value="true_false">True / false</option>
+                <option value="scenario">Scenario</option>
+              </Select>
               <Input {...register("question", { required: true })} />
             </div>
             <div className="space-y-2">
@@ -208,6 +220,8 @@ export function EditItemPage() {
               <div className="space-y-2">
                 <Label>Correct Option Index (0-based)</Label>
                 <Input type="number" min={0} {...register("correct_index", { required: true })} />
+                <Label>Multiple-response correct indices (comma separated)</Label>
+                <Input {...register('correct_indices')} placeholder="0,2" />
               </div>
               <div className="space-y-2">
                 <Label>Explanation</Label>
@@ -220,7 +234,7 @@ export function EditItemPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>Assessment Rubric</CardTitle>
-            <Button type="button" variant="secondary" size="sm" onClick={() => appendRubric({ criterion: '', max_points: 10 })}>
+            <Button type="button" variant="secondary" size="sm" disabled={rubricFields.length >= 5} onClick={() => appendRubric({ criterion: '', expected_performance: '', max_points: 5 })}>
               <Plus className="w-4 h-4 mr-1" /> Add Criterion
             </Button>
           </CardHeader>
@@ -230,12 +244,14 @@ export function EditItemPage() {
                 <div className="flex-1 space-y-2">
                   <Label>Criterion #{idx + 1}</Label>
                   <Input {...register(`rubric.${idx}.criterion`, { required: true })} />
+                  <Label>Expected performance</Label>
+                  <Input {...register(`rubric.${idx}.expected_performance`)} />
                 </div>
                 <div className="w-24 space-y-2">
                   <Label>Max Pts</Label>
-                  <Input type="number" min={1} {...register(`rubric.${idx}.max_points`, { required: true })} />
+                  <Input type="number" min={1} max={5} {...register(`rubric.${idx}.max_points`, { required: true })} />
                 </div>
-                {rubricFields.length > 1 && (
+                {rubricFields.length > 2 && (
                   <Button type="button" variant="ghost" size="sm" onClick={() => removeRubric(idx)} className="text-red-500 mb-0.5">
                     <Trash2 className="w-4 h-4" />
                   </Button>

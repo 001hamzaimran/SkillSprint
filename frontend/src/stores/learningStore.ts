@@ -16,7 +16,7 @@ interface LearningState {
   fetchLearningHome: () => Promise<void>
   fetchLearnWorkspace: (planId: string) => Promise<void>
   saveProgress: (planId: string, reqId: string, data: Record<string, unknown>) => Promise<void>
-  submitQuiz: (planId: string, reqId: string, answer: number) => Promise<void>
+  submitQuiz: (planId: string, reqId: string, answer: number | number[]) => Promise<void>
   submitPractical: (planId: string, reqId: string, data: Record<string, string>) => Promise<void>
   gradeSubmission: (submissionId: string, data: Record<string, unknown> | FormData) => Promise<void>
   fetchAssessments: () => Promise<void>
@@ -65,8 +65,8 @@ export const useLearningStore = create<LearningState>((set) => ({
     await api.post(`learning/${planId}/${reqId}/progress`, { json: data })
   },
 
-  submitQuiz: async (planId: string, reqId: string, answer: number) => {
-    await api.post(`learning/${planId}/${reqId}/quiz`, { json: { answer } })
+  submitQuiz: async (planId: string, reqId: string, answer: number | number[]) => {
+    await api.post(`learning/${planId}/${reqId}/quiz`, { json: Array.isArray(answer) ? { answers: answer } : { answer } })
   },
 
   submitPractical: async (planId: string, reqId: string, data: Record<string, string>) => {

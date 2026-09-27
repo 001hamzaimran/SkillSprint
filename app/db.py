@@ -437,6 +437,8 @@ COLLECTIONS = (
     "practical_submissions",
     "conflict_resolutions",
     "consistency_experiments",
+    "workspace_settings",
+    "progress_evaluations",
 )
 
 

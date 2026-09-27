@@ -1,0 +1,11 @@
+.env
+.env.*
+.git
+.venv
+frontend/node_modules
+uploads
+tmp
+archive*
+output
+reports
+**/__pycache__

@@ -1,6 +1,6 @@
 # Phase 4 — local evaluation and submission packaging
 
-Deployment removed by explicit user request on 2026-09-25. Local evaluation, measured reporting optimization, machine-readable evidence and submission drafts are delivered. This is not a claim of complete SRS acceptance or externally published submission.
+Historical evaluation snapshot, before the latest PostgreSQL/React SRS work. These results are not a fresh benchmark of the current build. Deployment is now in scope: Railway backend and Vercel frontend, as requested on 2026-09-27. See [deployment instructions](DEPLOYMENT.md). This is not a claim of complete SRS acceptance or externally published submission.
 
 - 70 automated tests passed, including ten adversarial PDFs, ten reviewed conflict fixtures, ten actual policy-version transitions and provider failure boundaries.
 - Ten full real role plans generated: 88 items each, 880 requirement comparisons. All passed core checks; all remain subject to human interpretation/review warnings.
@@ -9,4 +9,4 @@ Deployment removed by explicit user request on 2026-09-25. Local evaluation, mea
 - The 1,000-plan report median improved from 20.87 seconds to 3.12 seconds on a synthetic local capacity fixture. Request-scoped matrix reuse and narrower source queries caused the improvement.
 - Local artifacts: project report/diagrams, 63-step acceptance matrix, evaluation/security findings, 2,590-word blog draft, annotated MP4 replay, demo script, schema export, source/data/evidence ZIP and hash manifest.
 
-Read output/submission/START_HERE.md. Public repository/blog publication, full live-action video recording and participant human verification remain explicitly pending owner actions. Deployment is excluded rather than pending. No genuine prior Git history exists in this workspace and none was fabricated.
+Read output/submission/START_HERE.md. Public repository/blog publication, full live-action video recording and participant human verification remain explicitly pending owner actions. Live deployment and acceptance checks are pending. No genuine prior Git history was fabricated.

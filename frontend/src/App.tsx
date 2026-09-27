@@ -27,6 +27,9 @@ import ReportsPage from '@/pages/ReportsPage';
 import AuditPage from '@/pages/AuditPage';
 import UsersPage from '@/pages/UsersPage';
 import NotFoundPage from '@/pages/NotFoundPage';
+import WorkspacePage from '@/pages/WorkspacePage';
+import RecoveryPage from '@/pages/RecoveryPage';
+import RulePage from '@/pages/RulePage';
 
 export default function App() {
   const editorsAndReviewers = [...EDITORS, ...REVIEWERS];
@@ -34,10 +37,14 @@ export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/forgot-password" element={<RecoveryPage />} />
+      <Route path="/reset-password" element={<RecoveryPage />} />
       
       <Route path="/" element={<AppShell />}>
         {/* All roles */}
         <Route element={<ProtectedRoute />}>
+          <Route path="search" element={<WorkspacePage mode="search" />} />
+          <Route path="insights" element={<WorkspacePage mode="insights" />} />
           <Route index element={<DashboardPage />} />
           <Route path="employees" element={<EmployeesPage />} />
           <Route path="plans" element={<PlansPage />} />
@@ -51,6 +58,7 @@ export default function App() {
 
         {/* Editors & Reviewers */}
         <Route element={<ProtectedRoute allowedRoles={editorsAndReviewers} />}>
+          <Route path="compare" element={<WorkspacePage mode="compare" />} />
           <Route path="documents" element={<DocumentsPage />} />
           <Route path="documents/:id" element={<DocumentPage />} />
           <Route path="documents/:id/impact" element={<ImpactPage />} />
@@ -69,12 +77,18 @@ export default function App() {
 
         {/* Reviewers Only */}
         <Route element={<ProtectedRoute allowedRoles={[...REVIEWERS]} />}>
+          <Route path="review-queue" element={<WorkspacePage mode="review-queue" />} />
+          <Route path="requirements/:id/rules" element={<RulePage />} />
           <Route path="audit" element={<AuditPage />} />
         </Route>
 
         {/* Admin Only */}
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+          <Route path="settings" element={<WorkspacePage mode="settings" />} />
           <Route path="users" element={<UsersPage />} />
+        </Route>
+        <Route element={<ProtectedRoute allowedRoles={[...EDITORS]} />}>
+          <Route path="manage" element={<WorkspacePage mode="manage" />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

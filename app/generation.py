@@ -1,4 +1,5 @@
 import json
+import hashlib
 import time
 from openai import (
     OpenAI,
@@ -45,6 +46,8 @@ def structured(settings, schema, template, payload, on_attempt=lambda *args: Non
                     "model": response.model,
                     "usage": response.usage.model_dump() if response.usage else {},
                     "attempts": attempt,
+                    "prompt_version": template,
+                    "prompt_sha256": hashlib.sha256(prompt.encode()).hexdigest(),
                 }
             except AuthenticationError:
                 raise GenerationFailure(

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router';
+import { Link, useNavigate, useLocation } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -179,7 +179,7 @@ export default function LoginPage() {
           </form>
 
           <div className="text-center lg:text-left text-sm text-muted">
-            Need help signing in or resetting your password? Contact your IT administrator.
+            <Link className="text-green underline" to="/forgot-password">Forgot your password?</Link> You can also contact your IT administrator.
           </div>
         </div>
       </div>

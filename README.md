@@ -1,6 +1,10 @@
 # SkillSprint AI
 
-PostgreSQL-backed onboarding workspace built with Python, FastAPI, React and Jinja2. Phases 1–3 provide source-to-plan generation, human review and publication, employee learning, quizzes, practical assessment and persisted progress. Full competition SRS coverage is still in progress; see [Phase 4 local evaluation and submission pack](documentation/PHASE4_STATUS.md).
+PostgreSQL-backed onboarding workspace built with Python, FastAPI, React and Jinja2. Source-to-plan generation, human review and publication, employee learning, assessments and persisted progress are connected through the React interface. Additional workflows include review queues, configurable stage deadlines, profile editing, search, progress insights, password recovery and controlled advisory overrides. Full competition SRS acceptance is still in progress.
+
+Hosting target: **Railway backend + PostgreSQL, Vercel React frontend**. Follow [the deployment guide](documentation/DEPLOYMENT.md); the Vercel backend URL placeholders must be replaced before publishing. Historical evaluation evidence is recorded in [Phase 4 status](documentation/PHASE4_STATUS.md), not proof of acceptance for the current build.
+
+See [the SRS implementation and acceptance map](documentation/SRS_COVERAGE.md) for the implemented workflows and remaining verification/performance gaps.
 
 ## Start this workspace
 

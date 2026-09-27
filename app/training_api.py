@@ -7,7 +7,7 @@ from pydantic import BaseModel, ValidationError
 from .db import uid, now, audit
 from .security import require, EDITORS, REVIEWERS
 from .schemas import FullOnboardingPlan, FullLearningItem
-from .learning import learning_checks, progress_report, public_content, PASS_PERCENT
+from .learning import learning_checks, progress_report, public_content, PASS_PERCENT, quiz_result
 from .validation import validate_plan
 from .worker import matrix, fingerprint, enqueue
 from .updates import carry_progress, serialized_learning
@@ -39,7 +39,8 @@ def _inspect_plan(db, content, employee):
     requirements = matrix(db, employee["role_id"])
     ids = list({r["document_id"] for r in requirements})
     validation = validate_plan(
-        parsed, requirements,
+        parsed,
+        requirements,
         list(db.documents.find({"_id": {"$in": ids}})),
         list(db.source_sections.find({"document_id": {"$in": ids}})),
         employee["role_id"],
@@ -53,9 +54,7 @@ def _context(request, plan_id, active=False):
     db = request.app.state.db
     fresh = _current(db, plan, employee)
     if active and (
-        plan["status"] != "Published"
-        or employee.get("active_plan_id") != plan_id
-        or not fresh
+        plan["status"] != "Published" or employee.get("active_plan_id") != plan_id or not fresh
     ):
         raise HTTPException(409, "This is not the current published plan, or its sources changed.")
     return db, plan, employee, user, session, fresh
@@ -67,17 +66,18 @@ def _learner_item(request, plan_id, requirement_id):
     if user["role"] != "employee" or employee.get("user_id") != user["_id"]:
         raise HTTPException(403, "Only the assigned employee can submit learning work.")
     report = progress_report(db, plan, employee)
-    row = next(
-        (r for r in report["rows"] if r["item"]["requirement_id"] == requirement_id), None
-    )
+    row = next((r for r in report["rows"] if r["item"]["requirement_id"] == requirement_id), None)
     if not row:
         raise HTTPException(404, "Learning item not found.")
     if row["blocked_by"]:
-        raise HTTPException(409, "Complete prerequisite modules first: " + ", ".join(row["blocked_by"]))
+        raise HTTPException(
+            409, "Complete prerequisite modules first: " + ", ".join(row["blocked_by"])
+        )
     return db, plan, employee, user, row
 
 
 # ── Learning home ─────────────────────────────────────────────────────────────
+
 
 @router.get("/learning")
 def learning_home(request: Request):
@@ -86,12 +86,14 @@ def learning_home(request: Request):
     cards = []
     for employee in _employees_for(db, user):
         plan = db.plans.find_one({"_id": employee.get("active_plan_id", "")})
-        cards.append({
-            "employee": employee,
-            "plan": plan,
-            "fresh": _current(db, plan, employee) if plan else False,
-            "report": progress_report(db, plan, employee) if plan else None,
-        })
+        cards.append(
+            {
+                "employee": employee,
+                "plan": plan,
+                "fresh": _current(db, plan, employee) if plan else False,
+                "report": progress_report(db, plan, employee) if plan else None,
+            }
+        )
     return ok({"cards": cards})
 
 
@@ -99,25 +101,24 @@ def learning_home(request: Request):
 def learn_workspace(request: Request, plan_id: str):
     db, plan, employee, user, _, fresh = _context(request, plan_id)
     report = progress_report(db, plan, employee)
-    active = (
-        plan["status"] == "Published"
-        and employee.get("active_plan_id") == plan_id
-        and fresh
-    )
+    active = plan["status"] == "Published" and employee.get("active_plan_id") == plan_id and fresh
     if user["role"] == "employee":
         for row in report["rows"]:
             row["item"] = public_content({"items": [row["item"]]})["items"][0]
-    return ok({
-        "plan": plan,
-        "employee": employee,
-        "report": report,
-        "active": active,
-        "is_learner": user["role"] == "employee",
-        "pass_percent": PASS_PERCENT,
-    })
+    return ok(
+        {
+            "plan": plan,
+            "employee": employee,
+            "report": report,
+            "active": active,
+            "is_learner": user["role"] == "employee",
+            "pass_percent": PASS_PERCENT,
+        }
+    )
 
 
 # ── Plan review ───────────────────────────────────────────────────────────────
+
 
 class ReviewBody(BaseModel):
     decision: str
@@ -142,7 +143,9 @@ def review_plan(request: Request, plan_id: str, body: ReviewBody):
                 raise HTTPException(422, "Confirm that you reviewed all content.")
             validation, teaching, requirements = _inspect_plan(db, plan["content"], employee)
             if not fresh or not validation["core_passed"] or not teaching["passed"]:
-                raise HTTPException(409, "Resolve validation findings and stale sources before publishing.")
+                raise HTTPException(
+                    409, "Resolve validation findings and stale sources before publishing."
+                )
             updates = {
                 "status": "Published",
                 "published_by": user["_id"],
@@ -153,24 +156,22 @@ def review_plan(request: Request, plan_id: str, body: ReviewBody):
             carry_progress(db, plan, employee)
         else:
             updates = {"status": "Rejected"}
-        result = db.plans.update_one(
-            {"_id": plan_id, "status": plan["status"]}, {"$set": updates}
-        )
+        result = db.plans.update_one({"_id": plan_id, "status": plan["status"]}, {"$set": updates})
         if not result.matched_count:
             raise HTTPException(409, "Another reviewer changed this plan. Refresh before deciding.")
         if body.decision == "approve":
-            db.employees.update_one(
-                {"_id": employee["_id"]}, {"$set": {"active_plan_id": plan_id}}
-            )
-    db.plan_reviews.insert_one({
-        "_id": uid(),
-        "plan_id": plan_id,
-        "actor_id": user["_id"],
-        "actor_name": user["name"],
-        "decision": body.decision,
-        "comment": comment,
-        "created_at": now(),
-    })
+            db.employees.update_one({"_id": employee["_id"]}, {"$set": {"active_plan_id": plan_id}})
+    db.plan_reviews.insert_one(
+        {
+            "_id": uid(),
+            "plan_id": plan_id,
+            "actor_id": user["_id"],
+            "actor_name": user["name"],
+            "decision": body.decision,
+            "comment": comment,
+            "created_at": now(),
+        }
+    )
     audit(db, user["_id"], "plan." + body.decision, plan_id, {"comment": comment})
     return JSONResponse(None, status_code=204)
 
@@ -185,6 +186,7 @@ def regenerate_plan(request: Request, plan_id: str):
 
 
 # ── Plan edit ─────────────────────────────────────────────────────────────────
+
 
 @router.get("/plans/{plan_id}/items/{requirement_id}/edit")
 def edit_item_get(request: Request, plan_id: str, requirement_id: str):
@@ -219,9 +221,16 @@ async def edit_item_post(request: Request, plan_id: str, requirement_id: str):
         item["checklist"] = [x.strip() for x in body.get("checklist", []) if x.strip()]
         item["scenario"] = {
             "prompt": _text(body.get("scenario_prompt", ""), "Scenario"),
-            "expected_response": _text(body.get("scenario_expected", ""), "Expected scenario response"),
+            "expected_response": _text(
+                body.get("scenario_expected", ""), "Expected scenario response"
+            ),
         }
         item["quiz"] = {
+            "question_type": body.get(
+                "question_type", item["quiz"].get("question_type", "multiple_choice")
+            ),
+            "difficulty": body.get("difficulty", item["quiz"].get("difficulty", "Beginner")),
+            "correct_indices": body.get("correct_indices", item["quiz"].get("correct_indices", [])),
             "question": _text(body.get("question", ""), "Quiz question"),
             "options": [x.strip() for x in body.get("options", []) if x.strip()],
             "correct_index": int(body.get("correct_index", 0)),
@@ -231,6 +240,7 @@ async def edit_item_post(request: Request, plan_id: str, requirement_id: str):
         item["rubric"] = [
             {
                 "criterion": _text(r.get("criterion", ""), "Rubric criterion"),
+                "expected_performance": str(r.get("expected_performance", ""))[:1200],
                 "max_points": int(r.get("max_points", 1)),
             }
             for r in body.get("rubric", [])
@@ -243,40 +253,58 @@ async def edit_item_post(request: Request, plan_id: str, requirement_id: str):
     key = uid()
     new = {
         k: deepcopy(plan[k])
-        for k in ("employee_id", "role_id", "source_document_ids", "model", "prompt_version", "generation")
+        for k in (
+            "employee_id",
+            "role_id",
+            "source_document_ids",
+            "model",
+            "prompt_version",
+            "generation",
+        )
     }
-    new.update({
-        "_id": key,
-        "parent_plan_id": plan_id,
-        "root_plan_id": plan.get("root_plan_id", plan_id),
-        "carry_parent_plan_id": plan.get("carry_parent_plan_id"),
-        "employee_snapshot": plan.get("employee_snapshot", {}),
-        "content": content,
-        "status": validation["status"],
-        "validation": validation,
-        "learning_checks": teaching,
-        "matrix_snapshot": requirements,
-        "snapshot_digest": fingerprint(requirements),
-        "created_by": user["_id"],
-        "created_at": now(),
-        "origin": "human_edit",
-    })
+    new.update(
+        {
+            **({"stage_days": plan["stage_days"]} if plan.get("stage_days") else {}),
+            "_id": key,
+            "parent_plan_id": plan_id,
+            "root_plan_id": plan.get("root_plan_id", plan_id),
+            "carry_parent_plan_id": plan.get("carry_parent_plan_id"),
+            "employee_snapshot": plan.get("employee_snapshot", {}),
+            "content": content,
+            "status": validation["status"],
+            "validation": validation,
+            "learning_checks": teaching,
+            "matrix_snapshot": requirements,
+            "snapshot_digest": fingerprint(requirements),
+            "created_by": user["_id"],
+            "created_at": now(),
+            "origin": "human_edit",
+        }
+    )
     db.plans.insert_one(new)
-    db.plan_reviews.insert_one({
-        "_id": uid(),
-        "plan_id": key,
-        "actor_id": user["_id"],
-        "actor_name": user["name"],
-        "decision": "edit",
-        "comment": reason,
-        "created_at": now(),
-    })
-    audit(db, user["_id"], "plan.edit", key,
-          {"parent_plan_id": plan_id, "requirement_id": requirement_id, "reason": reason})
+    db.plan_reviews.insert_one(
+        {
+            "_id": uid(),
+            "plan_id": key,
+            "actor_id": user["_id"],
+            "actor_name": user["name"],
+            "decision": "edit",
+            "comment": reason,
+            "created_at": now(),
+        }
+    )
+    audit(
+        db,
+        user["_id"],
+        "plan.edit",
+        key,
+        {"parent_plan_id": plan_id, "requirement_id": requirement_id, "reason": reason},
+    )
     return ok({"plan_id": key}, 201)
 
 
 # ── Learner progress ─────────────────────────────────────────────────────────
+
 
 class ProgressBody(BaseModel):
     lesson_read: bool = False
@@ -304,7 +332,8 @@ def save_progress(request: Request, plan_id: str, requirement_id: str, body: Pro
 
 
 class QuizBody(BaseModel):
-    answer: int
+    answer: int | None = None
+    answers: list[int] = []
 
 
 @router.post("/learning/{plan_id}/{requirement_id}/quiz")
@@ -312,23 +341,35 @@ class QuizBody(BaseModel):
 def submit_quiz(request: Request, plan_id: str, requirement_id: str, body: QuizBody):
     db, plan, employee, user, row = _learner_item(request, plan_id, requirement_id)
     question = row["item"]["quiz"]
-    if not 0 <= body.answer < len(question["options"]):
-        raise HTTPException(422, "Select an existing answer.")
-    passed = body.answer == question["correct_index"]
-    db.quiz_attempts.insert_one({
-        "_id": uid(),
-        "plan_id": plan_id,
-        "employee_id": employee["_id"],
-        "requirement_id": requirement_id,
-        "answer": body.answer,
-        "score": 100 if passed else 0,
-        "passed": passed,
-        "feedback": question["explanation"],
-        "created_at": now(),
-    })
-    audit(db, user["_id"], "learning.quiz", plan_id,
-          {"requirement_id": requirement_id, "score": 100 if passed else 0})
-    return ok({"score": 100 if passed else 0, "passed": passed, "feedback": question["explanation"]})
+    answers = body.answers or ([body.answer] if body.answer is not None else [])
+    try:
+        passed = quiz_result(question, answers)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
+    db.quiz_attempts.insert_one(
+        {
+            "_id": uid(),
+            "plan_id": plan_id,
+            "employee_id": employee["_id"],
+            "requirement_id": requirement_id,
+            "answer": body.answer,
+            "answers": answers,
+            "score": 100 if passed else 0,
+            "passed": passed,
+            "feedback": question["explanation"],
+            "created_at": now(),
+        }
+    )
+    audit(
+        db,
+        user["_id"],
+        "learning.quiz",
+        plan_id,
+        {"requirement_id": requirement_id, "score": 100 if passed else 0},
+    )
+    return ok(
+        {"score": 100 if passed else 0, "passed": passed, "feedback": question["explanation"]}
+    )
 
 
 class PracticalBody(BaseModel):
@@ -343,23 +384,28 @@ def submit_practical(request: Request, plan_id: str, requirement_id: str, body: 
     if row["practical_passed"] or (
         row["latest_submission"] and row["latest_submission"]["status"] == "pending"
     ):
-        raise HTTPException(409, "This activity already passed or has a submission awaiting assessment.")
+        raise HTTPException(
+            409, "This activity already passed or has a submission awaiting assessment."
+        )
     key = uid()
-    db.practical_submissions.insert_one({
-        "_id": key,
-        "plan_id": plan_id,
-        "employee_id": employee["_id"],
-        "requirement_id": requirement_id,
-        "status": "pending",
-        "scenario_response": _text(body.scenario_response, "Scenario response"),
-        "practical_response": _text(body.practical_response, "Practical response"),
-        "created_at": now(),
-    })
+    db.practical_submissions.insert_one(
+        {
+            "_id": key,
+            "plan_id": plan_id,
+            "employee_id": employee["_id"],
+            "requirement_id": requirement_id,
+            "status": "pending",
+            "scenario_response": _text(body.scenario_response, "Scenario response"),
+            "practical_response": _text(body.practical_response, "Practical response"),
+            "created_at": now(),
+        }
+    )
     audit(db, user["_id"], "learning.submit", key)
     return JSONResponse(None, status_code=204)
 
 
 # ── Assessments ───────────────────────────────────────────────────────────────
+
 
 @router.get("/assessments")
 def assessment_queue(request: Request):
@@ -367,11 +413,13 @@ def assessment_queue(request: Request):
     db = request.app.state.db
     employees = {e["_id"]: e for e in _employees_for(db, user)}
     submissions = list(
-        db.practical_submissions.find({
-            "employee_id": {"$in": list(employees)},
-            "plan_id": {"$in": [e.get("active_plan_id", "") for e in employees.values()]},
-            "status": "pending",
-        }).sort("created_at", 1)
+        db.practical_submissions.find(
+            {
+                "employee_id": {"$in": list(employees)},
+                "plan_id": {"$in": [e.get("active_plan_id", "") for e in employees.values()]},
+                "status": "pending",
+            }
+        ).sort("created_at", 1)
     )
     return ok({"submissions": submissions, "employees": employees})
 
@@ -388,13 +436,14 @@ async def grade_submission(request: Request, submission_id: str):
         raise HTTPException(404, "Submission not found.")
     db2, plan, employee, _, _, _ = _context(request, submission["plan_id"], active=True)
     item = next(
-        i for i in plan["content"]["items"]
-        if i["requirement_id"] == submission["requirement_id"]
+        i for i in plan["content"]["items"] if i["requirement_id"] == submission["requirement_id"]
     )
     try:
         scores = [int(body.get(f"score_{i}", 0)) for i in range(len(item["rubric"]))]
     except (ValueError, TypeError):
-        raise HTTPException(422, "Provide whole-number scores for every rubric criterion.") from None
+        raise HTTPException(
+            422, "Provide whole-number scores for every rubric criterion."
+        ) from None
     if any(s < 0 or s > r["max_points"] for s, r in zip(scores, item["rubric"])):
         raise HTTPException(422, "Scores must be within the rubric limits.")
     maximum = sum(r["max_points"] for r in item["rubric"])
@@ -402,19 +451,26 @@ async def grade_submission(request: Request, submission_id: str):
     feedback = _text(body.get("feedback", ""), "Assessor feedback", 3000)
     result = db.practical_submissions.update_one(
         {"_id": submission_id, "status": "pending"},
-        {"$set": {
-            "status": "graded",
-            "scores": scores,
-            "maximum": maximum,
-            "percent": percent,
-            "passed": 100 * sum(scores) >= PASS_PERCENT * maximum,
-            "feedback": feedback,
-            "graded_by": user["_id"],
-            "graded_at": now(),
-        }},
+        {
+            "$set": {
+                "status": "graded",
+                "scores": scores,
+                "maximum": maximum,
+                "percent": percent,
+                "passed": 100 * sum(scores) >= PASS_PERCENT * maximum,
+                "feedback": feedback,
+                "graded_by": user["_id"],
+                "graded_at": now(),
+            }
+        },
     )
     if not result.matched_count:
         raise HTTPException(409, "This submission was already graded.")
-    audit(db, user["_id"], "learning.grade", submission_id,
-          {"scores": scores, "percent": percent, "feedback": feedback})
+    audit(
+        db,
+        user["_id"],
+        "learning.grade",
+        submission_id,
+        {"scores": scores, "percent": percent, "feedback": feedback},
+    )
     return JSONResponse(None, status_code=204)

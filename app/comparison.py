@@ -55,6 +55,9 @@ def compare_plans(left, right):
         and left.get("employee_snapshot") == right.get("employee_snapshot")
         and left.get("model") == right.get("model")
         and left.get("prompt_version") == right.get("prompt_version")
+        and left.get("generation", {}).get("prompt_sha256")
+        == right.get("generation", {}).get("prompt_sha256")
+        and left.get("stage_days") == right.get("stage_days")
         and left.get("origin", "ai_generation") == "ai_generation"
         and right.get("origin", "ai_generation") == "ai_generation"
     )

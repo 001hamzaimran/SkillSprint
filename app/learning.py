@@ -42,7 +42,7 @@ def public_content(content):
         if item.get("policy_facts"):
             item["policy_facts"].pop("answer_fact", None)
         if "quiz" in item:
-            for key in ("correct_index", "explanation"):
+            for key in ("correct_index", "correct_indices", "explanation"):
                 item["quiz"].pop(key, None)
         if "scenario" in item:
             item["scenario"].pop("expected_response", None)
@@ -70,7 +70,7 @@ def progress_report(db, plan, employee):
             saved.get("lesson_read") and checklist_done and quiz_passed and practical_passed
         )
         due = date.fromisoformat(employee["joining_date"]) + timedelta(
-            days=STAGE_DAYS[item["stage"]]
+            days=plan.get("stage_days", STAGE_DAYS)[item["stage"]]
         )
         latest = practicals[0] if practicals else None
         suggestion = ""
@@ -80,6 +80,10 @@ def progress_report(db, plan, employee):
             suggestion = (
                 "Use your assessor’s feedback to revise the scenario and practical response."
             )
+        elif due < date.today() and not complete:
+            suggestion = "Finish the outstanding learning steps and ask your manager about the missed deadline."
+        elif latest and latest["status"] == "pending":
+            suggestion = "Your practical work is awaiting manager or reviewer assessment."
         rows.append(
             {
                 "item": item,
@@ -110,7 +114,25 @@ def progress_report(db, plan, employee):
         }
         for stage in STAGES
     ]
+    overdue = sum(r["overdue"] for r in rows)
+    pending = sum(
+        bool(r["latest_submission"] and r["latest_submission"]["status"] == "pending") for r in rows
+    )
+    status = (
+        "Completed"
+        if rows and len(completed) == len(rows)
+        else (
+            "Behind Schedule"
+            if overdue
+            else (
+                "Assessment Required"
+                if pending
+                else "Requires Attention" if any(r["suggestion"] for r in rows) else "On Track"
+            )
+        )
+    )
     return {
+        "status": status,
         "rows": rows,
         "total": len(rows),
         "completed": len(completed),
@@ -122,3 +144,16 @@ def progress_report(db, plan, employee):
         "weak": [r for r in rows if r["suggestion"]],
         "milestones": [m for m in milestones if m["total"]],
     }
+
+
+def quiz_result(question, answers):
+    """Exact-set scoring supports single and multiple answers without partial guessing credit."""
+    selected = set(answers)
+    if not selected or any(index < 0 or index >= len(question["options"]) for index in selected):
+        raise ValueError("Select existing answers.")
+    expected = (
+        set(question.get("correct_indices", []))
+        if question.get("question_type") == "multiple_response"
+        else {question["correct_index"]}
+    )
+    return selected == expected

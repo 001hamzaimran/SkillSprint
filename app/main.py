@@ -7,6 +7,7 @@ from urllib.parse import quote
 from fastapi import FastAPI, Request, Form, File, UploadFile, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 from .config import Settings, ROOT
 from .db import connect, initialize, now, uid, audit, DuplicateKeyError
@@ -35,6 +36,8 @@ from .api import router as api_router
 from .training_api import router as training_api_router
 from .phase3_api import router as phase3_api_router
 from .mail import send_password_reset
+from .presentation import response_role
+from .workspace_api import router as workspace_router
 
 templates = Jinja2Templates(directory=str(ROOT / "templates"))
 
@@ -72,6 +75,13 @@ def create_app(settings=None):
         title="SkillSprint AI", lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None
     )
     app.mount("/static", StaticFiles(directory=ROOT / "static"), name="static")
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=settings.origins,
+        allow_credentials=True,
+        allow_methods=["GET", "POST", "PUT", "PATCH", "OPTIONS"],
+        allow_headers=["Content-Type", "X-CSRF-Token"],
+    )
 
     def page(request, name, **context):
         user, session = identity(request)
@@ -117,7 +127,26 @@ def create_app(settings=None):
 
     @app.middleware("http")
     async def headers(request, call_next):
-        response = await call_next(request)
+        origin = request.headers.get("origin")
+        trusted = set(settings.origins) | {
+            settings.app_base_url.rstrip("/"),
+            settings.frontend_url.rstrip("/"),
+        }
+        if request.url.path.startswith("/api/") and request.method not in (
+            "GET",
+            "HEAD",
+            "OPTIONS",
+        ):
+            if origin and origin not in trusted:
+                return JSONResponse({"detail": "Untrusted request origin."}, status_code=403)
+            if request.headers.get("sec-fetch-site") == "cross-site" and not origin:
+                return JSONResponse({"detail": "An approved Origin is required."}, status_code=403)
+        user, _ = identity(request) if request.url.path.startswith("/api/") else (None, None)
+        context_token = response_role.set(user["role"] if user else None)
+        try:
+            response = await call_next(request)
+        finally:
+            response_role.reset(context_token)
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["X-Frame-Options"] = "DENY"
         response.headers["Referrer-Policy"] = "same-origin"
@@ -896,6 +925,7 @@ def create_app(settings=None):
     app.include_router(api_router)
     app.include_router(training_api_router)
     app.include_router(phase3_api_router)
+    app.include_router(workspace_router)
 
     # ── Serve React SPA build ──────────────────────────────────────────────
     frontend_dist = ROOT / "frontend" / "dist"

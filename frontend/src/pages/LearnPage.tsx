@@ -172,7 +172,7 @@ interface ModuleCardProps {
   isLearner: boolean;
   isReviewerOrManager: boolean;
   onSaveProgress: (planId: string, reqId: string, data: Record<string, unknown>) => Promise<void>;
-  onSubmitQuiz: (planId: string, reqId: string, answer: number) => Promise<void>;
+  onSubmitQuiz: (planId: string, reqId: string, answer: number | number[]) => Promise<void>;
   onSubmitPractical: (planId: string, reqId: string, data: Record<string, string>) => Promise<void>;
   onGrade: (submissionId: string, data: Record<string, unknown>) => Promise<void>;
   onRefresh: () => void;
@@ -199,6 +199,8 @@ function ModuleCard({
     return (item.checklist || []).map((_, i) => checked.includes(i));
   });
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
+  const multiple = item.quiz?.question_type === 'multiple_response';
   const [scenarioResp, setScenarioResp] = useState('');
   const [practicalResp, setPracticalResp] = useState('');
   const [scores, setScores] = useState<Record<string, number>>({});
@@ -221,12 +223,12 @@ function ModuleCard({
   };
 
   const handleCheckAnswer = async () => {
-    if (selectedAnswer === null) {
+    if (multiple ? selectedAnswers.length === 0 : selectedAnswer === null) {
       toast.error('Please select an answer');
       return;
     }
     try {
-      await onSubmitQuiz(planId, item.requirement_id, selectedAnswer);
+      await onSubmitQuiz(planId, item.requirement_id, multiple ? selectedAnswers : selectedAnswer!);
       onRefresh();
     } catch {
       toast.error('Failed to submit answer');
@@ -372,11 +374,11 @@ function ModuleCard({
                   {item.quiz.options?.map((opt, idx) => (
                     <label key={idx} className="flex items-center space-x-3 p-2 rounded hover:bg-white cursor-pointer">
                       <input 
-                        type="radio" 
+                        type={multiple ? 'checkbox' : 'radio'}
                         name={`quiz-${item.requirement_id}`}
                         value={idx}
-                        checked={selectedAnswer === idx}
-                        onChange={() => setSelectedAnswer(idx)}
+                        checked={multiple ? selectedAnswers.includes(idx) : selectedAnswer === idx}
+                        onChange={() => multiple ? setSelectedAnswers(values => values.includes(idx) ? values.filter(value => value !== idx) : [...values, idx]) : setSelectedAnswer(idx)}
                         disabled={isBlocked || !isActive || !isLearner}
                         className="h-4 w-4 text-green focus:ring-green"
                       />

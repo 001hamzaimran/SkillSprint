@@ -17,6 +17,8 @@ def fingerprint(requirements):
                 "text",
                 "mandatory",
                 "due_stage",
+                "priority",
+                "classification",
                 "status",
                 "role_ids",
                 "prerequisites",
@@ -42,7 +44,11 @@ def raw_matrix(db, role_id):
     active = {
         d["_id"] for d in db.documents.find({"_id": {"$in": ids}, "status": "active"}, {"_id": 1})
     }
-    return [r for r in candidates if r["document_id"] in active]
+    return [
+        r
+        for r in candidates
+        if r["document_id"] in active and r.get("classification") != "Not Applicable"
+    ]
 
 
 def conflict_groups(requirements, role_id):

@@ -1,6 +1,8 @@
 """Independent core validator. No model, SDK, network, or generated ground truth."""
 
 from collections import Counter
+from difflib import SequenceMatcher
+import re
 from .ingestion import normalized
 from .schemas import STAGES
 from .policy import conflict_groups, dependency_findings
@@ -24,6 +26,47 @@ def validate_plan(plan, requirements, documents, sections, role_id):
     covered, traced = set(), 0
     findings, rows = [], []
     warnings = []
+    for index, item in enumerate(plan.items):
+        source_numbers = set(re.findall(r"\b\d+(?:\.\d+)?\b", item.source_quote))
+        lesson_numbers = set(re.findall(r"\b\d+(?:\.\d+)?\b", getattr(item, "lesson", "")))
+        if lesson_numbers - source_numbers:
+            warnings.append(
+                {
+                    "code": "UNSUPPORTED_NUMERIC_CLAIM",
+                    "requirement_id": item.requirement_id,
+                    "message": "Lesson contains numbers absent from its source quote; verify whether these are instructional examples or unsupported policy claims.",
+                }
+            )
+        for previous in plan.items[:index]:
+            for field in ("module_title", "practical_activity"):
+                left = normalized(getattr(item, field, "")).casefold()
+                right = normalized(getattr(previous, field, "")).casefold()
+                if left and right and SequenceMatcher(None, left, right).ratio() >= 0.9:
+                    warnings.append(
+                        {
+                            "code": "DUPLICATE_" + field.upper(),
+                            "requirement_id": item.requirement_id,
+                            "message": f'{field.replace("_", " ")} closely repeats {previous.requirement_id}; review the overlap.',
+                        }
+                    )
+            overlap = {normalized(step).casefold() for step in getattr(item, "checklist", [])} & {
+                normalized(step).casefold() for step in getattr(previous, "checklist", [])
+            }
+            if overlap:
+                warnings.append(
+                    {
+                        "code": "DUPLICATE_CHECKLIST",
+                        "requirement_id": item.requirement_id,
+                        "message": f"Checklist steps repeat {previous.requirement_id}; review whether repetition is justified.",
+                    }
+                )
+    if len(plan.items) > 1 and all(item.stage == "Day 1" for item in plan.items):
+        warnings.append(
+            {
+                "code": "DAY_ONE_OVERLOAD",
+                "message": "All modules are on Day 1; review the staged learning workload.",
+            }
+        )
     findings.extend(dependency_findings(list(expected.values())))
     for group in conflict_groups(list(expected.values()), role_id):
         findings.append(
@@ -130,6 +173,15 @@ def validate_plan(plan, requirements, documents, sections, role_id):
                 "traceable": trace,
                 "result": "Match" if not errors else "Mismatch",
                 "errors": errors,
+                "verification_status": (
+                    "Source Support Missing"
+                    if "SOURCE_SUPPORT_MISSING" in errors
+                    else (
+                        "Unsupported Requirement"
+                        if "UNSUPPORTED_REQUIREMENT" in errors
+                        else "Manual Review Required" if errors else "Verified with Warning"
+                    )
+                ),
             }
         )
     for missing in sorted(mandatory - covered):

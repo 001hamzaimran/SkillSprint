@@ -11,11 +11,15 @@ import { ArrowLeft, Download, AlertTriangle, Sparkles, CheckCircle2, ChevronDown
 import { formatDate, formatDateTime } from '@/lib/utils';
 import { toast } from 'sonner';
 import api from '@/lib/api';
+import { STAGES } from '@/types';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Select } from '@/components/ui/select';
 
 export default function DocumentPage() {
   const { id } = useParams<{ id: string }>();
   const { user } = useAuthStore();
-  const { currentDocument: doc, sections, requirements, jobs, fetchDocument, isLoading } = useDocumentStore();
+  const { currentDocument: doc, sections, requirements, jobs, roles, fetchDocument, isLoading } = useDocumentStore();
   const [isExtracting, setIsExtracting] = useState(false);
   const [isActivating, setIsActivating] = useState(false);
 
@@ -67,6 +71,8 @@ export default function DocumentPage() {
           mandatory: req.mandatory ? 'true' : 'false',
           due_stage: req.due_stage || 'Day 1',
           role_id: req.role_ids[0] || '',
+          priority: (req as any).priority || 'Medium',
+          classification: (req as any).classification || 'Must Know',
           decision,
         },
       });
@@ -185,6 +191,23 @@ export default function DocumentPage() {
                   <Collapsible.Content className="p-4 border-t border-border bg-slate-50/50">
                     <div className="space-y-4">
                       <p className="text-sm text-ink">{req.text}</p>
+                      {isReviewer && <Link className="text-green underline text-sm" to={`/requirements/${req._id}/rules`}>Edit rules and prerequisites</Link>}
+                      {isReviewer && <details><summary className="cursor-pointer text-green">Edit requirement review</summary><form className="space-y-3 pt-3" onSubmit={async event => {
+                        event.preventDefault();
+                        const json = Object.fromEntries(new FormData(event.currentTarget));
+                        try { await api.post(`requirements/${req._id}/review`, { json }); await fetchDocument(id!); toast.success('Requirement review saved.'); }
+                        catch (error: any) { const body = await error.response?.json(); toast.error(body?.detail || 'Could not save review.'); }
+                      }}>
+                        <label className="block">Title<Input name="title" defaultValue={req.title} required /></label>
+                        <label className="block">Exact source passage<Textarea name="text" defaultValue={req.text} required /></label>
+                        <label className="block">Obligation<Select name="mandatory" defaultValue={String(req.mandatory)}><option value="true">Mandatory</option><option value="false">Optional</option></Select></label>
+                        <label className="block">Due stage<Select name="due_stage" defaultValue={req.due_stage}>{STAGES.map(stage => <option key={stage}>{stage}</option>)}</Select></label>
+                        <label className="block">Role<Select name="role_id" defaultValue={req.role_ids[0] || ''}><option value="">All roles</option>{roles.map(role => <option key={role._id} value={role._id}>{role.name}</option>)}</Select></label>
+                        <label className="block">Priority<Select name="priority" defaultValue={(req as any).priority || 'Medium'}>{['High', 'Medium', 'Low'].map(value => <option key={value}>{value}</option>)}</Select></label>
+                        <label className="block">Requirement type<Select name="classification" defaultValue={(req as any).classification || 'Must Know'}>{['Must Know', 'Must Complete', 'Must Demonstrate', 'Must Acknowledge', 'Recommended', 'Optional', 'Not Applicable'].map(value => <option key={value}>{value}</option>)}</Select></label>
+                        <label className="block">Decision<Select name="decision" defaultValue={req.status}>{['draft', 'approved', 'rejected'].map(value => <option key={value}>{value}</option>)}</Select></label>
+                        <Button>Save review</Button>
+                      </form></details>}
                       
                       {isReviewer && req.status !== 'approved' && (
                         <div className="pt-4 border-t border-border mt-4 flex gap-2">

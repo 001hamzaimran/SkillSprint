@@ -2,6 +2,7 @@
 
 import re
 from datetime import date, datetime
+from typing import Literal
 from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -23,6 +24,7 @@ from .ingestion import ingest, normalized, SUSPICIOUS
 from .schemas import STAGES
 from .worker import enqueue, matrix
 from .learning import public_content, learning_checks
+from .presentation import safe_payload
 
 router = APIRouter(prefix="/api")
 
@@ -46,7 +48,7 @@ def _ser(obj):
 
 
 def ok(data, status_code=200):
-    return JSONResponse(_ser(data), status_code=status_code)
+    return JSONResponse(_ser(safe_payload(data)), status_code=status_code)
 
 
 # ── CSRF helper for JSON requests ─────────────────────────────────────────────
@@ -495,6 +497,16 @@ class ReviewBody(BaseModel):
     due_stage: str
     role_id: str = ""
     decision: str
+    priority: Literal["High", "Medium", "Low"] = "Medium"
+    classification: Literal[
+        "Must Know",
+        "Must Complete",
+        "Must Demonstrate",
+        "Must Acknowledge",
+        "Recommended",
+        "Optional",
+        "Not Applicable",
+    ] = "Must Know"
 
 
 @router.post("/requirements/{requirement_id}/review")
@@ -507,6 +519,8 @@ def requirements_review(request: Request, requirement_id: str, body: ReviewBody)
         raise HTTPException(404, "Requirement not found.")
     if body.decision not in ["approved", "rejected", "draft"] or body.due_stage not in STAGES:
         raise HTTPException(422, "Invalid review selection.")
+    if body.classification == "Not Applicable" and body.mandatory == "true":
+        raise HTTPException(422, "A mandatory requirement cannot be Not Applicable.")
     source = db.source_sections.find_one(
         {"document_id": req["document_id"], "section_id": req["section_id"]}
     )
@@ -525,6 +539,8 @@ def requirements_review(request: Request, requirement_id: str, body: ReviewBody)
     if body.role_id and not db.job_roles.find_one({"_id": body.role_id}):
         raise HTTPException(422, "Unknown job role.")
     changes = {
+        "priority": body.priority,
+        "classification": body.classification,
         "title": _nonempty(body.title, "Requirement title"),
         "text": clean,
         "mandatory": body.mandatory == "true",

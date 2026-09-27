@@ -1,4 +1,7 @@
 from copy import deepcopy
+import hashlib
+import time
+from .config import ROOT
 import threading
 from datetime import timedelta
 from .db import ReturnDocument
@@ -125,6 +128,21 @@ def process_one(db, settings, provider=structured):
                         "mandatory": req.mandatory,
                         "due_stage": req.due_stage,
                         "competency": req.competency[:180],
+                        "classification": req.classification,
+                        "priority": req.priority,
+                        "suggested_prerequisite_sections": [
+                            reference
+                            for reference in req.prerequisite_section_ids
+                            if reference != req.section_id
+                            and any(s["section_id"] == reference for s in sections)
+                            and normalized(req.prerequisite_evidence)
+                            and normalized(req.prerequisite_evidence) in normalized(section["text"])
+                        ],
+                        "prerequisite_evidence": (
+                            req.prerequisite_evidence
+                            if normalized(req.prerequisite_evidence) in normalized(section["text"])
+                            else ""
+                        ),
                         "role_ids": document["role_ids"],
                         "prerequisites": [],
                         "status": "draft",
@@ -158,6 +176,7 @@ def process_one(db, settings, provider=structured):
             employee_snapshot = {
                 k: employee[k] for k in ("role_id", "department", "experience", "joining_date")
             }
+            stage_days = (db.workspace_settings.find_one({"_id": "stages"}) or {}).get("days")
             if (
                 job.get("expected_snapshot", snapshot) != snapshot
                 or job.get("expected_context", employee_snapshot) != employee_snapshot
@@ -195,6 +214,8 @@ def process_one(db, settings, provider=structured):
                     "title": r["title"],
                     "mandatory": r["mandatory"],
                     "due_stage": r["due_stage"],
+                    "priority": r.get("priority", "High" if r["mandatory"] else "Low"),
+                    "classification": r.get("classification", "Must Know"),
                     "prerequisites": r["prerequisites"],
                     "policy_rule": r.get("policy_rule"),
                 }
@@ -245,6 +266,9 @@ def process_one(db, settings, provider=structured):
             )
 
             metadata = {
+                "prompt_sha256": hashlib.sha256(
+                    (ROOT / "prompt_templates" / "generate_v3.txt").read_bytes()
+                ).hexdigest(),
                 "batches": batches,
                 "model": settings.genai_model,
                 "attempts": sum(b.get("attempts", 1) for b in batches),
@@ -370,6 +394,7 @@ def process_one(db, settings, provider=structured):
                     "prompt_version": "generate_v3",
                     "model": settings.genai_model,
                     "job_id": job["_id"],
+                    **({"stage_days": stage_days} if stage_days else {}),
                 },
                 upsert=True,
             )
@@ -412,8 +437,14 @@ def start_worker(db, settings):
     stop = threading.Event()
 
     def run():
+        last_evaluation = -3600.0
         while not stop.is_set():
             try:
+                if time.monotonic() - last_evaluation >= 3600:
+                    from .workspace_api import evaluate_progress
+
+                    evaluate_progress(db)
+                    last_evaluation = time.monotonic()
                 if not process_one(db, settings):
                     stop.wait(1)
             except Exception:

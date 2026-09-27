@@ -109,7 +109,7 @@ export default function ComparePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <StatCard 
               label="Consistency Score" 
-              value={comparison.consistency_score !== null ? `${(comparison.consistency_score * 100).toFixed(0)}%` : 'N/A'} 
+              value={comparison.consistency_score !== null ? `${comparison.consistency_score.toFixed(0)}%` : 'N/A'}
               subtext={comparison.method}
             />
             <StatCard 
@@ -142,7 +142,7 @@ export default function ComparePage() {
                     {comparison.categories?.map((cat, i) => (
                       <tr key={i} className="hover:bg-paper/50">
                         <td className="px-4 py-3 font-medium text-ink">{cat.category}</td>
-                        <td className="px-4 py-3">{cat.score !== null ? `${(cat.score * 100).toFixed(0)}%` : '—'}</td>
+                        <td className="px-4 py-3">{cat.score !== null ? `${cat.score.toFixed(0)}%` : '—'}</td>
                         <td className="px-4 py-3">{cat.intersection}</td>
                         <td className="px-4 py-3">{cat.union}</td>
                       </tr>
