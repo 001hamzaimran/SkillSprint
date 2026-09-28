@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+.sidebar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #cad5c9 transparent;
+  overscroll-behavior: contain;
+}
+
 @theme {
   --color-ink: #19382e;
   --color-muted: #738079;
