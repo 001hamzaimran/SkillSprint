@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
+import { PageErrorBoundary } from './PageErrorBoundary';
 import { Sidebar } from './Sidebar';
 import { Topbar } from './Topbar';
 import { useAuthStore } from '@/stores/authStore';
 import { useUIStore } from '@/stores/uiStore';
 
 export function AppShell() {
+  const location = useLocation();
   const { fetchMe, isInitialized } = useAuthStore();
   const { flashMessage } = useUIStore();
 
@@ -35,7 +37,9 @@ export function AppShell() {
             </div>
           )}
           <div className="max-w-[1550px] mx-auto px-4 md:px-[38px] py-6 md:py-9 overflow-x-auto">
-            <Outlet />
+            <PageErrorBoundary key={location.key}>
+              <Outlet />
+            </PageErrorBoundary>
           </div>
         </main>
       </div>

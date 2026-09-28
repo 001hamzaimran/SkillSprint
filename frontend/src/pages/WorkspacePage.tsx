@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import api from '@/lib/api';
 import { Button } from '@/components/ui/button';
@@ -10,7 +10,17 @@ import { toast } from 'sonner';
 type RecordData = Record<string, any>;
 const panel = 'bg-white rounded-xl border border-border p-5 space-y-4';
 
-export default function WorkspacePage({ mode }: { mode: 'search' | 'insights' | 'review-queue' | 'settings' | 'manage' | 'compare' }) {
+type WorkspaceMode = 'search' | 'insights' | 'review-queue' | 'settings' | 'manage' | 'compare';
+
+export default function WorkspacePage({ mode }: { mode: WorkspaceMode }) {
+  // Each screen has a different response shape. Reset before rendering a new mode,
+  // not in an effect after it has already tried to render the previous data.
+  return <WorkspaceScreen key={mode} mode={mode} />;
+}
+
+function WorkspaceScreen({ mode }: { mode: WorkspaceMode }) {
+  const active = useRef(false);
+  const pendingLoad = useRef<AbortController | null>(null);
   const [data, setData] = useState<RecordData | null>(null);
   const [error, setError] = useState('');
   const [query, setQuery] = useState('');
@@ -21,14 +31,33 @@ export default function WorkspacePage({ mode }: { mode: 'search' | 'insights' | 
   const [right, setRight] = useState('');
   const [comparison, setComparison] = useState<RecordData | null>(null);
   async function load() {
+    if (!active.current) return;
+    pendingLoad.current?.abort();
+    const controller = new AbortController();
+    pendingLoad.current = controller;
     setError('');
+    setData(null);
     try {
       const endpoint = mode === 'settings' ? 'settings/stages' : mode === 'manage' ? 'employees' : mode === 'compare' ? 'plans' : mode;
       const params = mode === 'search' ? { q: query, department, status } : {};
-      setData(await api.get(endpoint, { searchParams: params }).json<RecordData>());
-    } catch { setError('Unable to load this workspace. Please retry.'); }
+      const result = await api.get(endpoint, { searchParams: params, signal: controller.signal }).json<RecordData>();
+      if (active.current && pendingLoad.current === controller && !controller.signal.aborted) {
+        setData(result);
+      }
+    } catch {
+      if (active.current && pendingLoad.current === controller && !controller.signal.aborted) {
+        setError('Unable to load this workspace. Please retry.');
+      }
+    }
   }
-  useEffect(() => { setData(null); setComparison(null); void load(); }, [mode]);
+  useEffect(() => {
+    active.current = true;
+    void load();
+    return () => {
+      active.current = false;
+      pendingLoad.current?.abort();
+    };
+  }, []);
   async function save(path: string, json: RecordData) {
     setBusy(true);
     try { await api.put(path, { json }); toast.success('Changes saved'); await load(); }
