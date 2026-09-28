@@ -118,7 +118,7 @@ export default function DashboardPage() {
             Streamline your onboarding by turning complex compliance documents into clear, actionable learning paths.
           </p>
           <Button asChild className="bg-ink hover:bg-ink/90 text-white rounded-full px-6">
-            <Link to={isEditor ? "/requirements" : "/plans"}>
+            <Link to={isEditor ? "/matrix" : "/plans"}>
               {isEditor ? "Explore role requirements" : "Explore your plans"} <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>

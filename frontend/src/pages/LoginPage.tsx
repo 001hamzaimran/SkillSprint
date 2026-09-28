@@ -22,7 +22,10 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state?.from?.pathname || '/';
+  const destination = location.state?.from;
+  const from = destination
+    ? `${destination.pathname}${destination.search || ''}${destination.hash || ''}`
+    : '/';
 
   const {
     register,

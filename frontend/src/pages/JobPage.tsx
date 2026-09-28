@@ -117,13 +117,13 @@ export function JobPage() {
                     View Document <ArrowRight className="w-4 h-4" />
                   </Button>
                 </Link>
-              ) : (
-                <Link to={`/plans/${job.result_id || job.target_id}`}>
+              ) : job.result_id ? (
+                <Link to={`/plans/${job.result_id}`}>
                   <Button className="gap-2 bg-green text-white hover:bg-green/90">
                     Open Result Plan <ArrowRight className="w-4 h-4" />
                   </Button>
                 </Link>
-              )}
+              ) : <p className="text-muted">No result plan is available for this job.</p>}
             </div>
           </div>
         )}

@@ -17,6 +17,7 @@ import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { ArrowLeft, AlertCircle, CheckCircle2, Clock, XCircle, ChevronDown, ChevronUp, BookOpen } from 'lucide-react';
 import type { ProgressReport } from '@/types';
+import { useHashTarget } from '@/lib/useHashTarget';
 
 export function LearnPage() {
   const { planId } = useParams<{ planId: string }>();
@@ -34,6 +35,7 @@ export function LearnPage() {
     submitPractical,
     gradeSubmission,
   } = useLearningStore();
+  useHashTarget(!isLoading && !!report && plan?._id === planId);
 
   useEffect(() => {
     if (planId) {

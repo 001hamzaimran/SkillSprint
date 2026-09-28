@@ -15,6 +15,7 @@ import { STAGES } from '@/types';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select } from '@/components/ui/select';
+import { useHashTarget } from '@/lib/useHashTarget';
 
 export default function DocumentPage() {
   const { id } = useParams<{ id: string }>();
@@ -22,6 +23,7 @@ export default function DocumentPage() {
   const { currentDocument: doc, sections, requirements, jobs, roles, fetchDocument, isLoading } = useDocumentStore();
   const [isExtracting, setIsExtracting] = useState(false);
   const [isActivating, setIsActivating] = useState(false);
+  const sourceTarget = useHashTarget(!isLoading && doc?._id === id);
 
   const isEditor = user?.role === 'admin' || user?.role === 'training_manager';
   const isReviewer = user?.role === 'admin' || user?.role === 'reviewer';
@@ -238,7 +240,7 @@ export default function DocumentPage() {
           ) : (
             <div className="space-y-3">
               {sections.map((section, idx) => (
-                <Collapsible.Root key={section._id || idx} className="bg-white border border-border rounded-lg overflow-hidden">
+                <Collapsible.Root key={section._id || idx} id={section.section_id} defaultOpen={sourceTarget === section.section_id} className="bg-white border border-border rounded-lg overflow-hidden scroll-m-6">
                   <Collapsible.Trigger className="w-full flex items-center justify-between p-3 hover:bg-slate-50 text-sm">
                     <div className="flex items-center gap-2">
                       <span className="font-medium text-ink">{section.heading || `Section ${idx + 1}`}</span>

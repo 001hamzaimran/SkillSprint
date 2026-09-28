@@ -269,8 +269,10 @@ export function PlanPage() {
           <div className="flex flex-wrap gap-4 pt-4 border-t border-border text-sm">
             <Link to={`/plans/${id}/compare`} className="text-green hover:underline">Compare versions</Link>
             <a href={`/plans/${id}/validation.csv`} className="text-green hover:underline" download>Validation CSV</a>
-            <Link to={`/plans/${id}/update`} className="text-green hover:underline">Preview update</Link>
-            <button onClick={handleConsistency} className="text-green hover:underline font-medium">Run consistency check</button>
+            {(isEditor || isReviewer) && <>
+              <Link to={`/plans/${id}/update`} className="text-green hover:underline">Preview update</Link>
+              <button onClick={handleConsistency} className="text-green hover:underline font-medium">Run consistency check</button>
+            </>}
           </div>
         </div>
       </div>

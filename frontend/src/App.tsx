@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router';
+import { Routes, Route, Navigate, useLocation } from 'react-router';
 import { AppShell } from '@/components/layout/AppShell';
 import { ProtectedRoute } from '@/components/layout/ProtectedRoute';
 import { EDITORS, REVIEWERS } from '@/types';
@@ -30,6 +30,11 @@ import NotFoundPage from '@/pages/NotFoundPage';
 import WorkspacePage from '@/pages/WorkspacePage';
 import RecoveryPage from '@/pages/RecoveryPage';
 import RulePage from '@/pages/RulePage';
+
+function RequirementsRedirect() {
+  const { search, hash } = useLocation();
+  return <Navigate to={`/matrix${search}${hash}`} replace />;
+}
 
 export default function App() {
   const editorsAndReviewers = [...EDITORS, ...REVIEWERS];
@@ -64,6 +69,7 @@ export default function App() {
           <Route path="documents/:id/impact" element={<ImpactPage />} />
           <Route path="roles" element={<RolesPage />} />
           <Route path="matrix" element={<MatrixPage />} />
+          <Route path="requirements" element={<RequirementsRedirect />} />
           <Route path="verification" element={<VerificationPage />} />
           <Route path="plans/:planId/items/:reqId/edit" element={<EditItemPage />} />
           <Route path="plans/:id/update" element={<UpdatePlanPage />} />
