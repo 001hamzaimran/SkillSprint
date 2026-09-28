@@ -90,7 +90,7 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-8 max-w-6xl mx-auto pb-12">
-      <div className="flex items-start justify-between">
+      <div className="flex flex-wrap gap-4 items-start justify-between">
         <PageHeader 
           eyebrow="THE BIG PICTURE"
           title="A better first chapter."
@@ -111,17 +111,23 @@ export default function DashboardPage() {
       )}
 
       {/* Hero Banner */}
-      <div className="bg-hero-bg rounded-xl p-8 lg:p-12 relative overflow-hidden">
-        <div className="relative z-10 max-w-2xl">
-          <h2 className="text-3xl font-bold text-ink mb-4">Make every learning step count.</h2>
-          <p className="text-muted mb-8 text-lg">
-            Streamline your onboarding by turning complex compliance documents into clear, actionable learning paths.
+      <div className="sprint-hero rounded-3xl p-7 lg:p-10 relative overflow-hidden flex items-center gap-6">
+        <div className="relative z-10 max-w-xl flex-1">
+          <p className="text-lime text-[10px] font-semibold tracking-[0.22em] uppercase mb-4">From day one to what’s next</p>
+          <h2 className="text-3xl lg:text-[40px] leading-tight font-semibold tracking-tight text-white mb-4">Good knowledge.<br /><span className="text-lime">Great beginnings.</span></h2>
+          <p className="text-white/80 mb-7 text-sm max-w-md leading-relaxed">
+            Turn your company’s knowledge into clear learning paths. Grounded in evidence. Built around your people.
           </p>
-          <Button asChild className="bg-ink hover:bg-ink/90 text-white rounded-full px-6">
+          <Button asChild className="bg-lime hover:bg-white text-ink rounded-full px-6">
             <Link to={isEditor ? "/matrix" : "/plans"}>
               {isEditor ? "Explore role requirements" : "Explore your plans"} <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>
+        </div>
+        <div aria-hidden="true" className="sprint-orbit hidden xl:flex w-[270px] h-[250px] shrink-0 items-center justify-center relative">
+          <div className="absolute top-4 left-1 rounded-2xl bg-white/10 border border-white/20 px-4 py-3 text-white text-xs flex items-center gap-2 -rotate-6"><FileText className="w-4 h-4 text-lime" />Trusted knowledge</div>
+          <div className="w-24 h-24 rounded-3xl bg-lime flex items-center justify-center shadow-xl rotate-6"><BookOpen className="w-11 h-11 text-ink -rotate-6" strokeWidth={1.5} /></div>
+          <div className="absolute bottom-3 right-0 rounded-2xl bg-white px-4 py-3 text-ink text-xs flex items-center gap-2 rotate-3 shadow-lg"><CheckSquare className="w-4 h-4 text-green" />A confident next step</div>
         </div>
       </div>
 
@@ -133,7 +139,7 @@ export default function DashboardPage() {
           { label: 'Approved Requirements', value: data.stats.approved_requirements, icon: CheckSquare, color: 'text-green', bg: 'bg-green/10' },
           { label: 'Generated Plans', value: data.stats.generated_plans, icon: BookOpen, color: 'text-amber', bg: 'bg-amber/10' },
         ].map((stat, i) => (
-          <div key={i} className="bg-white rounded-xl border border-border p-6 shadow-sm">
+          <div key={i} className="bg-white rounded-2xl border border-border p-5 shadow-[0_4px_24px_-12px_rgba(18,62,55,0.18)]">
             <div className="flex items-center gap-4">
               <div className={cn("p-3 rounded-lg", stat.bg)}>
                 <stat.icon className={cn("w-6 h-6", stat.color)} />

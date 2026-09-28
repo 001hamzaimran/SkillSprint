@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/stores/authStore';
 import { EDITORS, REVIEWERS } from '@/types';
+import { BrandLogo } from '@/components/shared/BrandLogo';
 import {
   LayoutDashboard, BookOpen, GraduationCap, ClipboardCheck, Users, Map,
   ShieldCheck, BarChart3, Settings, LogOut, Activity, Search, TrendingUp,
@@ -67,11 +68,8 @@ export function Sidebar() {
     <aside className="w-full md:w-[244px] bg-surface border-b md:border-b-0 md:border-r border-border md:fixed left-0 top-0 md:h-dvh flex flex-col shrink-0 md:z-20">
       <div className="px-5 py-5 shrink-0 flex items-center justify-between border-b border-border">
         <div>
-          <div className="flex items-center gap-2 font-bold text-xl text-ink">
-            <span className="w-7 h-7 bg-green rounded-lg flex items-center justify-center text-white text-sm">s</span>
-            <span>SkillSprint <span className="text-muted font-normal text-sm">AI</span></span>
-          </div>
-          <p className="mt-2 text-[10px] font-semibold text-muted tracking-widest uppercase">AsterBridge Workspace</p>
+          <BrandLogo />
+          <p className="mt-3 text-[9px] font-semibold text-muted tracking-[0.2em] uppercase">Knowledge into momentum</p>
         </div>
         <button type="button" className="md:hidden p-2 rounded-md hover:bg-paper" aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={mobileOpen} aria-controls="workspace-navigation" onClick={() => setMobileOpen(!mobileOpen)}>
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -87,7 +85,7 @@ export function Sidebar() {
               <h2 className="px-3 mb-2 text-[10px] uppercase tracking-widest font-semibold text-muted">{group.title}</h2>
               <div className="space-y-1">
                 {items.map(({ path, label, icon: Icon }) => (
-                  <NavLink key={path} to={path} end={path === '/'} onClick={() => setMobileOpen(false)} className={({ isActive }) => cn('flex items-center gap-3 min-h-10 px-3 py-2 rounded-lg text-[13px] font-medium transition-colors', isActive ? 'bg-green/10 text-green font-semibold' : 'text-muted hover:bg-paper hover:text-ink')}>
+                  <NavLink key={path} to={path} end={path === '/'} onClick={() => setMobileOpen(false)} className={({ isActive }) => cn('flex items-center gap-3 min-h-10 px-3 py-2 rounded-xl text-[13px] font-medium transition-colors', isActive ? 'bg-ink text-white font-semibold shadow-sm' : 'text-muted hover:bg-green/5 hover:text-ink')}>
                     <Icon aria-hidden="true" className="w-4 h-4 shrink-0" />
                     <span>{label}</span>
                   </NavLink>

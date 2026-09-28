@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "test:assistant": "node scripts/check-assistant.mjs",
     "test:navigation": "node scripts/check-navigation.mjs",
     "dev": "vite",
     "build": "tsc -b && vite build",

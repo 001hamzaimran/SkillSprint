@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { AlertCircle } from 'lucide-react';
+import { BrandLogo } from '@/components/shared/BrandLogo';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -64,14 +65,9 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex w-full">
       {/* Left panel - Brand story */}
-      <div className="hidden lg:flex flex-col w-1/2 bg-hero-bg text-ink p-12 justify-between">
+      <div className="login-story hidden lg:flex flex-col w-1/2 bg-hero-bg text-ink p-12 justify-between">
         <div>
-          <div className="flex items-center gap-2 mb-16">
-            <div className="w-8 h-8 rounded-md bg-green text-white flex items-center justify-center font-bold text-xl">
-              s
-            </div>
-            <span className="font-semibold text-xl tracking-tight">SkillSprint AI</span>
-          </div>
+          <div className="mb-16"><BrandLogo /></div>
           
           <div className="max-w-md">
             <p className="text-sm font-medium tracking-wider text-muted uppercase mb-4">
@@ -120,6 +116,7 @@ export default function LoginPage() {
       {/* Right panel - Login card */}
       <div className="flex flex-col w-full lg:w-1/2 bg-surface items-center justify-center p-8">
         <div className="w-full max-w-md space-y-8">
+          <div className="lg:hidden flex justify-center"><BrandLogo /></div>
           <div className="text-center lg:text-left">
             <h2 className="text-3xl font-bold tracking-tight text-ink">Welcome back</h2>
             <p className="text-muted mt-2 text-sm">

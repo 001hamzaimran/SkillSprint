@@ -7,20 +7,20 @@
 }
 
 @theme {
-  --color-ink: #19382e;
-  --color-muted: #738079;
-  --color-brand: #246b50;
-  --color-green: #246b50;
-  --color-primary: #246b50;
+  --color-ink: #123e37;
+  --color-muted: #61736d;
+  --color-brand: #176b5b;
+  --color-green: #176b5b;
+  --color-primary: #176b5b;
   --color-background: #f6f8f4;
   --color-input: #e0e7df;
   --color-ring: #a5c78b;
-  --color-muted-foreground: #738079;
+  --color-muted-foreground: #61736d;
   --color-destructive: #dc2626;
   --color-brand-hover: #1d5a42;
-  --color-lime: #d6eeaf;
+  --color-lime: #c9ee95;
   --color-paper: #f6f8f4;
-  --color-border: #e0e7df;
+  --color-border: #dfe9e3;
   --color-surface: #ffffff;
   --color-amber: #976419;
   --color-amber-light: #fff1d8;
@@ -32,7 +32,7 @@
   --color-warning-bg: #fff5e3;
   --color-warning-border: #eddfc0;
   --color-warning-text: #8a692e;
-  --color-hero-bg: #e9f0df;
+  --color-hero-bg: #e7f0e5;
   --color-quote-bg: #f7f9f3;
   --color-quote-border: #cadcb6;
   --color-table-header-bg: #fbfcf8;
@@ -90,4 +90,27 @@ code {
 .preserve-lines {
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+
+.login-story {
+  background-image: radial-gradient(ellipse at 90% 10%, #c9ee9580, transparent 55%),
+    linear-gradient(135deg, #f0f6e7, #dcece4);
+}
+
+.workspace-canvas {
+  background: radial-gradient(ellipse at 95% 0%, #e6efdf 0, transparent 45%), #f6f8f4;
+}
+
+.sprint-hero {
+  background: radial-gradient(ellipse at 100% 0%, #32745d 0, transparent 60%), #123e37;
+  box-shadow: 0 16px 40px -24px #123e3780;
+}
+
+.sprint-orbit {
+  background: repeating-radial-gradient(circle at center, transparent 0 37px, #ffffff12 38px 39px, transparent 40px 70px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .assistant-launcher { transition: transform .2s, background-color .2s; }
+  .assistant-launcher:hover { transform: translateY(-2px); }
 }

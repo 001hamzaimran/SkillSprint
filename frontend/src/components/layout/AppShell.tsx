@@ -30,13 +30,13 @@ export function AppShell() {
       <Sidebar />
       <div className="flex-1 min-w-0 flex flex-col md:ml-[244px]">
         <Topbar />
-        <main className="flex-1">
+        <main className="flex-1 workspace-canvas">
           {flashMessage && (
             <div className="bg-amber/10 text-amber px-8 py-3 text-sm font-medium border-b border-amber/20">
               {flashMessage}
             </div>
           )}
-          <div className="max-w-[1550px] mx-auto px-4 md:px-[38px] py-6 md:py-9 overflow-x-auto">
+          <div className="max-w-[1550px] mx-auto px-4 md:px-[38px] pt-6 md:pt-9 pb-24 overflow-x-auto">
             <PageErrorBoundary key={location.key}>
               <Outlet />
             </PageErrorBoundary>
