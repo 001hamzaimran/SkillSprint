@@ -4,12 +4,12 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://REPLACE-WITH-YOUR-BACKEND.up.railway.app/api/:path*" },
-    { "source": "/documents/:id/download", "destination": "https://REPLACE-WITH-YOUR-BACKEND.up.railway.app/documents/:id/download" },
-    { "source": "/plans/:id/json", "destination": "https://REPLACE-WITH-YOUR-BACKEND.up.railway.app/plans/:id/json" },
-    { "source": "/plans/:id/validation.csv", "destination": "https://REPLACE-WITH-YOUR-BACKEND.up.railway.app/plans/:id/validation.csv" },
-    { "source": "/experiments/:id/json", "destination": "https://REPLACE-WITH-YOUR-BACKEND.up.railway.app/experiments/:id/json" },
-    { "source": "/reports.csv", "destination": "https://REPLACE-WITH-YOUR-BACKEND.up.railway.app/reports.csv" },
+    { "source": "/api/:path*", "destination": "https://skillsprint-production-ded3.up.railway.app/api/:path*" },
+    { "source": "/documents/:id/download", "destination": "https://skillsprint-production-ded3.up.railway.app/documents/:id/download" },
+    { "source": "/plans/:id/json", "destination": "https://skillsprint-production-ded3.up.railway.app/plans/:id/json" },
+    { "source": "/plans/:id/validation.csv", "destination": "https://skillsprint-production-ded3.up.railway.app/plans/:id/validation.csv" },
+    { "source": "/experiments/:id/json", "destination": "https://skillsprint-production-ded3.up.railway.app/experiments/:id/json" },
+    { "source": "/reports.csv", "destination": "https://skillsprint-production-ded3.up.railway.app/reports.csv" },
     { "source": "/((?!assets/).*)", "destination": "/index.html" }
   ],
   "headers": [
