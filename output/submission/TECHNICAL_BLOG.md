@@ -1,6 +1,12 @@
-# Building SkillSprint AI: onboarding that can show its evidence
+# Building SkillSprint AI: An Onboarding App That Shows Its Evidence
 
-Publication-ready draft for participant review. Not published. Written with AI assistance, as declared in AI_USAGE.md. The company and employees described here are fictional. This article reports a local competition implementation; deployment was removed from the requested scope.
+How React, FastAPI, PostgreSQL, and independent Python validation turn company documents into reviewable learning plans.
+
+A generated onboarding plan can sound convincing and still miss the one policy an employee must understand before starting work.
+
+That is the problem behind SkillSprint AI. The goal is not simply to turn a PDF into a friendly checklist. It is to show which obligations belong in a plan, where the learning content came from, and what still needs a human decision.
+
+> Generating training is one problem. Knowing whether it covers the right requirements is another.
 
 ## The business problem starts after the welcome email
 
@@ -10,13 +16,15 @@ Generative AI makes it easy to produce a polished training plan. It does not aut
 
 The fictional organization is AsterBridge Delivery Services. Its document pack contains policies, role procedures, historical versions, conflicting FAQs and adversarial examples. Choosing a coherent organization made the examples more useful than unrelated sample paragraphs. Delivery exceptions, access controls, refunds and customer escalation all produce concrete training obligations that an evaluator can inspect.
 
-## A small Python architecture with explicit responsibilities
+## The architecture: React in front, Python at the decision boundaries
 
-The local application uses FastAPI, Jinja2 templates, Pydantic and MongoDB. One Python service handles authentication, document workflows, review screens and learning. An embedded worker claims persisted generation jobs. Uploaded files live in a private directory, while MongoDB stores source locations, reviewed requirements, plans, attempts and audit events. The browser receives rendered pages with small amounts of JavaScript rather than a separate frontend application.
+The current application uses a React and TypeScript frontend built with Vite, a FastAPI backend, Pydantic schemas, and PostgreSQL. React provides the main workspace; the earlier Jinja2 interface remains available in the backend. The project has moved beyond the original MongoDB-backed, server-rendered implementation.
 
-This structure was chosen for a solo competition project with a short deadline. It keeps installation and debugging manageable without placing every responsibility in one file. Ingestion, policy rules, generation, validation, learning, comparison and update handling have separate modules. The important boundary is conceptual: the component that generates a lesson is not the component that decides whether its requirement and source match.
+The backend handles authentication, document processing, generation jobs, review, assessment, and progress. An embedded worker claims persisted jobs, so the browser can show their status while generation continues. Ingestion, policy rules, generation, validation, learning, comparison, and update handling have separate modules.
 
-MongoDB was a project requirement. Its document model fits bounded structures such as a learning item with a checklist, question and rubric. It does not mean all history should be embedded in one employee record. Quiz attempts, practical submissions, reviews and audit events grow independently, so they use separate collections. Unique indexes protect identities such as document/version and employee/login assignments. Required-field validators catch some invalid database writes before they become confusing UI failures.
+PostgreSQL stores application records in JSONB-backed tables. Learning items contain structured checklists, questions, and rubrics, while attempts, submissions, reviews, and audit events have independent records. Original uploads remain in private file storage rather than being bundled into the frontend.
+
+The important architectural boundary is not the choice of framework: the component that generates a lesson is not the component that decides whether its requirement and source match.
 
 ## Documents become traceable sections before they become prompts
 
@@ -36,7 +44,7 @@ The authored evaluation matrix contains 160 requirements across ten roles. Eight
 
 ## Prompt engineering is a contract, not an approval mechanism
 
-The generation adapter calls the OpenAI Responses API using structured parsing. Pydantic describes the expected JSON: staged learning items with an objective, lesson, checklist, practical activity, scenario, multiple-choice question and scoring rubric. The prompt asks the model to copy requirement and source identities, preserve the approved quotation, respect mandatory flags and avoid inventing company deadlines or thresholds.
+The generation adapter calls the OpenAI Responses API using structured parsing. Pydantic describes the expected JSON: staged learning items with an objective, lesson, checklist, practical activity, scenario, quiz, and scoring rubric. Supported quiz types include multiple choice, multiple response, true/false, and scenario-based questions. The prompt asks the model to copy requirement and source identities, preserve the approved quotation, respect mandatory flags, and avoid inventing company deadlines or thresholds.
 
 Requirements are sent in bounded batches of four. That keeps individual requests reviewable and avoids depending on a single very large response. The worker assembles a complete plan after all batches finish. Model responses include provider metadata and usage information. Prompt versions remain as files, and the evaluation records prompt hashes so the tested instruction text can be identified precisely.
 
@@ -70,6 +78,12 @@ The learner journey combines reading, checklist actions, a knowledge check and p
 
 The application separates permissions from business roles. An employee sees their own learning; a manager sees assigned employees; reviewers have review responsibilities. Unattempted employee responses exclude answer keys and expected scenario answers. Weak areas generate simple recommendations to revisit the policy evidence or use assessor feedback. These recommendations are intentionally understandable rather than unexplained personalization scores.
 
+Administrators can configure day offsets for six onboarding stages. New plans retain a snapshot of that schedule, so changing the configuration does not silently move an existing employee's deadlines. Progress insights distinguish overdue learning, work awaiting assessment, and completed onboarding. A periodic evaluation stores progress summaries; the dashboard also calculates current insights when requested.
+
+Requirement review now includes priority and classifications such as Must Know, Must Complete, and Must Demonstrate. Extraction can suggest prerequisites with supporting source passages, but a reviewer must confirm the actual requirement relationships. Suggested dependencies are not automatically promoted into approved policy.
+
+The review queue brings flagged plans together. Authorized reviewers can record a reasoned override of an advisory recommendation while preserving the original finding. They cannot use that mechanism to bypass missing mandatory coverage or an invalid source.
+
 ## Policy changes should preserve work that still applies
 
 Activating a newer source marks affected plans stale. An impact preview identifies affected employees and learning components before the version switch. Selective regeneration compares the new matrix with the old plan snapshot, including dependency changes and employee context. Unchanged modules can be retained; changed requirements and affected dependents are regenerated.
@@ -80,7 +94,9 @@ A short employee write lease serializes publication and learner writes. This pro
 
 ## Evaluation must include the failures
 
-The automated suite covers source parsing, permissions, review, quizzes, practical assessment, policy updates, selective carry-forward and comparison. Phase 4 added tests for all ten adversarial PDF fixtures, provider failure categories, unfamiliar Word tables, long-paragraph chunking and archive limits. The local suite passed seventy tests after the reporting optimization, with an upstream test-client deprecation warning documented separately.
+The automated suite covers source parsing, permissions, review, quizzes, practical assessment, policy updates, selective carry-forward, and comparison. It includes adversarial PDF fixtures, provider failure categories, unfamiliar Word tables, long-paragraph chunking, and archive limits.
+
+The recorded full regression run passed 80 tests. A subsequent focused run passed five SRS tests after the final extraction and review changes. These are overlapping runs, not 85 unique tests. They use controlled provider doubles and do not establish live model quality. Later frontend changes passed the production build and a static navigation audit covering 80 link patterns against 32 registered routes. That audit checks route compatibility, not the existence of every record or every authenticated browser interaction.
 
 Real generation evidence is stored apart from test doubles. The full ten-role evaluation uses the actual provider and complete 88-requirement matrices. Each role artifact includes the requests, structured output, validation and elapsed time. The comparison CSV contains requirement-level expected and actual results. Failed API calls or mismatches remain evidence; they are not replaced with invented success records.
 
@@ -90,9 +106,25 @@ A previous small live workflow tested two controlled generations and a selective
 
 The local capacity fixture uses one thousand employees, one hundred roles, one thousand documents with representative source records, and one thousand synthetic one-module plans. This is a database and page-rendering experiment, not a simulation of one thousand simultaneous users. Three requests per route provide a small repeatable sample, and the report includes both the fixture shape and the measurements.
 
-The full reports page initially took a median of about 20.9 seconds. Inspection showed repeated effective-matrix queries for employees sharing a role. Reusing each role's matrix within the same request and checking only applicable source identities reduced the median to about 3.1 seconds on the same local fixture. Filtered views were faster still. That is a concrete improvement with a reproducible mechanism, not a claim of production-scale performance.
+In the earlier implementation, the full reports page initially took a median of about 20.9 seconds. Inspection showed repeated effective-matrix queries for employees sharing a role. Reusing each role's matrix within the same request and checking only applicable source identities reduced the median to about 3.1 seconds on that local fixture. Those historical measurements predate the PostgreSQL migration; they are not benchmarks of the current hosted system.
 
-Full plan generation remains much slower than the SRS thirty-second target. The first four 88-module runs took approximately six minutes each in the concurrent evaluation. Batching limits request size but does not remove the cost of producing hundreds of detailed learning fields. The final evidence therefore records the target as unmet rather than quoting a small request as if it represented the full workload.
+Historical full-plan generation was much slower than the SRS thirty-second target: complete 88-module runs took roughly 333–484 seconds. Batching limits request size but does not remove the cost of producing hundreds of detailed learning fields. The target remains unmet in the recorded evidence. An asynchronous progress screen makes that wait more understandable; it does not make the generation itself faster.
+
+## Deployment exposed bugs that a successful build did not
+
+The deployment uses Vercel for the React frontend and Railway for the Python backend and PostgreSQL. Frontend requests use `/api`; Vercel rewrites forward those requests and authenticated downloads to Railway. Provider keys, database credentials, and mail credentials stay on the backend rather than in client-side Vite variables.
+
+The split also makes file persistence important. A PostgreSQL volume does not preserve files uploaded to the backend's filesystem. Original documents need their own persistent storage, and a backup strategy must cover both the database and those originals. Password recovery similarly needs real SMTP delivery in production; development-only reset links are not a production substitute.
+
+Deployment screenshots and user testing revealed a blank-page bug in several workspace screens. Those routes reused one React component with different modes. On navigation, React could retain data from the previous mode, while the next render expected a different response shape. Clearing the data inside an effect was too late: rendering could already have failed.
+
+The fix was to give each mode its own keyed screen instance, cancel superseded data requests, and keep page-level errors inside a recovery boundary. The sidebar remains usable if a page fails. This was a useful reminder that TypeScript compilation is not an end-to-end navigation test, especially when response data is typed too loosely.
+
+A second issue was simpler: the Overview button linked to `/requirements`, while the actual role-matrix route was `/matrix`. The button now uses the canonical route, and the old path redirects for existing bookmarks. The navigation audit was added to catch unresolved literal and templated destinations before deployment. Source-section anchors and post-login destinations were also corrected.
+
+The sidebar was reorganized around the primary workflow: Overview and the core pages first, supporting tools next, and administration below. Consistent icons, a separately scrolling navigation area, and a collapsible mobile menu make the available actions easier to find.
+
+These fixes are implemented in the project source. A passing build or route audit should not be confused with confirmation that every latest change has reached the live deployment. That still needs a deployment check and authenticated browser testing.
 
 ## Security begins at the boundaries
 
@@ -100,12 +132,22 @@ Passwords use Argon2, sessions use random tokens with server-side expiry, and mu
 
 Prompt-injection detection quarantines known suspicious instructions, but a pattern detector is not the whole defense. Documents do not have tools, database credentials or authority to change roles and completion records. The model receives source data inside a constrained generation request. Independent validation calculates coverage from actual records. Adversarial tests check that uploaded instructions cannot activate themselves, queue generation through a quarantined source or alter user permissions.
 
-Secrets remain in a local environment file excluded from packaging. Submission generation uses an explicit file allowlist rather than archiving the workspace indiscriminately. Private uploads, the virtual environment and local credentials are excluded. A final manifest hashes packaged files so the owner can inspect exactly what is being submitted.
+Local secrets belong in an excluded environment file; deployed secrets belong in the backend service's private configuration. Screenshots need the same care as source code: a settings screenshot can expose a credential even when the repository is clean. Any exposed credential must be revoked and replaced, not merely hidden in a later image.
+
+Submission packaging uses an explicit file allowlist. Private uploads, local credentials, and development environments are excluded. Existing submission archives and hash manifests describe the versions they packaged; they must be regenerated if updated files are submitted.
 
 ## Lessons learned and the remaining boundaries
 
 The most useful design decision was preserving distinctions: source approval versus requirement approval, schema validity versus factual support, validation versus publication, and publication versus employee completion. Combining these states would make the interface look simpler while making its claims less reliable. Keeping them explicit makes failures easier to explain to a reviewer and easier to test.
 
-The local build still has limitations. Human interpretation remains necessary for free-form meaning and ambiguous applicability. Scanned documents need OCR before upload. Full generation misses the latency target. The capacity sample does not establish concurrency limits or general availability. Public deployment was deliberately removed from the current phase, and public repository/blog publication remains a separate owner action.
+The application still has important limitations. Human interpretation remains necessary for free-form meaning and ambiguous applicability. Scanned documents need OCR before upload. Historical full generation misses the latency target. The current PostgreSQL adapter evaluates many filters in Python and uses table-level write locks, so representative load testing and query optimization remain necessary. Neither a local capacity fixture nor a live domain proves concurrency limits, backup reliability, or an uptime target.
 
-Future work should follow measured needs: pagination and bulk loading for large reports, carefully bounded generation parallelism, richer reviewed annotations, broader adversarial evaluation and stronger evaluation of ambiguous distractors. The participant must also read, adapt and understand the AI-assisted implementation before claiming it as independently verified work. A competition project is stronger when its evidence explains both what works and what remains uncertain.
+The next work should follow measured needs: indexed queries and pagination, carefully bounded generation parallelism, live evaluation of the expanded quiz schema, broader adversarial testing, and authenticated browser checks across roles and screen sizes.
+
+The central lesson is that a useful AI application needs more than a good prompt. It needs clear boundaries between generated content, approved evidence, human decisions, and recorded outcomes.
+
+SkillSprint AI is built around those boundaries. Its strongest claim is not that AI makes onboarding automatically correct. It is that the system makes its evidence—and its remaining uncertainty—available for inspection.
+
+---
+
+*Disclosure: This project and article were developed with AI assistance. AsterBridge Delivery Services and the example company records are fictional. Test results refer to the recorded runs described above, not a claim of complete SRS acceptance or production certification.*

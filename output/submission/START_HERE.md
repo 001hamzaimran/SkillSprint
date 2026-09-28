@@ -5,7 +5,7 @@ Deployment was removed from Phase 4 by the user. The application runs locally at
 1. **PROJECT_REPORT.md** — architecture, database, data flow, use-case, activity and sequence diagrams; design and limits.
 2. **ACCEPTANCE_MATRIX.csv** — all 63 numbered SRS steps, implementation evidence and known gaps.
 3. **EVALUATION_REPORT.md** — 70 tests, ten full role plans, 880 comparisons, failure/security and performance findings.
-4. **TECHNICAL_BLOG.md** — 2,590-word participant-review draft; not published.
+4. **TECHNICAL_BLOG.md** — updated Medium-oriented article covering React/PostgreSQL, Railway/Vercel and recent navigation fixes; not published. **MEDIUM_PUBLISHING_NOTES.md** contains title/subtitle, suggested tags, screenshots and the pre-publication checklist. The older ZIP and manifest have not been rebuilt for this revision.
 5. **SkillSprint_local_walkthrough.mp4** — silent annotated screen-based replay. VIDEO_NOTES.md and DEMO_SCRIPT.md explain coverage and full live-recording steps.
 6. **TEAM_CONTRIBUTION.md** — honest solo/AI contribution and pending participant verification.
 7. **../../reports/phase4/** — machine-readable test, capacity, provider and comparison evidence.

@@ -34,6 +34,12 @@ export default function DocumentPage() {
     }
   }, [id, fetchDocument]);
 
+  useEffect(() => {
+    const refresh = () => { if (id) void fetchDocument(id).catch(() => toast.error('Refresh the document to see its latest status')); };
+    window.addEventListener('skillsprint:documents-changed', refresh);
+    return () => window.removeEventListener('skillsprint:documents-changed', refresh);
+  }, [id, fetchDocument]);
+
   const handleExtract = async () => {
     if (!id) return;
     try {

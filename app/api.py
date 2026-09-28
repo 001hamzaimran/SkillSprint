@@ -4,7 +4,7 @@ import re
 from datetime import date, datetime
 from typing import Literal
 from fastapi import APIRouter, Request, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel
 from .db import now, uid, audit
 from .security import (
@@ -474,7 +474,7 @@ def documents_activate(request: Request, document_id: str):
         document_id,
         {"superseded": [d["_id"] for d in previous]},
     )
-    return JSONResponse(None, status_code=204)
+    return Response(status_code=204)
 
 
 @router.post("/documents/{document_id}/extract")

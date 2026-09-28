@@ -44,6 +44,12 @@ export default function DocumentsPage() {
     fetchDocuments().catch(() => toast.error('Failed to load documents'));
   }, [fetchDocuments]);
 
+  useEffect(() => {
+    const refresh = () => { void fetchDocuments().catch(() => toast.error('Refresh the library to see its latest status')); };
+    window.addEventListener('skillsprint:documents-changed', refresh);
+    return () => window.removeEventListener('skillsprint:documents-changed', refresh);
+  }, [fetchDocuments]);
+
   const onUpload = async (data: UploadFormValues) => {
     if (!selectedFile) {
       toast.error('Please select a file to upload');
